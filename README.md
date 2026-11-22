@@ -8,7 +8,7 @@ Learning paths are optional editorial suggestions. Every lab and atlas remains a
 
 | Project | Public site | Code | Current state |
 | --- | --- | --- | --- |
-| 01 · Die frühe Erde | [Site](https://philippklinz.github.io/lab-early-earth/) | [Repository](https://github.com/philippklinz/lab-early-earth) | Concept |
+| 01 · Die frühe Erde | [Site](https://philippklinz.github.io/lab-early-earth/) | [Repository](https://github.com/philippklinz/lab-early-earth) | In development — Proto-Erde 3D, Time Explorer and Trainer |
 | 02 · Abiogenese | [Site](https://philippklinz.github.io/lab-abiogenesis/) | [Repository](https://github.com/philippklinz/lab-abiogenesis) | Concept |
 | 03 · DNA & RNA | [Site](https://philippklinz.github.io/lab-molecular-biology/) | [Repository](https://github.com/philippklinz/lab-molecular-biology) | Working prototype |
 | 04 · Evolution | [Site](https://philippklinz.github.io/lab-evolution/) | [Repository](https://github.com/philippklinz/lab-evolution) | Concept |
