@@ -12,7 +12,7 @@ Learning paths are optional editorial suggestions. Every lab and atlas remains a
 | 02 · Abiogenese | [Site](https://philippklinz.github.io/lab-abiogenesis/) | [Repository](https://github.com/philippklinz/lab-abiogenesis) | Six interactive labs — chemistry, molecules, protocells, RNA, hypotheses, evidence |
 | 03 · DNA & RNA | [Site](https://philippklinz.github.io/lab-molecular-biology/) | [Repository](https://github.com/philippklinz/lab-molecular-biology) | Working prototype |
 | 04 · Evolution | [Site](https://philippklinz.github.io/lab-evolution/) | [Repository](https://github.com/philippklinz/lab-evolution) | Six interactive sublabs, population models and evolutionary evidence |
-| 05 · Entstehung des Menschen | [Site](https://philippklinz.github.io/lab-human-origins/) | [Repository](https://github.com/philippklinz/lab-human-origins) | Concept |
+| 05 · Entstehung des Menschen | [Site](https://philippklinz.github.io/lab-human-origins/) | [Repository](https://github.com/philippklinz/lab-human-origins) | Six interactive sublabs: fossils, bipedalism, tools, kinship, dispersal, evidence |
 | Anthropology Atlas | [Atlas](https://philippklinz.github.io/anthropology-atlas-engine/) | [Engine](https://github.com/philippklinz/anthropology-atlas-engine) / [Content](https://github.com/philippklinz/anthropology-atlas-content) | Working development version |
 
 **Concept** means a public landing page exists but the interactive exhibits have not been built yet. Status descriptions are maintained manually, not computed from GitHub.
