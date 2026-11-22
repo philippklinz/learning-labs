@@ -38,9 +38,9 @@ The portal is a **human-readable index**. It should never download the labs' con
 
 ## Design
 
-Modern Objectivity: graphite, warm near-white, signal turquoise (#009E98), calm typography and semantic scientific visuals. The dedicated design repository is [modern-objectivity-style](https://github.com/philippklinz/modern-objectivity-style). The portal footer links to that repository **while its own website is still in development**. Switch to its published GitHub Pages address only after verification.
+Modern Objectivity: graphite, warm near-white, signal turquoise (#009E98), calm typography and semantic scientific visuals. The [Modern Objectivity practical style kit](https://philippklinz.github.io/modern-objectivity-style/) now has a published showcase. This portal uses its locally copied, GPL-2.0-only reference stylesheet from [styles/modern-objectivity.css](https://github.com/philippklinz/modern-objectivity-style/blob/main/styles/modern-objectivity.css) (reference revision `c6af71a8688b9001313d19a642e8f308fa463280`) and adds stage-specific colors/layout in `index.html`. The kit is a **v0.1 draft reference implementation**, not a mandatory identity for every lab.
 
-The landing page uses a single self-contained index.html. Search and filters are progressive enhancement; project cards and links remain readable without JavaScript. The numbered diagram is schematic, not empirical research data.
+The landing page uses `index.html` and a **local `modern-objectivity.css`** (no CDN dependency). Search and filters are progressive enhancement; project cards and links remain readable without JavaScript. The numbered diagram is schematic, not empirical research data.
 
 ## Working instructions
 

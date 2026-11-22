@@ -21,7 +21,7 @@ This list is a starting point, **not** an exhaustive list of permitted lab types
 
 ## Architecture and conventions
 
-- One static, standalone index.html in the repository root; all styles and filtering scripts are inline for ease of editing.
+- One static, standalone index.html in the repository root. The local `modern-objectivity.css` contains the imported reference style kit; project-specific CSS and filtering scripts are inline in `index.html` for ease of editing. No network assets are required.
 - GitHub Pages serves main / (root); no backend, framework, bundler, accounts or build tools.
 - Lab content belongs exclusively in each lab's own repository.
 - Descriptive cross-links are optional. The numbered "Wissensreise" is an editorial path, not a required syllabus or technical dependency.
@@ -34,7 +34,7 @@ This list is a starting point, **not** an exhaustive list of permitted lab types
 - Follow the provisional Modern Objectivity direction: quiet, rational composition, graphite and warm light neutrals, signal turquoise #009E98, Liberation fonts with browser fallbacks.
 - Maintain semantic HTML landmarks, descriptive links, keyboard-focus indications, correct aria-pressed states, readable contrast, responsive layout and reduced-motion support.
 - Keep the scientific-exploration diagram explicitly schematic.
-- The footer links to the Modern Objectivity **GitHub repository** while the design site is unpublished. Replace it with a verified live design site later, not an assumed URL.
+- The footer links to the live [Modern Objectivity style kit](https://philippklinz.github.io/modern-objectivity-style/). The locally copied `modern-objectivity.css` is the v0.1 draft reference implementation, not a global style mandate. Preserve stage-specific contrast and usage.
 
 ## Editing project entries
 
