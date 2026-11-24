@@ -29,6 +29,10 @@ This list is a starting point, **not** an exhaustive list of permitted lab types
 - Cards use data-tags and data-search attributes for filters. Existing categories are nature, human and atlas. Add more only when necessary.
 - Avoid tracking, analytics, user accounts, third-party requests and auto-discovery APIs.
 
+## Multilingual access planning
+
+The agreed language-access goal and proposed implementation are documented in [docs/MULTILINGUALISM.md](docs/MULTILINGUALISM.md). The target is all 24 official EU languages across complete learning experiences. The user selected planning first: do not treat the proposed rollout as an instruction to translate or migrate the independent labs automatically. Distinguish target coverage from implemented and checked language editions. Keep each lab independent, with translations stored locally and no online translation service, accounts or tracking.
+
 ## Visual style and accessibility
 
 - Follow the provisional Modern Objectivity direction: quiet, rational composition, graphite and warm light neutrals, signal turquoise #009E98, Liberation fonts with browser fallbacks.

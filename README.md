@@ -42,6 +42,10 @@ Modern Objectivity: graphite, warm near-white, signal turquoise (#009E98), calm 
 
 The landing page uses `index.html` and a **local `modern-objectivity.css`** (no CDN dependency). Search and filters are progressive enhancement; project cards and links remain readable without JavaScript. The numbered diagram is schematic, not empirical research data.
 
+## Multilingual access (planned)
+
+The shared target is complete learning experiences in all 24 official EU languages, including explanations, interactive labels, exercises and accessible text. See [Multilingual Learning Labs](docs/MULTILINGUALISM.md) for the current inventory, requirements, proposed local language packs, translation maintenance and staged rollout. This is a planning document; the five labs currently teach in German, and the Atlas already offers German and English.
+
 ## Working instructions
 
 See [AGENTS.md](AGENTS.md).
