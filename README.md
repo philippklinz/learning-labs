@@ -44,7 +44,7 @@ The landing page uses `index.html` and a **local `modern-objectivity.css`** (no 
 
 ## Multilingual access (planned)
 
-The shared target is complete learning experiences in all 24 official EU languages, including explanations, interactive labels, exercises and accessible text. See [Multilingual Learning Labs](docs/MULTILINGUALISM.md) for the current inventory, requirements, proposed local language packs, translation maintenance and staged rollout. This is a planning document; the five labs currently teach in German, and the Atlas already offers German and English.
+Multilingual access is a central [Modern Objectivity requirement (MO-13)](https://github.com/philippklinz/modern-objectivity-style/blob/main/docs/10-multilingual-access.md): complete user-facing journeys in all 24 official EU languages. Its [programming pattern](https://github.com/philippklinz/modern-objectivity-style/blob/main/guides/multilingual-pattern.md) provides a local implementation reference. This repository keeps the [lab adoption plan](docs/MULTILINGUALISM.md), inventory and proposed rollout. The five existing labs still teach in German; the Atlas already offers German and English.
 
 ## Working instructions
 

@@ -31,7 +31,7 @@ This list is a starting point, **not** an exhaustive list of permitted lab types
 
 ## Multilingual access planning
 
-The agreed language-access goal and proposed implementation are documented in [docs/MULTILINGUALISM.md](docs/MULTILINGUALISM.md). The target is all 24 official EU languages across complete learning experiences. The user selected planning first: do not treat the proposed rollout as an instruction to translate or migrate the independent labs automatically. Distinguish target coverage from implemented and checked language editions. Keep each lab independent, with translations stored locally and no online translation service, accounts or tracking.
+The authoritative requirement is [Modern Objectivity MO-13](https://github.com/philippklinz/modern-objectivity-style/blob/main/docs/10-multilingual-access.md), with a [central programming pattern](https://github.com/philippklinz/modern-objectivity-style/blob/main/guides/multilingual-pattern.md). It requires complete user-facing journeys in all 24 official EU languages. Keep only the application-specific inventory and adoption plan in [docs/MULTILINGUALISM.md](docs/MULTILINGUALISM.md); do not maintain a competing central specification here. The independent labs' migration is still planned, not automatically authorized by work on this directory. Distinguish target coverage, implemented editions, source freshness and review. Each lab keeps its own local runtime and translations, without a translation service, accounts or tracking.
 
 ## Visual style and accessibility
 
