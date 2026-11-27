@@ -4,8 +4,7 @@ export function startCrystal(still) {
   const canvas = hero.querySelector('.hero-canvas');
   const viewport = hero.querySelector('.study-window');
   const growthDuration = 4300;
-  const cameraDuration = 5000;
-  let elapsed = root.dataset.crystalView === 'seed' ? 0 : cameraDuration;
+  let elapsed = root.dataset.crystalView === 'seed' ? 0 : growthDuration;
   let previousTime = null;
   let scene;
   let frame = 0;
@@ -22,13 +21,13 @@ export function startCrystal(still) {
   function showStill() {
     delete root.dataset.crystalView;
     // After showing the grown crystal, resume at the matching final pose.
-    elapsed = cameraDuration;
+    elapsed = growthDuration;
   }
 
   function paint(time) {
     frame = 0;
     if (!canDraw()) return;
-    if (previousTime !== null) elapsed = Math.min(cameraDuration, elapsed + time - previousTime);
+    if (previousTime !== null) elapsed = Math.min(growthDuration, elapsed + time - previousTime);
     previousTime = time;
     try {
       if (layoutNeeded) {
@@ -38,7 +37,7 @@ export function startCrystal(still) {
           plot.top - area.top + plot.height / 2, plot.height, Math.min(devicePixelRatio || 1, 1.5));
         layoutNeeded = false;
       }
-      scene.render('kristall', Math.min(1, elapsed / growthDuration), elapsed / cameraDuration);
+      scene.render('kristall', elapsed / growthDuration);
       if (lost) return;
       root.dataset.crystalView = 'live';
     } catch {
@@ -46,7 +45,7 @@ export function startCrystal(still) {
       showStill();
       return;
     }
-    if (elapsed < cameraDuration) frame = requestAnimationFrame(paint);
+    if (elapsed < growthDuration) frame = requestAnimationFrame(paint);
     else previousTime = null;
   }
 

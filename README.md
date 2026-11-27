@@ -43,7 +43,7 @@ The directory follows the [Modern Objectivity style kit](https://philipp-klinz.n
 
 Cards have square corners. Buttons, search and project actions share a 2.75 rem outer height at the default text size. The directory uses the Signal accent in both themes. It follows the device theme until a reader chooses one with the header toggle. The browser stores that choice locally. Search and category controls enhance the static directory. All project links, journeys and the crystal illustration are available with JavaScript disabled.
 
-The header shows a crystal growing at the XYZ origin. The camera moves through a small arc and settles. Over HTTP, a still of the seed covers the loading interval until WebGL 2 draws the same seed. Opening the file directly, using reduced motion or using a browser without WebGL displays the grown crystal. The Chladni plate and dye vortex are retained in `hero/studies.js` with their stills for future use. The two ES modules come from the [Three.js r180 distribution](https://github.com/mrdoob/three.js/tree/r180/build) and include its [MIT license](vendor/three/LICENSE).
+The header shows crystals growing up and out from a shared foot at the XYZ origin. The camera stays fixed throughout growth. Over HTTP, a still of the seed covers the loading interval until WebGL 2 draws the same seed. Opening the file directly, using reduced motion or using a browser without WebGL displays the grown crystal. The Chladni plate and dye vortex are retained in `hero/studies.js` with their stills for future use. The two ES modules come from the [Three.js r180 distribution](https://github.com/mrdoob/three.js/tree/r180/build) and include its [MIT license](vendor/three/LICENSE).
 
 ## Multilingual access (planned)
 
