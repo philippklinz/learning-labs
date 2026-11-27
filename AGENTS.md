@@ -37,7 +37,7 @@ The authoritative requirement is [Modern Objectivity MO-13](https://github.com/p
 
 ## Visual style and accessibility
 
-- Follow the provisional Modern Objectivity direction: quiet, rational composition, graphite and warm light neutrals, signal turquoise #009E98, Liberation fonts with browser fallbacks.
+- Use the locally pinned Modern Objectivity stylesheet, its light and dark Signal colours, and the LiberationFontsWeb subsets in `fonts/liberation/`. Cards and controls have square corners. Buttons, search and card actions align on the shared control-height token.
 - Maintain semantic HTML landmarks, descriptive links, keyboard-focus indications, correct aria-pressed states, readable contrast, responsive layout and reduced-motion support.
 - Keep the scientific-exploration diagram explicitly schematic.
 - The footer links to the live [Modern Objectivity style kit](https://philippklinz.github.io/modern-objectivity-style/). The locally copied `modern-objectivity.css` is the v0.1 draft reference implementation, not a global style mandate. Preserve stage-specific contrast and usage.
