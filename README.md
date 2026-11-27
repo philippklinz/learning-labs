@@ -41,7 +41,9 @@ The portal is a **human-readable index**. It should never download the labs' con
 
 The directory follows the [Modern Objectivity style kit](https://philipp-klinz.net/modern-objectivity-style/). The local `modern-objectivity.css` and its `fonts/liberation/` folder come from [style kit revision 18a78bc](https://github.com/philippklinz/modern-objectivity-style/tree/18a78bc5509bf8407600e87c19b5825fbc6cbf63/starter). LiberationFontsWeb supplies local WOFF2 subsets for interface text, editorial headings and figures.
 
-Cards have square corners. Buttons, search and project actions share a 2.75 rem outer height at the default text size. The directory uses the Signal accent in both themes. It follows the device theme until a reader chooses one with the header toggle. The browser stores that choice locally. Search and category controls enhance the static directory. All project links, journeys and the schematic diagram are available with JavaScript disabled.
+Cards have square corners. Buttons, search and project actions share a 2.75 rem outer height at the default text size. The directory uses the Signal accent in both themes. It follows the device theme until a reader chooses one with the header toggle. The browser stores that choice locally. Search and category controls enhance the static directory. All project links, journeys and the crystal illustration are available with JavaScript disabled.
+
+The header shows crystal growth, a Chladni plate and a dye vortex in one XYZ coordinate space. Select a study to play its short animation. Serving the directory over HTTP enables WebGL 2. Opening the file directly, using reduced motion or using a browser without WebGL displays stills rendered from the same models. The two ES modules come from the [Three.js r180 distribution](https://github.com/mrdoob/three.js/tree/r180/build) and include its [MIT license](vendor/three/LICENSE).
 
 ## Multilingual access (planned)
 
