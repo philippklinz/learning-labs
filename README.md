@@ -39,9 +39,9 @@ The portal is a **human-readable index**. It should never download the labs' con
 
 ## Design
 
-Modern Objectivity: graphite, warm near-white, signal turquoise (#009E98), calm typography and semantic scientific visuals. The [Modern Objectivity practical style kit](https://philippklinz.github.io/modern-objectivity-style/) now has a published showcase. This portal uses its locally copied, GPL-2.0-only reference stylesheet from [styles/modern-objectivity.css](https://github.com/philippklinz/modern-objectivity-style/blob/main/styles/modern-objectivity.css) (reference revision `c6af71a8688b9001313d19a642e8f308fa463280`) and adds stage-specific colors/layout in `index.html`. The kit is a **v0.1 draft reference implementation**, not a mandatory identity for every lab.
+The directory follows the [Modern Objectivity style kit](https://philipp-klinz.net/modern-objectivity-style/). The local `modern-objectivity.css` and its `fonts/liberation/` folder come from [style kit revision 18a78bc](https://github.com/philippklinz/modern-objectivity-style/tree/18a78bc5509bf8407600e87c19b5825fbc6cbf63/starter). LiberationFontsWeb supplies local WOFF2 subsets for interface text, editorial headings and figures.
 
-The landing page uses `index.html` and a **local `modern-objectivity.css`** (no CDN dependency). Search and filters are progressive enhancement; project cards and links remain readable without JavaScript. The numbered diagram is schematic, not empirical research data.
+Cards have square corners. Buttons, search and project actions share a 2.75 rem outer height at the default text size. The directory uses the Signal accent in both themes. It follows the device theme until a reader chooses one with the header toggle. The browser stores that choice locally. Search and category controls enhance the static directory. All project links, journeys and the schematic diagram are available with JavaScript disabled.
 
 ## Multilingual access (planned)
 
@@ -54,3 +54,5 @@ See [AGENTS.md](AGENTS.md).
 ## License
 
 Portal source is distributed under the [GNU General Public License v2.0](LICENSE). Each independent project retains its own licensing and third-party obligations.
+
+Liberation Sans Web, Serif Web and Mono Web use the [SIL Open Font License](fonts/liberation/LICENSE). Liberation Sans Narrow Web includes its [font exception](fonts/liberation/LICENSE-Sans-Narrow.txt) and [GPL terms](fonts/liberation/COPYING-Sans-Narrow). Upstream file hashes and credits are included in `fonts/liberation/`.
