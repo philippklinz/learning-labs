@@ -26,7 +26,7 @@ Snapshot of repository `main` trees inspected on 24 November 2026. Counts includ
 
 | Repository | HTML pages | Translation work beyond ordinary HTML |
 | --- | ---: | --- |
-| [learning-labs](https://github.com/philippklinz/learning-labs) | 1 | Search terms, filters, counts, project cards and overview SVG |
+| [learning-labs](https://github.com/philippklinz/learning-labs) | 1 | Search terms, filters, counts, project cards and three study labels and captions |
 | [lab-early-earth](https://github.com/philippklinz/lab-early-earth) | 6 | Timeline data labels, 36 geological portraits, trainer feedback, 3D explanations, SVGs and numerical output |
 | [lab-abiogenesis](https://github.com/philippklinz/lab-abiogenesis) | 7 | Chemistry controls, molecular diagrams, RNA exercises, hypotheses and evidence feedback |
 | [lab-molecular-biology](https://github.com/philippklinz/lab-molecular-biology) | 9 | Glossary/search, inline scripts, DNA/RNA views, sequence exercises and shared navigation |

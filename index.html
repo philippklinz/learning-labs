@@ -63,22 +63,30 @@ header { border-bottom: 1px solid var(--mo-border); }
 .theme-toggle svg { width: 18px; height: 18px; }
 .theme-toggle[aria-pressed="true"] { border-color: var(--mo-accent); box-shadow: inset 0 -3px var(--mo-accent); }
 
-.hero { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: clamp(24px, 5vw, 72px); align-items: center; padding-block: clamp(48px, 6vw, 88px); }
+.hero { position: relative; isolation: isolate; overflow: hidden; background: #10191d; color: var(--mo-text); }
+.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(90deg, #10191d80 0%, #10191d4d 38%, transparent 64%); }
+.hero-canvas { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; pointer-events: none; visibility: hidden; }
+.hero[data-live] .hero-canvas { visibility: visible; }
+.hero[data-live] .study-window::before, .hero[data-live] .study-poster { visibility: hidden; }
+.hero-inner { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: clamp(24px, 5vw, 72px); align-items: center; padding-block: clamp(48px, 6vw, 88px); }
 .hero h1 { margin: 0 0 24px; font-size: clamp(3rem, 5.6vw, 5.5rem); line-height: 1.02; letter-spacing: -.055em; }
 .hero h1 em { font-family: var(--mo-serif); font-weight: 400; color: var(--mo-accent-active); }
 .hero-copy, .section-head h2, .card-body h3, .principles h3, .route-copy { min-width: 0; overflow-wrap: anywhere; }
 .hero-links .mo-btn, .card-actions .mo-btn, .empty .mo-btn { min-width: 0; white-space: normal; }
 .lead { max-width: 52ch; font-size: clamp(1.125rem, 1.65vw, 1.5rem); line-height: 1.5; margin: 0 0 16px; }
 .intro { max-width: 55ch; margin: 0 0 24px; color: var(--mo-muted); }
-.figure { display: grid; align-content: center; margin: 0; min-width: 0; background: var(--mo-rail); color: var(--mo-rail-text); border: 1px solid var(--mo-border-strong); }
-.figure figcaption { padding: 12px 20px; border-bottom: 1px solid var(--mo-border); color: var(--mo-rail-muted); font: .75rem/1.4 var(--mo-mono); }
-.figure svg { display: block; width: 100%; height: auto; }
-.figure .track, .figure .track-branch { fill: none; stroke: var(--mo-accent); stroke-width: 2.5; stroke-dasharray: 6 7; }
-.figure .track-branch { stroke: var(--mo-rail-muted); stroke-width: 2; stroke-dasharray: 3 8; }
-.figure .node circle { fill: var(--mo-surface-2); stroke: var(--mo-rail-muted); stroke-width: 1.6; }
-.figure .node.active circle { stroke: var(--mo-accent); stroke-width: 2.4; fill: var(--mo-accent-light); }
-.figure .node text { fill: var(--mo-rail-text); font: 16px var(--mo-mono); }
-.figure .label { fill: var(--mo-rail-muted); font: 13px var(--mo-mono); }
+.study { min-width: 0; margin: 0; }
+.study-window { position: relative; width: 100%; max-width: 38rem; margin: auto; aspect-ratio: 3 / 2; }
+.study-window::before { content: ""; position: absolute; z-index: -2; left: 50%; top: 50%; width: 500%; aspect-ratio: 5 / 4; transform: translate(-50%, -50%); background: url("hero/raum.webp") center / contain no-repeat; pointer-events: none; }
+.study-poster { display: block; width: 100%; height: auto; pointer-events: none; }
+.study figcaption { display: grid; justify-items: center; gap: 12px; text-align: center; }
+.study-choices { display: flex; flex-wrap: wrap; justify-content: center; gap: 0; max-width: 100%; }
+.study-choices .mo-btn { padding-inline: clamp(10px, 1.4vw, 20px); background: var(--mo-bg); border-color: var(--mo-control-border); }
+.study-choices .mo-btn + .mo-btn { margin-inline-start: -1px; }
+.study-choices .mo-btn[aria-pressed="true"] { color: var(--mo-accent-active); background: var(--mo-accent-light); box-shadow: inset 0 -3px var(--mo-accent); }
+.study-choices .mo-btn:hover { background: var(--mo-surface-3); }
+.study-choices .mo-btn:focus-visible { position: relative; z-index: 1; }
+.study-caption { max-width: 45ch; min-height: 2.9em; margin: 0; color: var(--mo-muted); font-size: .875rem; line-height: 1.45; }
 
 .catalog, .journeys, .about { padding-block: clamp(40px, 5.6vw, 80px); }
 .catalog { background: var(--mo-surface-2); border-block: 1px solid var(--mo-border); }
@@ -142,8 +150,9 @@ header { border-bottom: 1px solid var(--mo-border); }
   .header-inner { grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; }
   .site-nav { grid-column: 1 / -1; grid-row: 2; }
   .theme-toggle { grid-column: 2; grid-row: 1; }
-  .hero { grid-template-columns: minmax(0, 1fr); padding-block: 40px; }
-  .figure { width: min(100%, 38rem); }
+  .hero-inner { grid-template-columns: minmax(0, 1fr); gap: 20px; padding-block: 40px; }
+  .hero::after { background: linear-gradient(180deg, #10191d66 0%, #10191d33 42%, transparent 66%); }
+  .study-window { max-width: 31rem; }
   .section-head { align-items: start; flex-direction: column; gap: 12px; margin-bottom: 24px; }
   .principles { gap: 16px; }
   .site-nav a, .footer-links a { padding-inline: 8px; }
@@ -153,8 +162,6 @@ header { border-bottom: 1px solid var(--mo-border); }
   .site-nav a { font-size: .8125rem; padding-inline: 2px; }
   .hero-links { align-items: stretch; }
   .hero-links .mo-btn { flex: 1 1 12rem; }
-  .figure .label { font-size: 24px; }
-  .figure .node text { font-size: 26px; }
   .cards, .principles { grid-template-columns: 1fr; grid-auto-rows: auto; }
   .filter-group, .search { width: 100%; }
   .filter-buttons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -189,9 +196,10 @@ header { border-bottom: 1px solid var(--mo-border); }
     --mo-control-border: ButtonText;
   }
   .filter-buttons [aria-pressed="true"], .theme-toggle[aria-pressed="true"] { outline: 2px solid Highlight; outline-offset: -4px; }
-  .figure .track, .figure .track-branch, .figure .node circle { stroke: CanvasText; }
-  .figure .node circle { fill: Canvas; }
-  .figure text { fill: CanvasText; }
+  .hero { background: Canvas; }
+  .hero::after { display: none; }
+  .study-window { isolation: isolate; overflow: hidden; }
+  .study-choices .mo-btn[aria-pressed="true"] { outline: 2px solid Highlight; outline-offset: -4px; }
 }
 </style>
 </head>
@@ -215,17 +223,28 @@ header { border-bottom: 1px solid var(--mo-border); }
   </div>
 </header>
 <main id="main" tabindex="-1">
-<section class="hero wrap">
-<div class="hero-copy"><h1>Wissen ist<br>ein Raum zum<br><em>Erkunden.</em></h1><p class="lead">Interaktive Experimente, wissenschaftliche Modelle und Atlanten – unabhängig voneinander, frei zugänglich und verbunden durch Neugier.</p><p class="intro">Du brauchst kein Vorwissen. Wähle ein Thema, stelle Fragen und finde heraus, wie die Dinge zusammenhängen.</p><div class="hero-links"><a class="mo-btn mo-btn-primary" href="#projects">Projekte entdecken</a><a class="mo-btn" href="#journeys">Wissensreise beginnen</a></div></div>
-<figure class="figure" data-theme="dark"><figcaption>Ein möglicher Weg durch fünf Labore · Schematische Darstellung</figcaption>
-<svg viewBox="0 0 600 440" role="img" aria-label="Schematische Verbindung von fünf eigenständigen Laboren: Erde, Entstehung des Lebens, Molekularbiologie, Evolution und Menschheitsgeschichte.">
-<defs><pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0V30" fill="none" stroke="#fff" stroke-opacity=".07" stroke-width=".6"/></pattern></defs>
-<rect width="600" height="440" fill="url(#grid)"/>
-<path class="track" d="M91 327C145 327 133 230 226 244S320 132 383 178S470 97 520 105"/>
-<path class="track-branch" d="M383 178C438 215 450 304 495 335"/>
-<g class="node"><circle cx="91" cy="327" r="29"/><text x="91" y="333" text-anchor="middle">01</text></g><g class="node"><circle cx="226" cy="244" r="29"/><text x="226" y="250" text-anchor="middle">02</text></g><g class="node active"><circle cx="383" cy="178" r="34"/><text x="383" y="184" text-anchor="middle">03</text></g><g class="node"><circle cx="520" cy="105" r="29"/><text x="520" y="111" text-anchor="middle">04</text></g><g class="node"><circle cx="495" cy="335" r="29"/><text x="495" y="341" text-anchor="middle">05</text></g>
-<g class="label" text-anchor="middle"><text x="91" y="385">ERDE</text><text x="226" y="300">LEBEN</text><text x="383" y="243">MOLEKÜLE</text><text x="520" y="60">EVOLUTION</text><text x="495" y="395">MENSCH</text></g></svg>
+<section class="hero" data-theme="dark" aria-labelledby="hero-heading">
+<canvas class="hero-canvas" aria-hidden="true"></canvas>
+<div class="wrap hero-inner">
+<div class="hero-copy"><h1 id="hero-heading">Wissen ist<br>ein Raum zum<br><em>Erkunden.</em></h1><p class="lead">Interaktive Experimente, wissenschaftliche Modelle und Atlanten – unabhängig voneinander, frei zugänglich und verbunden durch Neugier.</p><p class="intro">Du brauchst kein Vorwissen. Wähle ein Thema, stelle Fragen und finde heraus, wie die Dinge zusammenhängen.</p><div class="hero-links"><a class="mo-btn mo-btn-primary" href="#projects">Projekte entdecken</a><a class="mo-btn" href="#journeys">Wissensreise beginnen</a></div></div>
+<figure class="study" aria-label="Schematische Darstellung im XYZ-Koordinatenraum">
+  <div class="study-window" aria-hidden="true">
+    <img class="study-poster" src="hero/kristall.webp" width="960" height="640" alt="">
+  </div>
+  <figcaption>
+    <div class="study-choices" role="group" aria-label="Schaubild wählen" hidden>
+      <button class="mo-btn" type="button" data-study="kristall" aria-pressed="true">Kristall</button>
+      <button class="mo-btn" type="button" data-study="klangfigur" aria-pressed="false">Klangfigur</button>
+      <button class="mo-btn" type="button" data-study="farbwirbel" aria-pressed="false">Farbwirbel</button>
+    </div>
+    <p class="study-caption" aria-live="polite" aria-atomic="true">
+      <span data-caption="kristall">Aus einem Keim wächst ein Bündel facettierter Kristalle.</span>
+      <span data-caption="klangfigur" hidden>Sand sammelt sich auf den Knotenlinien einer schwingenden Platte.</span>
+      <span data-caption="farbwirbel" hidden>Ein Ring aus Farbe rollt sich im Wasser ein und zieht feine Fäden hinter sich her.</span>
+    </p>
+  </figcaption>
 </figure>
+</div>
 </section>
 <section class="catalog" id="projects"><div class="wrap"><div class="section-head"><h2>Entdecke die Projekte<span class="period">.</span></h2></div>
 <div class="filters" id="project-filters" hidden>
@@ -306,5 +325,6 @@ update();
 document.getElementById("project-filters").hidden = false;
 })();
 </script>
+<script defer src="hero/controls.js"></script>
 </body>
 </html>
