@@ -85,7 +85,9 @@ export function createHeroScene(canvas) {
   renderer.setClearColor(0x10191d);
   renderer.autoClear = false;
   const camera = new THREE.PerspectiveCamera(30, 1, 0.10, 80);
-  camera.position.set(-7.5, 5.4, 8.5);
+  const cameraStart = new THREE.Vector3(-7.5, 5.4, 8.5);
+  const sweep = THREE.MathUtils.degToRad(8);
+  camera.position.copy(cameraStart);
   camera.lookAt(0, 0, 0);
   const { space, labels } = coordinates();
   const subjects = new THREE.Scene();
@@ -106,7 +108,10 @@ export function createHeroScene(canvas) {
       camera.setViewOffset(width, height, width / 2 - originX, height / 2 - originY, width, height);
       for (const label of labels) label.scale.setScalar(20 * fieldHeight / studyHeight);
     },
-    render(name, progress) {
+    render(name, progress, cameraProgress = 0) {
+      const angle = sweep * (1 - Math.cos(2 * Math.PI * cameraProgress)) / 2;
+      camera.position.copy(cameraStart).applyAxisAngle(camera.up, angle);
+      camera.lookAt(0, 0, 0);
       if (!cache.has(name)) {
         const study = studies[name]();
         subjects.add(study.group);

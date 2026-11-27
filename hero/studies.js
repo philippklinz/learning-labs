@@ -50,7 +50,7 @@ function createCrystal() {
         facetNormal = normalMatrix * normal;
         toEye = -view.xyz;
         insideRay = inverse(mat3(modelViewMatrix)) * refract(normalize(view.xyz), normalize(facetNormal), 0.66);
-        crystalTint = fract(dot(modelMatrix[3].xz, vec2(12.9, 57.3)));
+        crystalTint = fract(dot(normalize(modelMatrix[0].xyz).xz, vec2(12.9, 57.3)));
         gl_Position = projectionMatrix * view;
       }`,
     fragmentShader: `
@@ -97,14 +97,16 @@ function createCrystal() {
   // Each prism is anchored at its base, so new tips grow outwards from the seed.
   const stalks = [];
   const up = new THREE.Vector3(0, 1, 0);
+  const orientation = new THREE.Quaternion().setFromAxisAngle(up, -0.07);
   function prism(x, z, leanX, leanZ, length, radius, twist, delay) {
     const mesh = new THREE.Mesh(geometry, mineral);
     mesh.add(new THREE.LineSegments(edges, edgeMaterial));
-    mesh.position.set(x, -1.13, z);
+    const base = new THREE.Vector3(x, 0, z).applyQuaternion(orientation);
     mesh.quaternion.setFromUnitVectors(up, new THREE.Vector3(leanX, 1, leanZ).normalize());
     mesh.rotateY(twist);
+    mesh.quaternion.premultiply(orientation);
     group.add(mesh);
-    stalks.push({ mesh, radius, length, delay });
+    stalks.push({ mesh, base, radius, length, delay });
   }
   prism(0, 0, 0.15, -0.12, 2.63, 0.39, 0.18, 0);
   prism(0.15, -0.15, 0.82, -0.35, 2.19, 0.30, 0.62, 0.09);
@@ -119,14 +121,31 @@ function createCrystal() {
     prism(x * 0.38, z * 0.38, x * lean, z * lean, 0.58 + random() * 0.79,
       0.12 + random() * 0.12, random(), 0.15 + random() * 0.30);
   }
+  const bounds = new THREE.Box3();
+  const point = new THREE.Vector3();
+  const center = new THREE.Vector3();
+  const vertices = geometry.getAttribute('position');
+  let previousGrowth = -1;
   return { group, update(t) {
-    group.rotation.y = -0.42 + 0.35 * t;
-    for (const { mesh, radius, length, delay } of stalks) {
+    if (t === previousGrowth) return;
+    previousGrowth = t;
+    bounds.makeEmpty();
+    for (const { mesh, base, radius, length, delay } of stalks) {
       const growth = THREE.MathUtils.smoothstep(t, delay, 1);
-      mesh.visible = growth > 0 || delay === 0;
-      const width = radius * (0.14 + 0.86 * Math.sqrt(growth));
-      mesh.scale.set(width, length * (0.04 + 0.96 * growth), width);
+      const fraction = delay === 0 ? 0.06 + 0.94 * growth : growth;
+      mesh.visible = fraction > 0;
+      if (!mesh.visible) continue;
+      mesh.position.copy(base).multiplyScalar(fraction);
+      const width = radius * Math.sqrt(fraction);
+      mesh.scale.set(width, length * fraction, width);
+      mesh.updateMatrix();
+      // Measure the actual tilted facets in group space, including just the visible prisms.
+      for (let i = 0; i < vertices.count; i++) {
+        bounds.expandByPoint(point.fromBufferAttribute(vertices, i).applyMatrix4(mesh.matrix));
+      }
     }
+    bounds.getCenter(center);
+    for (const { mesh } of stalks) if (mesh.visible) mesh.position.sub(center);
   } };
 }
 

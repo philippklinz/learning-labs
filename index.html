@@ -31,6 +31,18 @@
   });
 })();
 </script>
+<script>
+(() => {
+  if (!/^https?:$/.test(location.protocol) || !window.IntersectionObserver || !window.ResizeObserver) return;
+  const still = matchMedia('(prefers-reduced-motion: reduce), (forced-colors: active)');
+  // Choose the seed before the browser can paint the full-grown fallback.
+  if (!still.matches) document.documentElement.dataset.crystalView = 'seed';
+  document.addEventListener('DOMContentLoaded', () => {
+    import('./hero/controls.js').then(({ startCrystal }) => startCrystal(still))
+      .catch(() => { delete document.documentElement.dataset.crystalView; });
+  }, { once: true });
+})();
+</script>
 <link rel="stylesheet" href="modern-objectivity.css">
 <style>
 :root, [data-theme="dark"] {
@@ -66,8 +78,9 @@ header { border-bottom: 1px solid var(--mo-border); }
 .hero { position: relative; isolation: isolate; overflow: hidden; background: #10191d; color: var(--mo-text); }
 .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(90deg, #10191d80 0%, #10191d4d 38%, transparent 64%); }
 .hero-canvas { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; pointer-events: none; visibility: hidden; }
-.hero[data-live] .hero-canvas { visibility: visible; }
-.hero[data-live] .study-window::before, .hero[data-live] .study-poster { visibility: hidden; }
+[data-crystal-view="live"] .hero-canvas { visibility: visible; }
+[data-crystal-view="live"] .study-window::before, [data-crystal-view] .study-poster { visibility: hidden; }
+[data-crystal-view="seed"] .study-window::after { content: ""; position: absolute; inset: 0; background: url("hero/kristall-keim.webp") center / contain no-repeat; pointer-events: none; }
 .hero-inner { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: clamp(24px, 5vw, 72px); align-items: center; padding-block: clamp(48px, 6vw, 88px); }
 .hero h1 { margin: 0 0 24px; font-size: clamp(3rem, 5.6vw, 5.5rem); line-height: 1.02; letter-spacing: -.055em; }
 .hero h1 em { font-family: var(--mo-serif); font-weight: 400; color: var(--mo-accent-active); }
@@ -75,18 +88,9 @@ header { border-bottom: 1px solid var(--mo-border); }
 .hero-links .mo-btn, .card-actions .mo-btn, .empty .mo-btn { min-width: 0; white-space: normal; }
 .lead { max-width: 52ch; font-size: clamp(1.125rem, 1.65vw, 1.5rem); line-height: 1.5; margin: 0 0 16px; }
 .intro { max-width: 55ch; margin: 0 0 24px; color: var(--mo-muted); }
-.study { min-width: 0; margin: 0; }
-.study-window { position: relative; width: 100%; max-width: 38rem; margin: auto; aspect-ratio: 3 / 2; }
+.study-window { position: relative; min-width: 0; width: 100%; max-width: 38rem; margin: auto; aspect-ratio: 3 / 2; }
 .study-window::before { content: ""; position: absolute; z-index: -2; left: 50%; top: 50%; width: 500%; aspect-ratio: 5 / 4; transform: translate(-50%, -50%); background: url("hero/raum.webp") center / contain no-repeat; pointer-events: none; }
 .study-poster { display: block; width: 100%; height: auto; pointer-events: none; }
-.study figcaption { display: grid; justify-items: center; gap: 12px; text-align: center; }
-.study-choices { display: flex; flex-wrap: wrap; justify-content: center; gap: 0; max-width: 100%; }
-.study-choices .mo-btn { padding-inline: clamp(10px, 1.4vw, 20px); background: var(--mo-bg); border-color: var(--mo-control-border); }
-.study-choices .mo-btn + .mo-btn { margin-inline-start: -1px; }
-.study-choices .mo-btn[aria-pressed="true"] { color: var(--mo-accent-active); background: var(--mo-accent-light); box-shadow: inset 0 -3px var(--mo-accent); }
-.study-choices .mo-btn:hover { background: var(--mo-surface-3); }
-.study-choices .mo-btn:focus-visible { position: relative; z-index: 1; }
-.study-caption { max-width: 45ch; min-height: 2.9em; margin: 0; color: var(--mo-muted); font-size: .875rem; line-height: 1.45; }
 
 .catalog, .journeys, .about { padding-block: clamp(40px, 5.6vw, 80px); }
 .catalog { background: var(--mo-surface-2); border-block: 1px solid var(--mo-border); }
@@ -199,7 +203,6 @@ header { border-bottom: 1px solid var(--mo-border); }
   .hero { background: Canvas; }
   .hero::after { display: none; }
   .study-window { isolation: isolate; overflow: hidden; }
-  .study-choices .mo-btn[aria-pressed="true"] { outline: 2px solid Highlight; outline-offset: -4px; }
 }
 </style>
 </head>
@@ -227,22 +230,8 @@ header { border-bottom: 1px solid var(--mo-border); }
 <canvas class="hero-canvas" aria-hidden="true"></canvas>
 <div class="wrap hero-inner">
 <div class="hero-copy"><h1 id="hero-heading">Wissen ist<br>ein Raum zum<br><em>Erkunden.</em></h1><p class="lead">Interaktive Experimente, wissenschaftliche Modelle und Atlanten – unabhängig voneinander, frei zugänglich und verbunden durch Neugier.</p><p class="intro">Du brauchst kein Vorwissen. Wähle ein Thema, stelle Fragen und finde heraus, wie die Dinge zusammenhängen.</p><div class="hero-links"><a class="mo-btn mo-btn-primary" href="#projects">Projekte entdecken</a><a class="mo-btn" href="#journeys">Wissensreise beginnen</a></div></div>
-<figure class="study" aria-label="Schematische Darstellung im XYZ-Koordinatenraum">
-  <div class="study-window" aria-hidden="true">
-    <img class="study-poster" src="hero/kristall.webp" width="960" height="640" alt="">
-  </div>
-  <figcaption>
-    <div class="study-choices" role="group" aria-label="Schaubild wählen" hidden>
-      <button class="mo-btn" type="button" data-study="kristall" aria-pressed="true">Kristall</button>
-      <button class="mo-btn" type="button" data-study="klangfigur" aria-pressed="false">Klangfigur</button>
-      <button class="mo-btn" type="button" data-study="farbwirbel" aria-pressed="false">Farbwirbel</button>
-    </div>
-    <p class="study-caption" aria-live="polite" aria-atomic="true">
-      <span data-caption="kristall">Aus einem Keim wächst ein Bündel facettierter Kristalle.</span>
-      <span data-caption="klangfigur" hidden>Sand sammelt sich auf den Knotenlinien einer schwingenden Platte.</span>
-      <span data-caption="farbwirbel" hidden>Ein Ring aus Farbe rollt sich im Wasser ein und zieht feine Fäden hinter sich her.</span>
-    </p>
-  </figcaption>
+<figure class="study-window" role="img" aria-label="Schematische Darstellung eines Kristallbündels am Ursprung der X-, Y- und Z-Achse.">
+  <img class="study-poster" src="hero/kristall.webp" width="960" height="640" alt="">
 </figure>
 </div>
 </section>
@@ -325,6 +314,5 @@ update();
 document.getElementById("project-filters").hidden = false;
 })();
 </script>
-<script defer src="hero/controls.js"></script>
 </body>
 </html>
