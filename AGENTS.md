@@ -15,6 +15,8 @@ The aim is personal learning and occasional public sharing, not a commercial pro
 - Human Origins: https://github.com/philippklinz/lab-human-origins
 - Anthropology Atlas engine: https://github.com/philippklinz/anthropology-atlas-engine
 - Anthropology Atlas research content: https://github.com/philippklinz/anthropology-atlas-content
+- People Atlas engine: https://github.com/philippklinz/people-atlas-engine
+- People Atlas biographical content: https://github.com/philippklinz/people-atlas-content
 - Modern Objectivity design language: https://github.com/philippklinz/modern-objectivity-style
 
 This list is a starting point, **not** an exhaustive list of permitted lab types.

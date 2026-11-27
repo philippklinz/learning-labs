@@ -14,6 +14,7 @@ Learning paths are optional editorial suggestions. Every lab and atlas remains a
 | 04 · Evolution | [Site](https://philippklinz.github.io/lab-evolution/) | [Repository](https://github.com/philippklinz/lab-evolution) | Six interactive sublabs, population models and evolutionary evidence |
 | 05 · Entstehung des Menschen | [Site](https://philippklinz.github.io/lab-human-origins/) | [Repository](https://github.com/philippklinz/lab-human-origins) | Six interactive sublabs: fossils, bipedalism, tools, kinship, dispersal, evidence |
 | Anthropology Atlas | [Atlas](https://philippklinz.github.io/anthropology-atlas-engine/) | [Engine](https://github.com/philippklinz/anthropology-atlas-engine) / [Content](https://github.com/philippklinz/anthropology-atlas-content) | Working development version |
+| People Atlas | [Atlas](https://philipp-klinz.net/people-atlas-engine/) | [Engine](https://github.com/philippklinz/people-atlas-engine) / [Content](https://github.com/philippklinz/people-atlas-content) | Interactive timeline, combined categories and biographies in German and English |
 
 **Concept** means a public landing page exists but the interactive exhibits have not been built yet. Status descriptions are maintained manually, not computed from GitHub.
 
@@ -21,7 +22,7 @@ Learning paths are optional editorial suggestions. Every lab and atlas remains a
 
 Open index.html directly in a browser or publish the root of main as a static GitHub Pages site. No npm, build step, backend, external fonts, accounts, analytics or service dependencies are required.
 
-Expected Pages address: https://philippklinz.github.io/learning-labs/
+Public directory: https://philipp-klinz.net/learning-labs/
 
 To activate Pages if needed: Settings > Pages > Deploy from a branch > main > /(root).
 
@@ -44,7 +45,7 @@ The landing page uses `index.html` and a **local `modern-objectivity.css`** (no 
 
 ## Multilingual access (planned)
 
-Multilingual access is a central [Modern Objectivity requirement (MO-13)](https://github.com/philippklinz/modern-objectivity-style/blob/main/docs/10-multilingual-access.md): complete user-facing journeys in all 24 official EU languages. Its [programming pattern](https://github.com/philippklinz/modern-objectivity-style/blob/main/guides/multilingual-pattern.md) provides a local implementation reference. This repository keeps the [lab adoption plan](docs/MULTILINGUALISM.md), inventory and proposed rollout. The five existing labs still teach in German; the Atlas already offers German and English.
+Multilingual access is a central [Modern Objectivity requirement (MO-13)](https://github.com/philippklinz/modern-objectivity-style/blob/main/docs/10-multilingual-access.md): complete user-facing journeys in all 24 official EU languages. Its [programming pattern](https://github.com/philippklinz/modern-objectivity-style/blob/main/guides/multilingual-pattern.md) provides a local implementation reference. This repository keeps the [lab adoption plan](docs/MULTILINGUALISM.md), inventory and proposed rollout. The five existing labs still teach in German; Anthropology Atlas and People Atlas offer German and English.
 
 ## Working instructions
 

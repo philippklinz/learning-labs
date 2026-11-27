@@ -18,6 +18,8 @@ The first migration covers the five independent labs and this directory. The Ant
 
 The central requirement and reference pattern are now in place. Translation of the existing labs remains a separately planned implementation task.
 
+People Atlas joined the directory on 27 November 2026 with German and English UI and biographies. Like Anthropology Atlas, it maintains independent engine/content repositories and translation contracts; it is not included in the earlier page-count snapshot below. Independent historical and language review of its AI-assisted text remains pending.
+
 ## Current inventory
 
 Snapshot of repository `main` trees inspected on 24 November 2026. Counts include each repository's start page and exclude the Atlas.
