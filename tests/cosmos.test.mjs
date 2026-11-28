@@ -102,6 +102,38 @@ test('the pulse meets the XYZ origin on the archived perspective grid at every s
   }
 });
 
+test('X, Y and Z share the Y marker distance and fit the opening view', () => {
+  const view = createAtlasView();
+  const atlas = createAtlasWorld(view);
+  const labels = [];
+  atlas.world.traverse(object => {
+    if (object.isLineSegments && object.renderOrder === 2) labels.push(object);
+  });
+  try {
+    assert.equal(labels.length, 3);
+    for (const [width, height, plot] of [
+      [1440, 690, { x: 756, y: 130, width: 582, height: 388 }],
+      [390, 823, { x: 16, y: 545, width: 358, height: 239 }]
+    ]) {
+      atlas.resize(width, height, plot, [plot, plot], 1);
+      atlas.update(duration, stateAt(duration));
+      const distance = labels[1].position.y;
+      assert.ok(width === 1440 ? distance === 3.38 : distance > 0 && distance < 3.38);
+      for (const [axis, label] of labels.entries()) {
+        assert.equal(label.position.getComponent(axis), distance);
+        assert.equal(label.position.clone().setComponent(axis, 0).length(), .14);
+        const vertices = label.geometry.getAttribute('position');
+        for (let i = 0; i < vertices.count; i++) {
+          const pixel = view.pixel(label.localToWorld(new Vector3().fromBufferAttribute(vertices, i)));
+          assert.ok(pixel.x > 0 && pixel.x < width && pixel.y > 0 && pixel.y < height);
+        }
+      }
+    }
+  } finally {
+    atlas.dispose();
+  }
+});
+
 test('turning the mobile star field side-on keeps a comparable number of visible stars', () => {
   const view = createAtlasView();
   const atlas = createAtlasWorld(view);
