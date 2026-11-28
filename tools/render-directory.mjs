@@ -42,7 +42,7 @@ function renderJourneys(language, copy) {
   const journeys = json(`journeys/${language}.json`);
   checkIds(journeys, language);
   return journeys.map((journey, index) => {
-    const { id, stops, furtherReading } = journey;
+    const { id, stops } = journey;
     if (!stops.length) throw new Error('Journey has no stops: ' + id);
     checkIds(stops, id);
     const rows = stops.map((stop, i) => {
@@ -58,16 +58,9 @@ function renderJourneys(language, copy) {
         </a>
       </li>`;
     });
-    let reading = '';
-    if (furtherReading) {
-      const project = copy.projects[furtherReading.projectId];
-      if (!project) throw new Error('Unknown project: ' + furtherReading.projectId);
-      reading = `<p class="journey-reading"><span>${escape(copy.guide.furtherReading)}</span><a href="${linkUrl(furtherReading.url)}">${escape(furtherReading.title)} · ${escape(project.title)}</a></p>`;
-    }
     return `<details class="journey" name="knowledge-journeys" id="journey-${id}"${index === 0 ? ' open' : ''}>
       <summary><span class="journey-title">${escape(journey.title)}</span><span class="journey-count">${escape(counted(copy.guide.stops, language, stops.length))}</span><span class="chevron" aria-hidden="true"></span></summary>
       <ol class="journey-list">${rows.join('\n')}</ol>
-      ${reading}
     </details>`;
   }).join('\n');
 }
