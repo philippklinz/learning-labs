@@ -1,5 +1,5 @@
 {
-  "sourceRevision": "71414704710fda080315af3a5245494705edc60439f443387bf9b37074a70366",
+  "sourceRevision": "5e4ffc87b6c06c658747ab1beb606dc92370938d715a1e42038388f459c8d9e2",
   "languageName": "English",
   "page": {
     "title": "Learning Labs – Interactive labs and atlases",
@@ -11,7 +11,6 @@
     "label": "Main navigation",
     "projects": "Projects",
     "journeys": "Journeys",
-    "about": "About",
     "language": "Choose language",
     "theme": "Dark mode"
   },
@@ -103,11 +102,5 @@
     "role": "Your guide",
     "greeting": "What shall we explore today?",
     "stops": {"one": "{count} stop", "other": "{count} stops"}
-  },
-  "about": {
-    "heading": "Small labs.\nBig questions",
-    "statement": "How did the young Earth get its oceans? Why does the altitude theorem hold for every right-angled triangle? I build the Learning Labs around questions I want to answer for myself. For the first, a model helps me picture what happened. For the second, I can work through a proof step by step.",
-    "invitation": "I share what helps me learn so anyone can use it. As you explore, you might come across a question I haven’t even thought of yet."
-  },
-  "footer": {"source": "Directory source code"}
+  }
 }

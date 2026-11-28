@@ -10,7 +10,6 @@
     "label": "Hauptnavigation",
     "projects": "Projekte",
     "journeys": "Wissensreisen",
-    "about": "Konzept",
     "language": "Sprache wählen",
     "theme": "Dunkelmodus"
   },
@@ -108,13 +107,5 @@
       "one": "{count} Station",
       "other": "{count} Stationen"
     }
-  },
-  "about": {
-    "heading": "Kleine Labore.\nGroße Fragen",
-    "statement": "Wie bekam die junge Erde ihre Ozeane? Warum gilt der Höhensatz für jedes rechtwinklige Dreieck? Die Learning Labs entstehen aus Fragen, die ich selbst verstehen möchte. Bei der einen hilft mir ein Modell, bei der anderen ein Beweis, den ich Schritt für Schritt nachvollziehen kann.",
-    "invitation": "Was mir beim Lernen hilft, mache ich hier frei zugänglich. Vielleicht entdeckst du beim Erkunden eine Frage, auf die ich selbst noch gar nicht gekommen bin."
-  },
-  "footer": {
-    "source": "Portal-Quellcode"
   }
 }
