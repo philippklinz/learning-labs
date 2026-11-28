@@ -58,7 +58,7 @@ header { border-bottom: 1px solid var(--mo-border); }
 :root:not([data-cosmos-view]) .spiral-galaxy { background-image: url("hero/spiral-galaxy.webp"); }
 :root:not([data-cosmos-view]) .distant-galaxy { background-image: url("hero/distant-galaxy.webp"); }
 
-.catalog, .journeys { padding-block: clamp(40px, 5.6vw, 80px); }
+.catalog, .journeys, .statements { padding-block: clamp(40px, 5.6vw, 80px); }
 .catalog { background: var(--mo-surface-2); border-block: 1px solid var(--mo-border); }
 .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 32px; }
 .section-head h2 { margin: 0; font-size: clamp(2rem, 3.8vw, 3.5rem); line-height: 1.08; letter-spacing: -.045em; }
@@ -155,6 +155,15 @@ details[open] > summary > .chevron { transform: translateY(2px) rotate(225deg); 
 .route-copy strong { font-size: clamp(1.05rem, 1.5vw, 1.3rem); line-height: 1.3; }
 .route-question { color: var(--mo-rail-muted); font-size: .9375rem; line-height: 1.5; }
 .route-arrow { color: var(--mo-accent); }
+
+.statement-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(28px, 4.8vw, 72px); }
+.statement { display: flex; flex-direction: column; margin: 0; padding-block-start: 20px; border-block-start: 1px solid var(--mo-border-strong); overflow-wrap: anywhere; }
+.statement blockquote { margin: 0; font: italic clamp(1.125rem, 1.5vw, 1.375rem)/1.5 var(--mo-serif); }
+.statement p { margin: 0; }
+.statement p + p { margin-block-start: .8em; }
+.statement figcaption { margin-block-start: auto; padding-block-start: 20px; color: var(--mo-text-strong); font: 700 .875rem/1.5 var(--mo-font); }
+.statement + .statement figcaption { text-align: end; }
+
 footer { border-block-start: 1px solid var(--mo-border); }
 .footer-inner { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; padding-block: 16px; }
 .footer-signature { flex: 1 1 34ch; margin: 0; color: var(--mo-rail-muted); font: .75rem/1.6 var(--mo-mono); }
@@ -169,6 +178,7 @@ footer { border-block-start: 1px solid var(--mo-border); }
   .hero::after { background: linear-gradient(180deg, #10191d66 0%, #10191d33 42%, transparent 66%); }
   .cosmos-frame { max-width: 31rem; }
   .section-head { align-items: start; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+  .statement-grid { grid-template-columns: minmax(0, 1fr); }
   .journey-guide { --guide-width: 8.5rem; }
   .footer-links a { padding-inline: 8px; }
 }
