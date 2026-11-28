@@ -17,6 +17,8 @@ The aim is personal learning and occasional public sharing, not a commercial pro
 - Anthropology Atlas research content: https://github.com/philippklinz/anthropology-atlas-content
 - People Atlas engine: https://github.com/philippklinz/people-atlas-engine
 - People Atlas biographical content: https://github.com/philippklinz/people-atlas-content
+- [Maths Atlas engine](https://github.com/philippklinz/maths-atlas-engine)
+- [Maths Atlas mathematical content](https://github.com/philippklinz/maths-atlas-content)
 - Modern Objectivity design language: https://github.com/philippklinz/modern-objectivity-style
 
 This list is a starting point, **not** an exhaustive list of permitted lab types.

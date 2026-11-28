@@ -15,6 +15,7 @@ Learning paths are optional editorial suggestions. Every lab and atlas remains a
 | 05 · Entstehung des Menschen | [Site](https://philippklinz.github.io/lab-human-origins/) | [Repository](https://github.com/philippklinz/lab-human-origins) | Six interactive sublabs: fossils, bipedalism, tools, kinship, dispersal, evidence |
 | Anthropology Atlas | [Atlas](https://philippklinz.github.io/anthropology-atlas-engine/) | [Engine](https://github.com/philippklinz/anthropology-atlas-engine) / [Content](https://github.com/philippklinz/anthropology-atlas-content) | Working development version |
 | People Atlas | [Atlas](https://philipp-klinz.net/people-atlas-engine/) | [Engine](https://github.com/philippklinz/people-atlas-engine) / [Content](https://github.com/philippklinz/people-atlas-content) | Interactive timeline, combined categories and biographies in German and English |
+| Maths Atlas | [Atlas](https://philipp-klinz.net/maths-atlas-engine/) | [Engine](https://github.com/philippklinz/maths-atlas-engine) / [Content](https://github.com/philippklinz/maths-atlas-content) | Step-by-step proofs in German and a mind map connecting mathematical concepts and theorems |
 
 **Concept** means a public landing page exists but the interactive exhibits have not been built yet. Status descriptions are maintained manually, not computed from GitHub.
 
