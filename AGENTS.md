@@ -45,8 +45,8 @@ The authoritative requirement is [Modern Objectivity MO-13](https://github.com/p
 ## Editing project entries
 
 1. Verify repository existence and published Pages URL using available tools or browsing.
-2. Check real status; use Concept for a landing-only project, In Entwicklung for one with active exhibits. Do not invent features.
-3. Add or update the static card in index.html with title, summary, optional sequence number, status, category, data-tags, data-search, public URL and source URL.
+2. Verify which exhibits visitors can use. Reserve the Concept badge for projects with only a landing page.
+3. Add or update the static card in index.html with title, summary, optional sequence number, category, data-tags, data-search, public URL and source URL.
 4. Ensure atlases and projects beyond the five existing labs are also welcome.
 5. Update readme and count-related copy when the directory grows.
 6. Update optional journeys when useful, but never imply a linear scientific or historical inevitability.
