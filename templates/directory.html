@@ -35,13 +35,14 @@
 </script>
 <script>
 (() => {
-  if (!/^https?:$/.test(location.protocol) || !window.IntersectionObserver || !window.ResizeObserver) return;
+  if (!/^https?:$/.test(location.protocol) || !window.IntersectionObserver || !window.ResizeObserver || !window.WebGL2RenderingContext) return;
   const still = matchMedia('(prefers-reduced-motion: reduce), (forced-colors: active)');
-  // Choose the seed before the browser can paint the full-grown fallback.
-  if (!still.matches) document.documentElement.dataset.crystalView = 'seed';
+  if (still.matches) return;
+  // Select the dark opening before the browser can paint the finished atlas.
+  document.documentElement.dataset.cosmosView = 'opening';
   document.addEventListener('DOMContentLoaded', () => {
-    import('./hero/controls.js').then(({ startCrystal }) => startCrystal(still))
-      .catch(() => { delete document.documentElement.dataset.crystalView; });
+    import('./hero/cosmos-player.js').then(({ startCosmos }) => startCosmos(still))
+      .catch(() => { delete document.documentElement.dataset.cosmosView; });
   }, { once: true });
 })();
 </script>
@@ -84,8 +85,9 @@
       <p class="intro">{{hero.intro}}</p>
       <div class="hero-links"><a class="mo-btn mo-btn-primary" href="#projects">{{hero.projects}}</a><a class="mo-btn" href="#journeys">{{hero.journeys}}</a></div>
     </div>
-    <figure class="study-window" role="img" aria-label="{{hero.crystal}}">
-      <img class="study-poster" src="hero/kristall.webp" width="960" height="640" alt="">
+    <figure class="cosmos-frame" role="img" aria-label="{{hero.cosmos}}">
+      <img class="spiral-galaxy" src="hero/spiral-galaxy.webp" width="620" height="404" alt="">
+      <img class="distant-galaxy" src="hero/distant-galaxy.webp" width="470" height="304" alt="">
     </figure>
   </div>
 </section>
