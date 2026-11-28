@@ -1,5 +1,5 @@
 {
-  "sourceRevision": "8cbcb7dbbd68efa647d2861f28979419642ec09316a6918e7936c30ae92deba6",
+  "sourceRevision": "5e12a55d2072cf339f5781bb0bb31ee95e2aed687d0ed81a2639cd503de72297",
   "languageName": "English",
   "page": {
     "title": "Learning Labs – Interactive labs and atlases",
@@ -18,7 +18,7 @@
     "intro": "You can start anywhere. Pick a topic, ask a question and see how things fit together.",
     "projects": "Explore the projects",
     "journeys": "Start a journey",
-    "crystal": "Schematic crystal cluster growing upwards and outwards from a shared base at the origin of the XYZ axes."
+    "cosmos": "Schematic view of expanding space. Three coordinate axes grow from the origin. Stars move apart and two tilted spiral galaxies come into view."
   },
   "catalog": {
     "heading": "Explore the projects",

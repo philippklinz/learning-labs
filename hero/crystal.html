@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Crystal growth · Learning Labs</title>
+<link rel="stylesheet" href="../modern-objectivity.css">
+<style>
+html, body { margin: 0; background: #10191d; }
+.hero { position: relative; isolation: isolate; display: grid; place-items: center; min-height: 100svh; overflow: hidden; }
+.hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; visibility: hidden; }
+.study-window { position: relative; width: min(90vw, 52rem, 125svh); aspect-ratio: 3 / 2; margin: 0; }
+.study-window::before { content: ""; position: absolute; z-index: -1; left: 50%; top: 50%; width: 500%; aspect-ratio: 5 / 4; transform: translate(-50%, -50%); background: url("raum.webp") center / contain no-repeat; }
+.study-poster { display: block; width: 100%; height: auto; }
+[data-crystal-view] .study-poster, [data-crystal-view="live"] .study-window::before { visibility: hidden; }
+[data-crystal-view="seed"] .study-window::after { content: ""; position: absolute; inset: 0; background: url("kristall-keim.webp") center / contain no-repeat; }
+[data-crystal-view="live"] .hero-canvas { visibility: visible; }
+</style>
+<script>
+if (/^https?:$/.test(location.protocol) && window.IntersectionObserver && window.ResizeObserver) {
+  const still = matchMedia('(prefers-reduced-motion: reduce), (forced-colors: active)');
+  if (!still.matches) document.documentElement.dataset.crystalView = 'seed';
+  document.addEventListener('DOMContentLoaded', () => {
+    import('./controls.js').then(({ startCrystal }) => startCrystal(still))
+      .catch(() => { delete document.documentElement.dataset.crystalView; });
+  }, { once: true });
+}
+</script>
+</head>
+<body>
+<main class="hero" aria-label="Crystal growth">
+  <canvas class="hero-canvas" aria-hidden="true"></canvas>
+  <figure class="study-window">
+    <img class="study-poster" src="kristall.webp" width="960" height="640" alt="Faceted crystals grow upwards and outwards from a shared foot at the origin of three coordinate axes.">
+  </figure>
+</main>
+</body>
+</html>
