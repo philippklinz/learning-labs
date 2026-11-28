@@ -25,7 +25,7 @@ This list is a starting point, **not** an exhaustive list of permitted lab types
 
 ## Architecture and conventions
 
-- One static, standalone index.html in the repository root. The local `modern-objectivity.css` contains the imported reference style kit; project-specific CSS and filtering scripts are inline in `index.html` for ease of editing. No network assets are required.
+- Serve the checked-in German `index.html` and English `en.html` directly. Edit the shared `templates/directory.html`, local UI catalogues and per-edition journey JSON, then refresh the HTML with `node tools/render-directory.mjs`. The local `modern-objectivity.css` is the reference style kit. `directory.css` and `directory.js` are shared by the editions.
 - GitHub Pages serves main / (root); no backend, framework, bundler, accounts or build tools.
 - Lab content belongs exclusively in each lab's own repository.
 - Descriptive cross-links are optional. The numbered "Wissensreise" is an editorial path, not a required syllabus or technical dependency.
@@ -48,7 +48,7 @@ The authoritative requirement is [Modern Objectivity MO-13](https://github.com/p
 
 1. Verify repository existence and published Pages URL using available tools or browsing.
 2. Verify which exhibits visitors can use. Reserve the Concept badge for projects with only a landing page.
-3. Add or update the static card in index.html with title, summary, optional sequence number, category, data-tags, data-search, public URL and source URL.
+3. Edit the shared card template and the localised title, summary, category and search vocabulary. Preserve the project ID, tags, public URL and source URL.
 4. Ensure atlases and projects beyond the five existing labs are also welcome.
 5. Update readme and count-related copy when the directory grows.
 6. Update optional journeys when useful, but never imply a linear scientific or historical inevitability.

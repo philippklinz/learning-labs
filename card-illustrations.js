@@ -148,6 +148,16 @@
       };
     },
 
+    humboldt({ head, writingHand }) {
+      return (t, w) => {
+        const lookUp = beat(t, .20, .55, .94);
+        const indicate = beat(t, .28, .61, .93);
+        const trace = Math.sin(2 * turn * t) * (1 - indicate);
+        rotate(head, 7 * lookUp * w, 105, 73);
+        rotate(writingHand, (2.4 * trace + 6 * indicate) * w, 130, 97);
+      };
+    },
+
     altitude({ angle, construction, plumb }) {
       return (t, w) => {
         const drop = ramp(t, .10, .59) * (1 - ramp(t, .81, 1));
@@ -160,11 +170,11 @@
     }
   };
 
-  function attach(card, stillSvg) {
+  function attach(trigger, stillSvg) {
     let movingSvg;
     let draw;
     let visible = true;
-    let hovered = matchMedia('(hover: hover)').matches && card.matches(':hover');
+    let hovered = matchMedia('(hover: hover)').matches && trigger.matches(':hover');
     let target = 0;
     let weight = 0;
     let from = 0;
@@ -172,8 +182,11 @@
     let previous = 0;
     let phase = 0;
     let frame = 0;
+    let cueTimer = 0;
 
     function stop() {
+      clearTimeout(cueTimer);
+      cueTimer = 0;
       cancelAnimationFrame(frame);
       frame = 0;
       if (movingSvg) {
@@ -185,7 +198,7 @@
 
     function paint(now) {
       frame = 0;
-      if (card.hidden) { stop(); return; }
+      if (trigger.hidden) { stop(); return; }
       const transition = ramp(now - changedAt, 0, target ? 260 : 480);
       weight = from + (target - from) * transition;
       if (!target && transition === 1) { stop(); return; }
@@ -198,8 +211,8 @@
     }
 
     function sync() {
-      if (still.matches || document.hidden || !visible || card.hidden) { stop(); return; }
-      const next = Number(hovered || !!card.querySelector(':focus-visible'));
+      if (still.matches || document.hidden || !visible || trigger.hidden) { stop(); return; }
+      const next = Number(hovered || !!cueTimer || !!trigger.querySelector(':focus-visible'));
       if (next === target) return;
       if (!movingSvg) {
         // Keep the authored still intact and put it back once the return has finished.
@@ -223,13 +236,19 @@
       hovered = event.type === 'pointerenter';
       sync();
     }
-    card.addEventListener('pointerenter', pointer);
-    card.addEventListener('pointerleave', pointer);
-    card.addEventListener('pointercancel', pointer);
-    card.addEventListener('focusin', sync);
-    card.addEventListener('focusout', () => queueMicrotask(sync));
+    trigger.addEventListener('pointerenter', pointer);
+    trigger.addEventListener('pointerleave', pointer);
+    trigger.addEventListener('pointercancel', pointer);
+    trigger.addEventListener('focusin', sync);
+    trigger.addEventListener('focusout', () => queueMicrotask(sync));
     return {
       sync,
+      cue() {
+        if (still.matches || document.hidden || !visible) return;
+        clearTimeout(cueTimer);
+        cueTimer = setTimeout(() => { cueTimer = 0; sync(); }, cycle);
+        sync();
+      },
       setVisible(value) {
         visible = value;
         if (!value) hovered = false;
@@ -238,20 +257,29 @@
     };
   }
 
-  const cards = new Map();
+  const players = new Map();
   for (const svg of document.querySelectorAll('#project-cards svg[data-illustration]')) {
     const card = svg.closest('.card');
-    cards.set(card, attach(card, svg));
+    players.set(card, attach(card, svg));
+  }
+  const guide = document.querySelector('.journey-guide');
+  if (guide) {
+    const section = guide.closest('.journeys');
+    const guidePlayer = attach(section, guide.querySelector('svg'));
+    players.set(guide, guidePlayer);
+    section.addEventListener('click', event => {
+      if (event.pointerType === 'touch' && event.target.closest('.journey > summary')) guidePlayer.cue();
+    });
   }
 
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(entries => {
-      for (const entry of entries) cards.get(entry.target).setVisible(entry.isIntersecting);
+      for (const entry of entries) players.get(entry.target).setVisible(entry.isIntersecting);
     });
-    for (const card of cards.keys()) observer.observe(card);
+    for (const element of players.keys()) observer.observe(element);
   }
   function syncAll() {
-    for (const player of cards.values()) player.sync();
+    for (const player of players.values()) player.sync();
   }
   still.addEventListener('change', syncAll);
   document.addEventListener('visibilitychange', syncAll);

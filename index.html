@@ -1,11 +1,14 @@
 <!doctype html>
+<!-- Source: templates/directory.html, locales/ and journeys/. Publish the checked-in HTML directly. -->
 <html lang="de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0b1d23">
-<meta name="description" content="Unabhängige interaktive Wissenslabore und Atlanten: Entstehung des Lebens, Molekularbiologie, Evolution und Menschheitsgeschichte.">
+<meta name="description" content="Unabhängige interaktive Wissenslabore, wissenschaftliche Modelle und Atlanten. Entdecke Projekte und folge einer Wissensreise.">
 <title>Learning Labs – Interaktive Labore und Atlanten</title>
+<link rel="alternate" hreflang="de" href="index.html">
+<link rel="alternate" hreflang="en" href="en.html">
 <script>
 (() => {
   const media = matchMedia("(prefers-color-scheme: dark)");
@@ -44,173 +47,15 @@
 })();
 </script>
 <link rel="stylesheet" href="modern-objectivity.css">
+<link rel="stylesheet" href="directory.css">
 <script defer src="card-illustrations.js"></script>
-<style>
-:root, [data-theme="dark"] {
-  --mo-button-bg: var(--mo-accent);
-  --mo-button-hover: var(--mo-accent-active);
-}
-:root { --mo-on-accent: #fff; --mo-on-accent-hover: #fff; }
-[data-theme="dark"] { --mo-on-accent: var(--mo-bg); --mo-on-accent-hover: var(--mo-bg); }
-[hidden] { display: none !important; }
-.mo-btn { transition-property: transform; }
-.wrap { width: min(100%, 1440px); margin-inline: auto; padding-inline: clamp(16px, 4.8vw, 76px); }
-.skip { position: fixed; inset: 8px auto auto 8px; transform: translateY(calc(-100% - 16px)); z-index: 10; }
-.skip:focus { transform: none; }
-main:focus { outline-offset: -3px; }
-.external-mark { display: inline-block; margin-inline-start: .25em; font-family: var(--mo-font); }
-
-header, .journeys, footer { background: var(--mo-rail); color: var(--mo-rail-text); }
-header { border-bottom: 1px solid var(--mo-border); }
-.header-inner { min-height: 76px; display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 16px; padding-block: 12px; }
-.brand { display: inline-flex; align-items: center; gap: 12px; min-height: var(--mo-control-height); width: fit-content; max-width: 100%; text-decoration: none; color: var(--mo-rail-text); }
-.brand:hover { color: var(--mo-accent-active); }
-.brand-mark { flex: 0 0 40px; height: 40px; border: 1px solid var(--mo-control-border); display: grid; place-items: center; color: var(--mo-accent); font: 26px var(--mo-serif); }
-.brand-name { min-width: 0; display: grid; gap: 4px; overflow-wrap: anywhere; }
-.brand-name strong { font-size: 1.05rem; line-height: 1.1; letter-spacing: .02em; }
-.brand-name small { font: .625rem var(--mo-mono); color: var(--mo-rail-muted); letter-spacing: .05em; }
-.site-nav, .hero-links, .footer-links { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
-.site-nav a, .footer-links a { display: inline-flex; align-items: center; justify-content: center; min-height: var(--mo-control-height); padding-inline: 12px; color: var(--mo-rail-text); text-decoration: none; font: 700 .875rem/1.25 var(--mo-font); }
-.site-nav a:hover, .footer-links a:hover { color: var(--mo-accent-active); text-decoration: underline; }
-.theme-toggle { width: var(--mo-control-height); padding: 0; }
-.theme-toggle svg { width: 18px; height: 18px; }
-.theme-toggle[aria-pressed="true"] { border-color: var(--mo-accent); box-shadow: inset 0 -3px var(--mo-accent); }
-
-.hero { position: relative; isolation: isolate; overflow: hidden; background: #10191d; color: var(--mo-text); }
-.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(90deg, #10191d80 0%, #10191d4d 38%, transparent 64%); }
-.hero-canvas { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; pointer-events: none; visibility: hidden; }
-[data-crystal-view="live"] .hero-canvas { visibility: visible; }
-[data-crystal-view="live"] .study-window::before, [data-crystal-view] .study-poster { visibility: hidden; }
-[data-crystal-view="seed"] .study-window::after { content: ""; position: absolute; inset: 0; background: url("hero/kristall-keim.webp") center / contain no-repeat; pointer-events: none; }
-.hero-inner { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: clamp(24px, 5vw, 72px); align-items: center; padding-block: clamp(48px, 6vw, 88px); }
-.hero h1 { margin: 0 0 24px; font-size: clamp(3rem, 5.6vw, 5.5rem); line-height: 1.02; letter-spacing: -.055em; }
-.hero h1 em { font-family: var(--mo-serif); font-weight: 400; color: var(--mo-accent-active); }
-.hero-copy, .section-head h2, .card-body h3, .principles h3, .route-copy { min-width: 0; overflow-wrap: anywhere; }
-.hero-links .mo-btn, .card-actions .mo-btn, .empty .mo-btn { min-width: 0; white-space: normal; }
-.lead { max-width: 52ch; font-size: clamp(1.125rem, 1.65vw, 1.5rem); line-height: 1.5; margin: 0 0 16px; }
-.intro { max-width: 55ch; margin: 0 0 24px; color: var(--mo-muted); }
-.study-window { position: relative; min-width: 0; width: 100%; max-width: 38rem; margin: auto; aspect-ratio: 3 / 2; }
-.study-window::before { content: ""; position: absolute; z-index: -2; left: 50%; top: 50%; width: 500%; aspect-ratio: 5 / 4; transform: translate(-50%, -50%); background: url("hero/raum.webp") center / contain no-repeat; pointer-events: none; }
-.study-poster { display: block; width: 100%; height: auto; pointer-events: none; }
-
-.catalog, .journeys, .about { padding-block: clamp(40px, 5.6vw, 80px); }
-.catalog { background: var(--mo-surface-2); border-block: 1px solid var(--mo-border); }
-.section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 32px; }
-.section-head h2 { margin: 0; font-size: clamp(2rem, 3.8vw, 3.5rem); line-height: 1.08; letter-spacing: -.045em; }
-.section-head > p { max-width: 45ch; margin: 0; color: var(--mo-muted); }
-.period { color: var(--mo-accent); }
-.filters { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px 24px; padding-bottom: 16px; border-bottom: 1px solid var(--mo-border-strong); }
-.filter-group { border: 0; padding: 0; margin: 0; min-width: 0; }
-.filter-group legend, .search label { display: block; padding: 0; margin: 0 0 8px; color: var(--mo-text-strong); font: 700 .8125rem/1.3 var(--mo-font); }
-.filter-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
-.filter-buttons [aria-pressed="true"] { background: var(--mo-accent-light); color: var(--mo-accent-active); border-color: var(--mo-accent); box-shadow: inset 0 -3px var(--mo-accent); }
-.search { width: min(100%, 20rem); min-width: 0; }
-.results { font: .75rem/1.5 var(--mo-mono); color: var(--mo-muted); margin: 16px 0; }
-.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 16px; }
-.card { min-width: 0; display: flex; flex-direction: column; background: var(--mo-surface); border: 1px solid var(--mo-border-strong); border-radius: var(--mo-radius); }
-.card:focus-within { border-color: var(--mo-focus); }
-.card-meta { display: flex; min-height: 3rem; align-items: center; justify-content: space-between; padding: 12px 16px; gap: 8px; border-bottom: 1px solid var(--mo-border); }
-.card-num, .card-category { font: 700 .6875rem/1.4 var(--mo-mono); color: var(--mo-accent-active); letter-spacing: .04em; }
-.status { font: .6875rem/1.4 var(--mo-mono); padding: 3px 8px; color: var(--mo-muted); border: 1px solid var(--mo-border-strong); }
-.card-art { display: grid; place-items: center; height: 132px; color: var(--mo-accent-active); border-bottom: 1px solid var(--mo-border); background-color: var(--mo-surface-2); background-image: linear-gradient(var(--mo-border) 1px, transparent 1px), linear-gradient(90deg, var(--mo-border) 1px, transparent 1px); background-size: 24px 24px; }
-.card-art svg { width: 144px; max-width: 100%; height: 104px; stroke: currentColor; }
-.card-body { flex: 1; padding: 20px; overflow-wrap: anywhere; }
-.card-category { margin: 0 0 8px; }
-.card-body h3 { margin: 0 0 12px; font-size: 1.5rem; }
-.card-body > p:last-child { color: var(--mo-muted); font-size: .9375rem; margin: 0; }
-.card-actions { display: grid; grid-template-columns: minmax(0, 4fr) minmax(max-content, 1fr); gap: 1px; margin-top: auto; align-items: stretch; border-top: 1px solid var(--mo-border); background: var(--mo-border); }
-.card-actions .mo-btn { border: 0; padding-inline: 12px; background: var(--mo-surface); }
-.card-actions .card-open { justify-content: flex-start; color: var(--mo-accent-active); }
-.card-actions .card-source { padding-inline: 8px; }
-.card-actions a:hover { background: var(--mo-surface-2); text-decoration: underline; }
-.card-actions a:focus-visible { outline-offset: -3px; }
-.empty { padding: 24px; background: var(--mo-surface); border: 1px solid var(--mo-border-strong); }
-.empty p { margin: 4px 0 16px; color: var(--mo-muted); }
-
-.journeys .section-head h2 { color: var(--mo-rail-text); }
-.journeys .section-head > p { color: var(--mo-rail-muted); }
-.journey-list { border-top: 1px solid var(--mo-border-strong); }
-.journey-list a { display: grid; grid-template-columns: 48px minmax(0, 1fr); align-items: baseline; gap: 16px; min-height: var(--mo-control-height); padding: 20px 8px; border-bottom: 1px solid var(--mo-border-strong); text-decoration: none; color: var(--mo-rail-text); }
-.journey-list a:hover { background: var(--mo-surface-2); color: var(--mo-accent-active); }
-.route-num { font: .875rem var(--mo-mono); color: var(--mo-accent); }
-.route-copy { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 24px; }
-.route-copy strong { font-size: clamp(1.125rem, 2vw, 1.5rem); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
-.route-copy small { font-size: .875rem; color: var(--mo-rail-muted); }
-.journey-aside { margin-top: 24px; max-width: 72ch; padding: 16px 20px; background: var(--mo-surface); border-inline-start: 3px solid var(--mo-accent); }
-.journey-aside p { font-size: .9375rem; color: var(--mo-rail-muted); margin: 4px 0 0; }
-.principles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
-.principles article { border-top: 1px solid var(--mo-border-strong); padding-top: 16px; }
-.principles h3 { font-size: 1.4rem; margin: 0 0 8px; }
-.principles p { font-size: .9375rem; color: var(--mo-muted); margin: 0; }
-.footer-inner { padding-block: 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
-.footer-brand strong { font-size: 1.125rem; }
-.footer-brand p { font-size: .8125rem; color: var(--mo-rail-muted); margin: 4px 0 0; }
-.foot-bar { border-top: 1px solid var(--mo-border-strong); padding-block: 16px; font: .6875rem/1.5 var(--mo-mono); color: var(--mo-rail-muted); }
-
-@media (max-width: 62rem) {
-  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 48rem) {
-  .header-inner { grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; }
-  .site-nav { grid-column: 1 / -1; grid-row: 2; }
-  .theme-toggle { grid-column: 2; grid-row: 1; }
-  .hero-inner { grid-template-columns: minmax(0, 1fr); gap: 20px; padding-block: 40px; }
-  .hero::after { background: linear-gradient(180deg, #10191d66 0%, #10191d33 42%, transparent 66%); }
-  .study-window { max-width: 31rem; }
-  .section-head { align-items: start; flex-direction: column; gap: 12px; margin-bottom: 24px; }
-  .principles { gap: 16px; }
-  .site-nav a, .footer-links a { padding-inline: 8px; }
-}
-@media (max-width: 36rem) {
-  .site-nav { gap: 2px; justify-content: space-between; }
-  .site-nav a { font-size: .8125rem; padding-inline: 2px; }
-  .hero-links { align-items: stretch; }
-  .hero-links .mo-btn { flex: 1 1 12rem; }
-  .cards, .principles { grid-template-columns: 1fr; grid-auto-rows: auto; }
-  .filter-group, .search { width: 100%; }
-  .filter-buttons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .filter-buttons .mo-btn { padding-inline: 8px; white-space: normal; }
-  .route-copy small { width: 100%; }
-  .journey-list a { grid-template-columns: minmax(32px, max-content) minmax(0, 1fr); gap: 8px; }
-  .footer-links { gap: 4px; }
-}
-@media (forced-colors: active) {
-  :root, [data-theme="dark"] {
-    color-scheme: light dark;
-    --mo-bg: Canvas;
-    --mo-surface: Canvas;
-    --mo-surface-2: Canvas;
-    --mo-rail: Canvas;
-    --mo-text: CanvasText;
-    --mo-text-strong: CanvasText;
-    --mo-muted: CanvasText;
-    --mo-rail-text: CanvasText;
-    --mo-rail-muted: CanvasText;
-    --mo-accent: LinkText;
-    --mo-accent-active: LinkText;
-    --mo-accent-light: Canvas;
-    --mo-info: CanvasText;
-    --mo-info-bg: Canvas;
-    --mo-on-accent: ButtonText;
-    --mo-on-accent-hover: ButtonText;
-    --mo-button-bg: ButtonFace;
-    --mo-button-hover: ButtonFace;
-    --mo-border: CanvasText;
-    --mo-border-strong: CanvasText;
-    --mo-control-border: ButtonText;
-  }
-  .filter-buttons [aria-pressed="true"], .theme-toggle[aria-pressed="true"] { outline: 2px solid Highlight; outline-offset: -4px; }
-  .hero { background: Canvas; }
-  .hero::after { display: none; }
-  .study-window { isolation: isolate; overflow: hidden; }
-}
-</style>
+<script defer src="directory.js"></script>
 </head>
 <body>
 <a class="skip mo-btn" href="#main">Zum Inhalt springen</a>
 <header data-theme="dark">
   <div class="wrap header-inner">
-    <a class="brand" href="./" aria-label="Learning Labs – Startseite">
+    <a class="brand" href="index.html" aria-label="Learning Labs – Startseite">
       <span class="brand-mark" aria-hidden="true">⌁</span>
       <span class="brand-name" lang="en"><strong>LEARNING LABS</strong><small>INDEPENDENT KNOWLEDGE SPACES</small></span>
     </a>
@@ -220,43 +65,53 @@ header { border-bottom: 1px solid var(--mo-border); }
       <a href="#about">Konzept</a>
       <a href="https://github.com/philippklinz/learning-labs">GitHub<span class="external-mark" aria-hidden="true">↗</span></a>
     </nav>
-    <button type="button" id="theme-toggle" class="mo-btn theme-toggle" aria-label="Dunkelmodus" title="Dunkelmodus" aria-pressed="false" hidden>
-      <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 2a8 8 0 0 1 0 16z" fill="currentColor"/></svg>
-    </button>
+    <div class="header-tools">
+      <details class="language-menu">
+        <summary class="mo-btn"><span class="mo-sr-only">Sprache wählen · </span>Deutsch<span class="chevron" aria-hidden="true"></span></summary>
+        <nav class="language-options" aria-label="Sprache wählen"><a lang="de" hreflang="de" href="index.html" aria-current="page">Deutsch</a>
+<a lang="en" hreflang="en" href="en.html">English</a></nav>
+      </details>
+      <button type="button" id="theme-toggle" class="mo-btn theme-toggle" aria-label="Dunkelmodus" title="Dunkelmodus" aria-pressed="false" hidden>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 2a8 8 0 0 1 0 16z" fill="currentColor"/></svg>
+      </button>
+    </div>
   </div>
 </header>
 <main id="main" tabindex="-1">
 <section class="hero" data-theme="dark" aria-labelledby="hero-heading">
-<canvas class="hero-canvas" aria-hidden="true"></canvas>
-<div class="wrap hero-inner">
-<div class="hero-copy"><h1 id="hero-heading">Wissen ist<br>ein Raum zum<br><em>Erkunden.</em></h1><p class="lead">Interaktive Experimente, wissenschaftliche Modelle und Atlanten – unabhängig voneinander, frei zugänglich und verbunden durch Neugier.</p><p class="intro">Du brauchst kein Vorwissen. Wähle ein Thema, stelle Fragen und finde heraus, wie die Dinge zusammenhängen.</p><div class="hero-links"><a class="mo-btn mo-btn-primary" href="#projects">Projekte entdecken</a><a class="mo-btn" href="#journeys">Wissensreise beginnen</a></div></div>
-<figure class="study-window" role="img" aria-label="Schematische Darstellung eines Kristallbündels, das vom gemeinsamen Fuß im XYZ-Ursprung nach oben und außen wächst.">
-  <img class="study-poster" src="hero/kristall.webp" width="960" height="640" alt="">
-</figure>
-</div>
-</section>
-<section class="catalog" id="projects"><div class="wrap"><div class="section-head"><h2>Entdecke die Projekte<span class="period">.</span></h2></div>
-<div class="filters" id="project-filters" hidden>
-  <fieldset class="filter-group">
-    <legend>Kategorie</legend>
-    <div class="filter-buttons">
-      <button type="button" class="mo-btn" data-filter="all" aria-controls="project-cards" aria-pressed="true">Alle</button>
-      <button type="button" class="mo-btn" data-filter="nature" aria-controls="project-cards" aria-pressed="false">Natur &amp; Leben</button>
-      <button type="button" class="mo-btn" data-filter="human" aria-controls="project-cards" aria-pressed="false">Mensch &amp; Kultur</button>
-      <button type="button" class="mo-btn" data-filter="atlas" aria-controls="project-cards" aria-pressed="false">Atlanten</button>
+  <canvas class="hero-canvas" aria-hidden="true"></canvas>
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <h1 id="hero-heading">Wissen ist <br>ein Raum zum<br><em>Erkunden.</em></h1>
+      <p class="lead">Interaktive Experimente, wissenschaftliche Modelle und Atlanten – unabhängig voneinander, frei zugänglich und verbunden durch Neugier.</p>
+      <p class="intro">Du brauchst kein Vorwissen. Wähle ein Thema, stelle Fragen und finde heraus, wie die Dinge zusammenhängen.</p>
+      <div class="hero-links"><a class="mo-btn mo-btn-primary" href="#projects">Projekte entdecken</a><a class="mo-btn" href="#journeys">Wissensreise beginnen</a></div>
     </div>
-  </fieldset>
-  <div class="search">
-    <label for="project-search">Projekte durchsuchen</label>
-    <input type="search" id="project-search" class="mo-input" placeholder="Name oder Thema" autocomplete="off" aria-controls="project-cards">
+    <figure class="study-window" role="img" aria-label="Schematische Darstellung eines Kristallbündels, das vom gemeinsamen Fuß im XYZ-Ursprung nach oben und außen wächst.">
+      <img class="study-poster" src="hero/kristall.webp" width="960" height="640" alt="">
+    </figure>
   </div>
-</div>
-<p class="results" id="result-count" role="status" aria-live="polite">8 Projekte</p>
-<div class="cards" id="project-cards">
-<!-- Weitere Projekte als article.card anfügen und data-tags/data-search pflegen. -->
-<article class="card" data-tags="nature" data-search="erde ursprung planet geologie ozeane atmosphäre frühgeschichte time geologische zeitskala trainer threejs protoerde akkretionsmodell"><div class="card-meta"><span class="card-num">LAB / 01</span></div>
-<div class="card-art">
-  <svg data-illustration="impact" viewBox="0 0 155 112" fill="none" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+</section>
+<section class="catalog" id="projects"><div class="wrap">
+  <div class="section-head"><h2>Entdecke die Projekte<span class="period">.</span></h2></div>
+  <div class="filters" id="project-filters" hidden>
+    <fieldset class="filter-group">
+      <legend>Kategorie</legend>
+      <div class="filter-buttons">
+        <button type="button" class="mo-btn" data-filter="all" aria-controls="project-cards" aria-pressed="true">Alle</button>
+        <button type="button" class="mo-btn" data-filter="nature" aria-controls="project-cards" aria-pressed="false">Natur &amp; Leben</button>
+        <button type="button" class="mo-btn" data-filter="human" aria-controls="project-cards" aria-pressed="false">Mensch &amp; Kultur</button>
+        <button type="button" class="mo-btn" data-filter="atlas" aria-controls="project-cards" aria-pressed="false">Atlanten</button>
+      </div>
+    </fieldset>
+    <div class="search"><label for="project-search">Projekte durchsuchen</label><input type="search" id="project-search" class="mo-input" placeholder="Name oder Thema" autocomplete="off" aria-controls="project-cards"></div>
+  </div>
+  <p class="results" id="result-count" role="status" aria-live="polite" data-messages="{&quot;one&quot;:&quot;{count} Projekt&quot;,&quot;other&quot;:&quot;{count} Projekte&quot;}">8 Projekte</p>
+  <div class="cards" id="project-cards">
+<article class="card" data-project="early-earth" data-tags="nature" data-search="erde ursprung planet geologie ozeane atmosphäre frühgeschichte time geologische zeitskala trainer threejs protoerde akkretionsmodell">
+  <div class="card-meta"><span class="card-num">LAB / 01</span></div>
+  <div class="card-art">
+    <svg data-illustration="impact" viewBox="0 0 155 112" fill="none" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
     <path d="M86 36 C79 31 72 29 65 29 C44 29 28 45 28 65 C28 86 45 102 65 102 C86 102 103 86 103 65 Q103 54 97 44 Q89 44 86 36 Z"/>
     <path d="M31 78 C41 92 55 98 71 95 Q92 90 101 65 C101 84 88 98 70 101 Q44 104 31 78Z" fill="currentColor" fill-opacity=".10" stroke="none"/>
     <g stroke-width="1.7">
@@ -274,11 +129,21 @@ header { border-bottom: 1px solid var(--mo-border); }
     <g data-part="shardFar"><path d="M126 19 L132 17 L136 21 L130 23 Z" stroke-width="1.8"/></g>
     <g data-part="shardLow"><path d="M110 37 L114 33 L118 35 L114 39 Z" stroke-width="1.7"/></g>
   </svg>
-</div>
-<div class="card-body"><p class="card-category">PLANET / NATURWISSENSCHAFT</p><h3>Die frühe Erde</h3><p>Von der Proto-Erde in 3D bis zur geologischen Zeitskala: Erdgeschichte zoomen, erforschen und mit täglichen Übungen lernen.</p></div><div class="card-actions"><a class="mo-btn card-open" href="https://philipp-klinz.net/lab-early-earth/" aria-label="Labor öffnen – Die frühe Erde">Labor öffnen</a><a class="mo-btn card-source" href="https://github.com/philippklinz/lab-early-earth" aria-label="Code – Die frühe Erde">Code</a></div></article>
-<article class="card" data-tags="nature" data-search="abiogenese ursprung leben chemie konzentration wasservolumen verdunstung praebiotisch protocellen membranen molekuele bausteine rna information kopieren hypothesen evidenz forschung studie"><div class="card-meta"><span class="card-num">LAB / 02</span></div>
-<div class="card-art">
-  <svg data-illustration="vesicle" viewBox="0 0 155 112" fill="none" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  </div>
+  <div class="card-body">
+    <p class="card-category">PLANET / NATURWISSENSCHAFT</p>
+    <h3>Die frühe Erde</h3>
+    <p>Von der Proto-Erde in 3D bis zur geologischen Zeitskala: Erdgeschichte zoomen, erforschen und mit täglichen Übungen lernen.</p>
+  </div>
+  <div class="card-actions">
+    <a class="mo-btn card-open" href="https://philipp-klinz.net/lab-early-earth/" aria-label="Labor öffnen – Die frühe Erde">Labor öffnen</a>
+    <a class="mo-btn card-source" href="https://github.com/philippklinz/lab-early-earth" aria-label="Code – Die frühe Erde">Code</a>
+  </div>
+</article>
+<article class="card" data-project="abiogenesis" data-tags="nature" data-search="abiogenese ursprung leben chemie konzentration wasservolumen verdunstung praebiotisch protocellen membranen molekuele bausteine rna information kopieren hypothesen evidenz forschung studie">
+  <div class="card-meta"><span class="card-num">LAB / 02</span></div>
+  <div class="card-art">
+    <svg data-illustration="vesicle" viewBox="0 0 155 112" fill="none" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
     <defs>
       <g id="card-lipid" stroke-width="1.65">
         <path d="M-1.4 2 L-2.6 6.8 L-1.5 10.5 M1.3 2 L.8 6.5 L2.2 9.5"/>
@@ -305,11 +170,21 @@ header { border-bottom: 1px solid var(--mo-border); }
     </g>
     <circle data-part="bead" cx="93" cy="74" r="2.5" fill="currentColor" stroke="none"/>
   </svg>
-</div>
-<div class="card-body"><p class="card-category">CHEMIE / URSPRUNG DES LEBENS</p><h3>Abiogenese</h3><p>Sechs interaktive Lernstationen: präbiotische Chemie, Molekülbausteine, Protocellen, RNA, Ursprungshypothesen und wissenschaftliche Evidenz.</p></div><div class="card-actions"><a class="mo-btn card-open" href="https://philipp-klinz.net/lab-abiogenesis/" aria-label="Labor öffnen – Abiogenese">Labor öffnen</a><a class="mo-btn card-source" href="https://github.com/philippklinz/lab-abiogenesis" aria-label="Code – Abiogenese">Code</a></div></article>
-<article class="card" data-tags="nature" data-search="dna rna molekularbiologie gene proteine transkription translation replikation mutation"><div class="card-meta"><span class="card-num">LAB / 03</span></div>
-<div class="card-art">
-  <svg data-illustration="molecules" viewBox="0 0 155 112" fill="none" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  </div>
+  <div class="card-body">
+    <p class="card-category">CHEMIE / URSPRUNG DES LEBENS</p>
+    <h3>Abiogenese</h3>
+    <p>Sechs interaktive Lernstationen: präbiotische Chemie, Molekülbausteine, Protocellen, RNA, Ursprungshypothesen und wissenschaftliche Evidenz.</p>
+  </div>
+  <div class="card-actions">
+    <a class="mo-btn card-open" href="https://philipp-klinz.net/lab-abiogenesis/" aria-label="Labor öffnen – Abiogenese">Labor öffnen</a>
+    <a class="mo-btn card-source" href="https://github.com/philippklinz/lab-abiogenesis" aria-label="Code – Abiogenese">Code</a>
+  </div>
+</article>
+<article class="card" data-project="molecular-biology" data-tags="nature" data-search="dna rna molekularbiologie gene proteine transkription translation replikation mutation">
+  <div class="card-meta"><span class="card-num">LAB / 03</span></div>
+  <div class="card-art">
+    <svg data-illustration="molecules" viewBox="0 0 155 112" fill="none" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
     <path data-part="rungs" d="M67.46 19.8 L36.54 17.56 M56.79 28.64 L47.21 23.45 M42.81 35.68 L61.19 31.14 M35.17 41.16 L68.83 40.39 M39.15 46.37 L64.85 49.9 M52 52.8 L52 58.2 M64.85 61.1 L39.15 64.63 M68.83 70.61 L35.17 69.84 M61.19 79.86 L42.81 75.32 M47.21 87.55 L56.79 82.36 M36.54 93.44 L67.46 91.2" stroke-width="1.7" opacity=".82"/>
     <path data-part="backboneA" d="M69 15 C69 20.91 60.9 26.7 52 31.2 C43.1 35.7 35 38.91 35 42 C35 45.09 43.1 48.3 52 52.8 C60.9 57.3 69 63.09 69 69 C69 74.91 60.9 80.7 52 85.2 C43.1 89.7 35 92.91 35 96"/>
     <path data-part="backboneB" d="M35 15 C35 18.09 43.1 21.3 52 25.8 C60.9 30.3 69 36.09 69 42 C69 47.91 60.9 53.7 52 58.2 C43.1 62.7 35 65.91 35 69 C35 72.09 43.1 75.3 52 79.8 C60.9 84.3 69 90.09 69 96"/>
@@ -318,11 +193,21 @@ header { border-bottom: 1px solid var(--mo-border); }
       <path d="M103 28 L108 31 M113 20 L115 25 M126 21 L123 26 M132 33 L126 33 M107 53l8 3 M105 59l8 3 M103 65l8 3 M100 71l9 3 M87 87l-3-4 M95 80l-3-4 M121 82l1-5 M128 80l2-4" stroke-width="1.7"/>
     </g>
   </svg>
-</div>
-<div class="card-body"><p class="card-category">BIOLOGIE / MOLEKÜLE</p><h3>DNA &amp; RNA</h3><p>Genetische Information verstehen: DNA, RNA, Replikation, Transkription, Translation und Mutationen.</p></div><div class="card-actions"><a class="mo-btn card-open" href="https://philipp-klinz.net/lab-molecular-biology/" aria-label="Labor öffnen – DNA &amp; RNA">Labor öffnen</a><a class="mo-btn card-source" href="https://github.com/philippklinz/lab-molecular-biology" aria-label="Code – DNA &amp; RNA">Code</a></div></article>
-<article class="card" data-tags="nature" data-search="evolution arten natürliche selektion genetische drift population mutation stammbaum phylogenetik luca grosse uebergaenge evidenz fossilien genfluss"><div class="card-meta"><span class="card-num">LAB / 04</span></div>
-<div class="card-art">
-  <svg data-illustration="finches" viewBox="0 0 155 112" fill="none" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  </div>
+  <div class="card-body">
+    <p class="card-category">BIOLOGIE / MOLEKÜLE</p>
+    <h3>DNA &amp; RNA</h3>
+    <p>Genetische Information verstehen: DNA, RNA, Replikation, Transkription, Translation und Mutationen.</p>
+  </div>
+  <div class="card-actions">
+    <a class="mo-btn card-open" href="https://philipp-klinz.net/lab-molecular-biology/" aria-label="Labor öffnen – DNA &amp; RNA">Labor öffnen</a>
+    <a class="mo-btn card-source" href="https://github.com/philippklinz/lab-molecular-biology" aria-label="Code – DNA &amp; RNA">Code</a>
+  </div>
+</article>
+<article class="card" data-project="evolution" data-tags="nature" data-search="evolution arten natürliche selektion genetische drift population mutation stammbaum phylogenetik luca grosse uebergaenge evidenz fossilien genfluss">
+  <div class="card-meta"><span class="card-num">LAB / 04</span></div>
+  <div class="card-art">
+    <svg data-illustration="finches" viewBox="0 0 155 112" fill="none" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
     <g data-part="deepBeak">
       <path d="M14 93 C19 84 23 76 22 65 C20 49 29 34 43 32 C54 30 62 35 66 44 Q76 47 83 55 Q75 62 63 64 C59 72 52 76 50 84 Q48 90 49 97"/>
       <path d="M66 44 Q67 54 63 64 M66 55 Q75 57 82 55 M33 43 Q40 38 48 39 M36 55 Q41 64 52 65 M30 74 L35 79" stroke-width="1.7"/>
@@ -337,11 +222,21 @@ header { border-bottom: 1px solid var(--mo-border); }
       <path d="M81 75 Q84 68 90 69 Q91 76 83 78 Z M83 76 L88 71"/>
     </g>
   </svg>
-</div>
-<div class="card-body"><p class="card-category">BIOLOGIE / ZEIT</p><h3>Evolution</h3><p>Sechs interaktive Lernlabore: Populationsgenetik, Genfluss, Stammbäume, LUCA, biologische Übergänge und Evolutionsbelege.</p></div><div class="card-actions"><a class="mo-btn card-open" href="https://philipp-klinz.net/lab-evolution/" aria-label="Labor öffnen – Evolution">Labor öffnen</a><a class="mo-btn card-source" href="https://github.com/philippklinz/lab-evolution" aria-label="Code – Evolution">Code</a></div></article>
-<article class="card" data-tags="human" data-search="menschen homininen entstehung mensch fossilien archäologie palaeoanthropologie migration homo sapiens laetoli lucy werkzeuge neandertaler denisova menschenursprung"><div class="card-meta"><span class="card-num">LAB / 05</span></div>
-<div class="card-art">
-  <svg data-illustration="footsteps" viewBox="0 0 155 112" fill="none" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  </div>
+  <div class="card-body">
+    <p class="card-category">BIOLOGIE / ZEIT</p>
+    <h3>Evolution</h3>
+    <p>Sechs interaktive Lernlabore: Populationsgenetik, Genfluss, Stammbäume, LUCA, biologische Übergänge und Evolutionsbelege.</p>
+  </div>
+  <div class="card-actions">
+    <a class="mo-btn card-open" href="https://philipp-klinz.net/lab-evolution/" aria-label="Labor öffnen – Evolution">Labor öffnen</a>
+    <a class="mo-btn card-source" href="https://github.com/philippklinz/lab-evolution" aria-label="Code – Evolution">Code</a>
+  </div>
+</article>
+<article class="card" data-project="human-origins" data-tags="human" data-search="menschen homininen entstehung mensch fossilien archäologie palaeoanthropologie migration homo sapiens laetoli lucy werkzeuge neandertaler denisova menschenursprung">
+  <div class="card-meta"><span class="card-num">LAB / 05</span></div>
+  <div class="card-art">
+    <svg data-illustration="footsteps" viewBox="0 0 155 112" fill="none" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
     <defs>
       <g id="card-footprint" fill="currentColor">
         <path d="M-11 -11 C-16 -6 -15 3 -12 12 Q-9 22 -10 27 C-12 34 -10 40 -4 41 C3 43 8 38 7 31 C7 25 2 22 2 16 C2 10 8 8 11 3 C15 -3 12 -11 6 -13 Q-4 -17 -11 -11 Z"/>
@@ -362,11 +257,21 @@ header { border-bottom: 1px solid var(--mo-border); }
       <g data-part="rightPrint" fill-opacity="0"><use href="#card-footprint"/></g>
     </g>
   </svg>
-</div>
-<div class="card-body"><p class="card-category">ANTHROPOLOGIE / URSPRÜNGE</p><h3>Entstehung des Menschen</h3><p>Sechs interaktive Unterlabore: Homininen-Zeitreise, Stammbaum, aufrechter Gang, Werkzeuge, Ausbreitungen und Evidenz.</p></div><div class="card-actions"><a class="mo-btn card-open" href="https://philipp-klinz.net/lab-human-origins/" aria-label="Labor öffnen – Entstehung des Menschen">Labor öffnen</a><a class="mo-btn card-source" href="https://github.com/philippklinz/lab-human-origins" aria-label="Code – Entstehung des Menschen">Code</a></div></article>
-<article class="card" data-tags="atlas human" data-search="anthropology atlas anthropologie geschichte historische reisen kolumbus darwin magellan weltkarte zeitleiste menschen orte ereignisse"><div class="card-meta"><span class="card-num">ATLAS / 01</span></div>
-<div class="card-art">
-  <svg data-illustration="map" viewBox="0 0 155 112" fill="none" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  </div>
+  <div class="card-body">
+    <p class="card-category">ANTHROPOLOGIE / URSPRÜNGE</p>
+    <h3>Entstehung des Menschen</h3>
+    <p>Sechs interaktive Unterlabore: Homininen-Zeitreise, Stammbaum, aufrechter Gang, Werkzeuge, Ausbreitungen und Evidenz.</p>
+  </div>
+  <div class="card-actions">
+    <a class="mo-btn card-open" href="https://philipp-klinz.net/lab-human-origins/" aria-label="Labor öffnen – Entstehung des Menschen">Labor öffnen</a>
+    <a class="mo-btn card-source" href="https://github.com/philippklinz/lab-human-origins" aria-label="Code – Entstehung des Menschen">Code</a>
+  </div>
+</article>
+<article class="card" data-project="anthropology-atlas" data-tags="atlas human" data-search="anthropology atlas anthropologie geschichte historische reisen kolumbus darwin magellan weltkarte zeitleiste menschen orte ereignisse">
+  <div class="card-meta"><span class="card-num">ATLAS / 01</span></div>
+  <div class="card-art">
+    <svg data-illustration="map" viewBox="0 0 155 112" fill="none" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
     <path d="M18 31 L56 18 L98 31 L137 18 V82 L98 95 L56 82 L18 95 Z"/>
     <path d="M56 19 V82 M98 31 V94" stroke-width="1.7" opacity=".72"/>
     <g stroke-width="1.8">
@@ -381,12 +286,21 @@ header { border-bottom: 1px solid var(--mo-border); }
     </g>
     <circle data-part="traveller" cx="30" cy="78" r="3.5" fill="currentColor" stroke="none" opacity="0"/>
   </svg>
-</div>
-<div class="card-body"><p class="card-category">GESCHICHTE / KARTEN / ZEIT</p><h3>Anthropology Atlas</h3><p>Menschen, Orte, Quellen und historische Reisen auf interaktiven Karten und Zeitleisten entdecken.</p></div><div class="card-actions"><a class="mo-btn card-open" href="https://philipp-klinz.net/anthropology-atlas-engine/" aria-label="Atlas öffnen – Anthropology Atlas">Atlas öffnen</a><a class="mo-btn card-source" href="https://github.com/philippklinz/anthropology-atlas-engine" aria-label="Code – Anthropology Atlas">Code</a></div></article>
-<article class="card" data-tags="atlas human" data-search="people atlas personen menschen biografien biographien lebenswege zeitleiste zeit wissenschaft wissenschaftler wissenschaftlerinnen mathematik mathematiker mathematikerinnen philosophie philosophen philosophinnen erfindungen erfinder erfinderinnen politik kunst literatur frauen forschung deutsch englisch">
-<div class="card-meta"><span class="card-num">ATLAS / 02</span></div>
-<div class="card-art">
-  <svg data-illustration="portraits" viewBox="0 0 155 112" fill="none" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  </div>
+  <div class="card-body">
+    <p class="card-category">GESCHICHTE / KARTEN / ZEIT</p>
+    <h3>Anthropology Atlas</h3>
+    <p>Menschen, Orte, Quellen und historische Reisen auf interaktiven Karten und Zeitleisten entdecken.</p>
+  </div>
+  <div class="card-actions">
+    <a class="mo-btn card-open" href="https://philipp-klinz.net/anthropology-atlas-engine/" aria-label="Atlas öffnen – Anthropology Atlas">Atlas öffnen</a>
+    <a class="mo-btn card-source" href="https://github.com/philippklinz/anthropology-atlas-engine" aria-label="Code – Anthropology Atlas">Code</a>
+  </div>
+</article>
+<article class="card" data-project="people-atlas" data-tags="atlas human" data-search="people atlas personen menschen biografien biographien lebenswege zeitleiste zeit wissenschaft wissenschaftler wissenschaftlerinnen mathematik mathematiker mathematikerinnen philosophie philosophen philosophinnen erfindungen erfinder erfinderinnen politik kunst literatur frauen forschung deutsch englisch">
+  <div class="card-meta"><span class="card-num">ATLAS / 02</span></div>
+  <div class="card-art">
+    <svg data-illustration="portraits" viewBox="0 0 155 112" fill="none" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
     <g data-part="rear" opacity=".8">
       <path d="M80 78 Q95 72 95 66 V60 C89 54 86 47 86 39 C86 25 94 14 106 14 C118 14 125 23 125 35 Q124 38 127 42 L131 47 Q132 49 129 50 L125 51 L124 57 Q124 62 118 63 L112 64 V69 Q112 73 122 77 Q136 82 140 90"/>
       <path d="M115 36h3 M121 56h3 M102 42c-2-4-7-3-6 2 0 2 2 5 4 6" stroke-width="2"/>
@@ -396,11 +310,18 @@ header { border-bottom: 1px solid var(--mo-border); }
       <path d="M74 30 Q68 37 57 39 Q54 44 49 46 M68 44h3 M73 62h4 M54 50c-2-4-7-3-6 2 0 2 2 5 4 6" stroke-width="2"/>
     </g>
   </svg>
-</div>
-<div class="card-body"><p class="card-category">MENSCHEN / BIOGRAFIEN / ZEIT</p><h3>People Atlas</h3><p>Lebenswege aus Wissenschaft, Philosophie, Politik und Kunst vergleichen: Kategorien kombinieren, Biografien lesen und Werke, Beiträge sowie Quellen entdecken. Auf Deutsch und Englisch.</p></div>
-<div class="card-actions"><a class="mo-btn card-open" href="https://philipp-klinz.net/people-atlas-engine/" aria-label="Atlas öffnen – People Atlas">Atlas öffnen</a><a class="mo-btn card-source" href="https://github.com/philippklinz/people-atlas-engine" aria-label="Code – People Atlas">Code</a></div>
+  </div>
+  <div class="card-body">
+    <p class="card-category">MENSCHEN / BIOGRAFIEN / ZEIT</p>
+    <h3>People Atlas</h3>
+    <p>Lebenswege aus Wissenschaft, Philosophie, Politik und Kunst vergleichen: Kategorien kombinieren, Biografien lesen und Werke, Beiträge sowie Quellen entdecken. Auf Deutsch und Englisch.</p>
+  </div>
+  <div class="card-actions">
+    <a class="mo-btn card-open" href="https://philipp-klinz.net/people-atlas-engine/" aria-label="Atlas öffnen – People Atlas">Atlas öffnen</a>
+    <a class="mo-btn card-source" href="https://github.com/philippklinz/people-atlas-engine" aria-label="Code – People Atlas">Code</a>
+  </div>
 </article>
-<article class="card" data-tags="atlas" data-search="maths atlas matheatlas mathe-atlas mathe atlas mathematik algebra arithmetik geometrie dreieck höhensatz hoehensatz brüche formeln lemma">
+<article class="card" data-project="maths-atlas" data-tags="atlas" data-search="maths atlas matheatlas mathe-atlas mathe atlas mathematik algebra arithmetik geometrie dreieck höhensatz hoehensatz brüche formeln lemma">
   <div class="card-meta"><span class="card-num">ATLAS / 03</span></div>
   <div class="card-art">
     <svg data-illustration="altitude" viewBox="0 0 155 112" fill="none" stroke-width="2.7" aria-hidden="true" focusable="false">
@@ -422,53 +343,108 @@ header { border-bottom: 1px solid var(--mo-border); }
     <a class="mo-btn card-source" href="https://github.com/philippklinz/maths-atlas-engine" aria-label="Code – Maths Atlas">Code</a>
   </div>
 </article>
-</div>
-<div id="no-results" class="empty" hidden><strong>Keine passenden Projekte gefunden.</strong><p>Versuche einen anderen Suchbegriff oder setze die Filter zurück.</p><button id="clear-search" class="mo-btn mo-btn-primary" type="button">Alle Projekte anzeigen</button></div>
+  </div>
+  <div id="no-results" class="empty" hidden><strong>Keine passenden Projekte gefunden.</strong><p>Versuche einen anderen Suchbegriff oder setze die Filter zurück.</p><button id="clear-search" class="mo-btn mo-btn-primary" type="button">Alle Projekte anzeigen</button></div>
 </div></section>
-<section class="journeys" id="journeys" data-theme="dark"><div class="wrap"><div class="section-head"><h2>Eine Frage führt<br>zur nächsten<span class="period">.</span></h2><p>Eine Wissensreise ist eine Einladung, kein Lehrplan. Die Reihenfolge ist nur ein möglicher Weg durch verwandte Themen.</p></div>
-<div class="journey-list">
-<a href="https://philipp-klinz.net/lab-early-earth/"><span class="route-num">01</span><span class="route-copy"><strong>Die frühe Erde</strong><small>Wo entstanden die Bedingungen?</small></span></a>
-<a href="https://philipp-klinz.net/lab-abiogenesis/"><span class="route-num">02</span><span class="route-copy"><strong>Abiogenese</strong><small>Wie könnte Leben beginnen?</small></span></a>
-<a href="https://philipp-klinz.net/lab-molecular-biology/"><span class="route-num">03</span><span class="route-copy"><strong>DNA &amp; RNA</strong><small>Wie funktioniert biologische Information?</small></span></a>
-<a href="https://philipp-klinz.net/lab-evolution/"><span class="route-num">04</span><span class="route-copy"><strong>Evolution</strong><small>Wie entsteht Vielfalt?</small></span></a>
-<a href="https://philipp-klinz.net/lab-human-origins/"><span class="route-num">05</span><span class="route-copy"><strong>Entstehung des Menschen</strong><small>Wie entstand unsere Linie?</small></span></a>
-</div>
-<div class="journey-aside"><div><strong>Geschichte als weitere Perspektive</strong><p>Der <a href="https://philipp-klinz.net/anthropology-atlas-engine/">Anthropology Atlas</a> ergänzt die Reise: Er verbindet Menschen, Orte, Quellen und Ereignisse in der historischen Zeit.</p></div></div>
+<section class="journeys" id="journeys" data-theme="dark" aria-labelledby="journeys-heading"><div class="wrap">
+  <div class="section-head journey-head">
+    <h2 id="journeys-heading">Eine Frage führt <br>zur nächsten<span class="period">.</span></h2>
+    <figure class="journey-guide">
+      <svg data-illustration="humboldt" viewBox="0 0 164 126" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  <!-- The high collar, neckcloth and swept-back hair belong to the portrait.
+       The open field notebook and pencil give the guide a gesture of his own. -->
+  <path fill="currentColor" fill-opacity=".045" d="M91 69 78 78Q69 84 64 98l14 12 21 5 54-5-3-19q-3-13-14-18l-15-9z" stroke="none"/>
+  <path d="M89 70 78 77Q68 83 64 98m58-32 13 6q13 6 16 18l3 17"/>
+  <path d="m86 72-9 11 7 1-4 7 9 11m34-34 8 11-9 2 3 7-21 14" stroke-width="1.8"/>
+  <g data-part="head">
+    <path fill="var(--mo-rail)" d="M81 23q-5 6-4 14l-1 5-7 9q-1 2 2 3l6 1-1 4 3 2q-1 4 3 5 3 8 11 7l8-2 4 6 14-8-3-10q10-9 12-24l-12-15z"/>
+    <path fill="var(--mo-rail)" d="M78 33q-5-4-3-9 1-4 6-5-1-6 6-7 5-7 12-4 6-4 13 0 7-1 12 4 8 1 10 9 5 4 3 11 4 7 0 13 1 6-4 9 0 6-6 8l-5 4q-5-3-6-9 0-5-4-5-4-1-5 4l-3-1 2-14q-2-7-10-11-6-3-9-9-1 7-9 12z"/>
+    <g stroke-width="1.65">
+      <path d="M84 21q4-2 5-7m5 0q1 7 10 11 9 4 11 11m-14-23q9 0 14 7 7 8 13 9m-8-13q9 3 11 10m-3 15q4 4 2 9m-9 1q4 2 3 7"/>
+      <path d="M77 40q4-3 9 0m-7 4q2 1 4 0m-6 14 5 0m-1 7 4 0m3-12q3 0 6 3"/>
+      <path d="M108 48q3-6 8-2 4 3 1 8-2 4-5 4m0-8q4-2 3 2"/>
+    </g>
+    <circle cx="80" cy="43" r="1.25" fill="currentColor" stroke="none"/>
+  </g>
+  <path fill="var(--mo-rail)" d="m88 70 9 5 5 7 3-6 14-10 4 4-9 14-12 5-11-6z"/>
+  <path d="m94 78 9 3 8-4-3 9-6 2-6-4zm7 10-1 9m8-12 7 8" stroke-width="1.7"/>
+  <!-- The pages share a spine; the lower corner is supported by the other hand. -->
+  <path fill="var(--mo-rail)" d="m11 89 22-7q11-3 20 2 8-9 17-10l14-2-5 30-12 2q-8 1-15 8-9-5-18-3l-18 5z"/>
+  <path d="m14 93 4 25 18-5q8-2 16 2 8-7 17-8l12-2m-28-21-1 28" stroke-width="1.8"/>
+  <path d="m22 91 9-3 7 2 7-2m-21 9 8-2m27-6 7-4 8-2" stroke-width="1.5"/>
+  <path d="M64 108q3 7 8 6l14-6m-18 0 4 3"/>
+  <g data-part="writingHand">
+    <path fill="var(--mo-rail)" d="M130 92q-8 5-19 8l-21-8-5-4-10-1-6 4q-3 2-1 4l-5 3q-2 3 1 4l9-3 7 2q5 1 9-1l20 12q5 3 11 1l18-9"/>
+    <path d="m86 89-4 11m12-6-3 7m9-4-3 8m-27-10 5-4 6 1" stroke-width="1.65"/>
+    <path d="m49 101 15-10m11-8 9-6" stroke-width="2.5"/>
+    <path d="m49 101-4 2 2-3" stroke-width="1.45"/>
+  </g>
+</svg>
+      <figcaption><strong>Alexander von Humboldt</strong><span>Dein Reiseführer</span></figcaption>
+    </figure>
+  </div>
+  <div class="journey-shelf">
+    <details class="journey" name="knowledge-journeys" id="journey-early-earth-to-humans" open>
+      <summary><span class="journey-title">Von der frühen Erde zum Menschen</span><span class="journey-count">5 Stationen</span><span class="chevron" aria-hidden="true"></span></summary>
+      <ol class="journey-list"><li id="journey-early-earth-to-humans-young-earth">
+        <a href="https://philipp-klinz.net/lab-early-earth/04_junge_erde.html#process-heading">
+          <span class="route-num" aria-hidden="true">01</span>
+          <span class="route-copy"><span class="route-project">Die frühe Erde</span><strong>Die Oberfläche der jungen Erde</strong></span>
+          <span class="route-question">Wie entstanden die erste Kruste, eine Atmosphäre und Ozeane?</span>
+          <span class="route-arrow" aria-hidden="true">↗</span>
+        </a>
+      </li>
+<li id="journey-early-earth-to-humans-protocells">
+        <a href="https://philipp-klinz.net/lab-abiogenesis/03_protocellen.html#membrane-title">
+          <span class="route-num" aria-hidden="true">02</span>
+          <span class="route-copy"><span class="route-project">Abiogenese</span><strong>Membranen und Protocellen</strong></span>
+          <span class="route-question">Wie kann eine Hülle aus Molekülen ein Innen und ein Außen trennen?</span>
+          <span class="route-arrow" aria-hidden="true">↗</span>
+        </a>
+      </li>
+<li id="journey-early-earth-to-humans-dna-and-rna">
+        <a href="https://philipp-klinz.net/lab-molecular-biology/01_dna_rna.html">
+          <span class="route-num" aria-hidden="true">03</span>
+          <span class="route-copy"><span class="route-project">DNA &amp; RNA</span><strong>DNA und RNA im Vergleich</strong></span>
+          <span class="route-question">Was verrät die Form der beiden Moleküle über ihre Aufgaben?</span>
+          <span class="route-arrow" aria-hidden="true">↗</span>
+        </a>
+      </li>
+<li id="journey-early-earth-to-humans-speciation">
+        <a href="https://philipp-klinz.net/lab-evolution/02_artbildung.html">
+          <span class="route-num" aria-hidden="true">04</span>
+          <span class="route-copy"><span class="route-project">Evolution</span><strong>Wenn Populationen sich trennen</strong></span>
+          <span class="route-question">Was passiert, wenn zwischen zwei Populationen weniger Gene ausgetauscht werden?</span>
+          <span class="route-arrow" aria-hidden="true">↗</span>
+        </a>
+      </li>
+<li id="journey-early-earth-to-humans-human-family-tree">
+        <a href="https://philipp-klinz.net/lab-human-origins/02_stammbaum.html">
+          <span class="route-num" aria-hidden="true">05</span>
+          <span class="route-copy"><span class="route-project">Entstehung des Menschen</span><strong>Unser verzweigter Stammbaum</strong></span>
+          <span class="route-question">Was erzählen Fossilien und DNA über unsere nächsten Verwandten?</span>
+          <span class="route-arrow" aria-hidden="true">↗</span>
+        </a>
+      </li></ol>
+      <p class="journey-reading"><span>Im Atlas weiterlesen</span><a href="https://philipp-klinz.net/anthropology-atlas-engine/#/v1/chapter/chapter%3Acradle-of-humankind?lang=de">Die Wiege der Menschheit · Anthropology Atlas</a></p>
+    </details>
+  </div>
 </div></section>
-<section class="about wrap" id="about"><div class="section-head"><h2>Kleine Labore.<br>Große Fragen<span class="period">.</span></h2><p>Die Websites sind bewusst einfach aufgebaut. Ihr Wert liegt nicht in einer gemeinsamen Plattform, sondern in der Möglichkeit, etwas selbst zu verstehen.</p></div><div class="principles"><article><h3>Unabhängig</h3><p>Jedes Labor ist eine eigenständige Website mit eigenem Repository. Es benötigt kein anderes Labor, um zu funktionieren.</p></article><article><h3>Erfahrbar</h3><p>Nicht nur lesen: ansehen, Hypothesen aufstellen, Parameter verändern und beobachten, was passiert.</p></article><article><h3>Offen</h3><p>Frei zugänglich, quelloffen und bewusst unvollendet – ein Ort für persönliche Neugier und neue Fragen.</p></article></div></section>
+<section class="about wrap" id="about">
+  <div class="section-head"><h2>Kleine Labore. <br>Große Fragen<span class="period">.</span></h2><p>Die Websites sind bewusst einfach aufgebaut. Ihr Wert liegt nicht in einer gemeinsamen Plattform, sondern in der Möglichkeit, etwas selbst zu verstehen.</p></div>
+  <div class="principles">
+    <article><h3>Unabhängig</h3><p>Jedes Labor ist eine eigenständige Website mit eigenem Repository. Es benötigt kein anderes Labor, um zu funktionieren.</p></article>
+    <article><h3>Erfahrbar</h3><p>Nicht nur lesen: ansehen, Hypothesen aufstellen, Parameter verändern und beobachten, was passiert.</p></article>
+    <article><h3>Offen</h3><p>Frei zugänglich, quelloffen und bewusst unvollendet – ein Ort für persönliche Neugier und neue Fragen.</p></article>
+  </div>
+</section>
 </main>
-<footer data-theme="dark"><div class="wrap footer-inner"><div class="footer-brand" lang="en"><strong>LEARNING LABS</strong><p>Independent spaces for curiosity and exploration.</p></div><div class="footer-links"><a href="https://github.com/philippklinz/learning-labs">Portal-Quellcode<span class="external-mark" aria-hidden="true">↗</span></a><a href="https://philipp-klinz.net/modern-objectivity-style/">Modern Objectivity</a><a href="LICENSE">GPL v2.0</a></div></div><div class="wrap foot-bar"><span lang="en">STATIC BY DESIGN · OPEN ACCESS · OPEN SOURCE · NO ACCOUNTS · NO TRACKING</span></div></footer>
-<script>
-(() => {
-"use strict";
-const cards=Array.from(document.querySelectorAll("#project-cards .card"));
-const buttons=Array.from(document.querySelectorAll("[data-filter]"));
-const search=document.getElementById("project-search");
-const results=document.getElementById("result-count");
-const empty=document.getElementById("no-results");
-const clear=document.getElementById("clear-search");
-let filter="all";
-function norm(s){return String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase()}
-function update(){
- const query=norm(search.value.trim());
- let shown=0;
- for(const card of cards){
-   const cats=(card.dataset.tags||"").split(/\s+/);
-   const text=norm(card.textContent+" "+(card.dataset.search||""));
-   const visible=(filter==="all"||cats.includes(filter))&&(!query||text.includes(query));
-   card.hidden=!visible;
-   if(visible)shown++;
- }
- results.textContent=shown+(shown===1?" Projekt":" Projekte");
- empty.hidden=shown!==0;
- for(const button of buttons){const yes=button.dataset.filter===filter;button.setAttribute("aria-pressed",String(yes))}
-}
-for(const button of buttons)button.addEventListener("click",()=>{filter=button.dataset.filter||"all";update()});
-search.addEventListener("input",update);
-clear.addEventListener("click",()=>{filter="all";search.value="";update();search.focus()});
-update();
-document.getElementById("project-filters").hidden = false;
-})();
-</script>
+<footer data-theme="dark">
+  <div class="wrap footer-inner">
+    <div class="footer-brand" lang="en"><strong>LEARNING LABS</strong><p>Independent spaces for curiosity and exploration.</p></div>
+    <div class="footer-links"><a href="https://github.com/philippklinz/learning-labs">Portal-Quellcode<span class="external-mark" aria-hidden="true">↗</span></a><a href="https://philipp-klinz.net/modern-objectivity-style/">Modern Objectivity</a><a href="LICENSE">GPL v2.0</a></div>
+  </div>
+  <div class="wrap foot-bar"><span lang="en">STATIC BY DESIGN · OPEN ACCESS · OPEN SOURCE · NO ACCOUNTS · NO TRACKING</span></div>
+</footer>
 </body>
 </html>

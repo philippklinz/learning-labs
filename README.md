@@ -21,7 +21,7 @@ Learning paths are optional editorial suggestions. Every lab and atlas remains a
 
 ## Run and publish
 
-Open index.html directly in a browser or publish the root of main as a static GitHub Pages site. No npm, build step, backend, external fonts, accounts, analytics or service dependencies are required.
+Open `index.html` (Deutsch) or `en.html` (English) directly in a browser. GitHub Pages serves these committed files from the root of main. Both editions include the complete directory, language menu and journeys in ordinary HTML. Publication requires no build step.
 
 Public directory: https://philipp-klinz.net/learning-labs/
 
@@ -30,11 +30,19 @@ To activate Pages if needed: Settings > Pages > Deploy from a branch > main > /(
 ## Add a new lab or atlas
 
 1. Confirm the source repository and public website exist. Do not invent URLs or describe unfinished features as working.
-2. In index.html, copy an article with class "card" in the "#project-cards" section and update its name, description, public link and GitHub link. Use a Concept badge only for a project with just a landing page.
-3. Set data-tags to one or more of "nature", "human", "atlas". Set data-search for additional search terms.
-4. The existing in-page JavaScript automatically handles filtering and counting; no JSON service or build is needed.
-5. Add a new optional knowledge journey stop only if there is a meaningful relationship, not just because a project exists.
-6. Keep this README and any static marketing copy up to date.
+2. Add the card to `templates/directory.html`. Give it a stable `data-project` ID, an illustration, its public and source links, and the appropriate `data-tags` from `nature`, `human` and `atlas`.
+3. Add the title, category, description and search vocabulary under that ID in each file in `locales/`. The directory counts and filters the cards in the current edition.
+4. Refresh the published HTML using the editing instructions below. Keep this directory list current.
+
+## Edit a journey or language edition
+
+Each edition has an independent ordered list in `journeys/<language>.json`. Each journey has an English ID, a displayed title and an ordered list of stops. Each stop has its own ID, `projectId`, title, question and a complete destination URL, including any chapter or fragment. An optional `furtherReading` link follows the stops. The first journey is expanded on arrival. Additional journeys appear as disclosures in file order. Reuse a journey ID across editions when it represents the same route.
+
+German and English currently offer *From early Earth to humans*. Both link to the five German lab activities. The further reading opens the corresponding German or English chapter in the Anthropology Atlas. Replace individual English stop URLs as those activities become available.
+
+The two pages share `templates/directory.html`, `directory.css`, the interaction scripts and the Humboldt drawing. UI text is maintained in `locales/<language>.json`. For a new edition, add a UI catalogue with the language's native name, translated search and plural forms, and its own journey file. The language menu and alternate links are generated from the available editions. Direct links such as `en.html#journey-early-earth-to-humans` work on Pages and in a downloaded copy.
+
+After an editorial change, run `node tools/render-directory.mjs` and commit the rendered HTML with its sources. The maintenance script uses only Node's standard library. Run `node tools/render-directory.mjs --check` to check for drift. When German UI copy changes, review affected translations and update their `sourceRevision` with the value printed by `node tools/render-directory.mjs --source-revision`. Each editor curates the journeys independently of this UI fingerprint.
 
 The portal is a **human-readable index**. It should never download the labs' contents or become a technical requirement for their operation.
 
@@ -48,9 +56,9 @@ Each project card contains an inline SVG illustration. Hovering over the card or
 
 The header shows crystals growing up and out from a shared foot at the XYZ origin. The camera stays fixed throughout growth. Over HTTP, a still of the seed covers the loading interval until WebGL 2 draws the same seed. Opening the file directly, using reduced motion or using a browser without WebGL displays the grown crystal. The Chladni plate and dye vortex are retained in `hero/studies.js` with their stills for future use. The two ES modules come from the [Three.js r180 distribution](https://github.com/mrdoob/three.js/tree/r180/build) and include its [MIT license](vendor/three/LICENSE).
 
-## Multilingual access (planned)
+## Multilingual access
 
-Multilingual access is a central [Modern Objectivity requirement (MO-13)](https://github.com/philippklinz/modern-objectivity-style/blob/main/docs/10-multilingual-access.md): complete user-facing journeys in all 24 official EU languages. Its [programming pattern](https://github.com/philippklinz/modern-objectivity-style/blob/main/guides/multilingual-pattern.md) provides a local implementation reference. This repository keeps the [lab adoption plan](docs/MULTILINGUALISM.md), inventory and proposed rollout. The five existing labs still teach in German; Anthropology Atlas and People Atlas offer German and English.
+German and English cover the directory, search, filters, access labels and first curated journey. The five independent lab activities currently teach in German. The Anthropology Atlas and People Atlas offer both languages. The remaining directory editions are planned under [MO-13](https://github.com/philippklinz/modern-objectivity-style/blob/main/docs/10-multilingual-access.md). See the [adoption plan](docs/MULTILINGUALISM.md) for coverage and review.
 
 ## Working instructions
 

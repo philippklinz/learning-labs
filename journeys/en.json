@@ -1,0 +1,48 @@
+[
+  {
+    "id": "early-earth-to-humans",
+    "title": "From early Earth to humans",
+    "stops": [
+      {
+        "id": "young-earth",
+        "projectId": "early-earth",
+        "title": "The surface of the young Earth",
+        "question": "How did the first crust, atmosphere and oceans form?",
+        "url": "https://philipp-klinz.net/lab-early-earth/04_junge_erde.html#process-heading"
+      },
+      {
+        "id": "protocells",
+        "projectId": "abiogenesis",
+        "title": "Membranes and protocells",
+        "question": "How can a layer of molecules separate an inside from an outside?",
+        "url": "https://philipp-klinz.net/lab-abiogenesis/03_protocellen.html#membrane-title"
+      },
+      {
+        "id": "dna-and-rna",
+        "projectId": "molecular-biology",
+        "title": "Comparing DNA and RNA",
+        "question": "What do the shapes of these molecules tell us about their roles?",
+        "url": "https://philipp-klinz.net/lab-molecular-biology/01_dna_rna.html"
+      },
+      {
+        "id": "speciation",
+        "projectId": "evolution",
+        "title": "When populations grow apart",
+        "question": "What happens when fewer genes move between two populations?",
+        "url": "https://philipp-klinz.net/lab-evolution/02_artbildung.html"
+      },
+      {
+        "id": "human-family-tree",
+        "projectId": "human-origins",
+        "title": "Our branching family tree",
+        "question": "What do fossils and DNA tell us about our closest relatives?",
+        "url": "https://philipp-klinz.net/lab-human-origins/02_stammbaum.html"
+      }
+    ],
+    "furtherReading": {
+      "projectId": "anthropology-atlas",
+      "title": "The Cradle of Humankind",
+      "url": "https://philipp-klinz.net/anthropology-atlas-engine/#/v1/chapter/chapter%3Acradle-of-humankind?lang=en"
+    }
+  }
+]
