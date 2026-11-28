@@ -73,6 +73,37 @@
     if (languageMenu.open && !languageMenu.contains(event.target)) languageMenu.open = false;
   });
 
+  const dialogue = document.querySelector('.guide-dialogue');
+  if (dialogue) {
+    const journeys = dialogue.closest('.journeys');
+    let hovered = matchMedia('(hover: hover)').matches && journeys.matches(':hover');
+    if (hovered) dialogue.open = true;
+    journeys.addEventListener('pointerenter', event => {
+      if (event.pointerType === 'touch') return;
+      hovered = true;
+      dialogue.open = true;
+    });
+    function leaveJourneys(event) {
+      if (event.pointerType === 'touch') return;
+      hovered = false;
+      if (!journeys.querySelector(':focus-visible')) dialogue.open = false;
+    }
+    journeys.addEventListener('pointerleave', leaveJourneys);
+    journeys.addEventListener('pointercancel', leaveJourneys);
+    journeys.addEventListener('focusin', event => {
+      if (event.target.matches(':focus-visible')) dialogue.open = true;
+    });
+    journeys.addEventListener('focusout', event => {
+      if (!hovered && !journeys.contains(event.relatedTarget)) dialogue.open = false;
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && dialogue.open) dialogue.open = false;
+    });
+    document.addEventListener('pointerdown', event => {
+      if (event.pointerType === 'touch' && !dialogue.contains(event.target)) dialogue.open = false;
+    });
+  }
+
   document.querySelector('.journey-shelf').addEventListener('click', event => {
     const summary = event.target.closest('.journey > summary');
     if (!summary) return;
