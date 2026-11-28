@@ -1,0 +1,118 @@
+{
+  "sourceRevision": "46d3b6b70aedc1497f2c88f6ae019478754c6dc47619de03b002ebd03f1fdcc7",
+  "languageName": "English",
+  "page": {
+    "title": "Learning Labs – Interactive labs and atlases",
+    "description": "Explore independent learning labs, scientific models and interactive atlases. Choose a project or follow a journey across them."
+  },
+  "nav": {
+    "skip": "Skip to content",
+    "home": "Learning Labs – home",
+    "label": "Main navigation",
+    "projects": "Projects",
+    "journeys": "Journeys",
+    "about": "About",
+    "language": "Choose language",
+    "theme": "Dark mode"
+  },
+  "hero": {
+    "heading": "Knowledge is\na space to",
+    "emphasis": "explore.",
+    "lead": "Interactive experiments, scientific models and atlases. Each is independent, freely accessible and connected to the others by curiosity.",
+    "intro": "You can start anywhere. Pick a topic, ask a question and see how things fit together.",
+    "projects": "Explore the projects",
+    "journeys": "Start a journey",
+    "crystal": "Schematic crystal cluster growing upwards and outwards from a shared base at the origin of the XYZ axes."
+  },
+  "catalog": {
+    "heading": "Explore the projects",
+    "category": "Category",
+    "all": "All",
+    "nature": "Nature & life",
+    "human": "People & culture",
+    "atlas": "Atlases",
+    "search": "Search projects",
+    "placeholder": "Name or topic",
+    "count": {"one": "{count} project", "other": "{count} projects"},
+    "empty": "No matching projects.",
+    "emptyHint": "Try another search term or reset the filters.",
+    "reset": "Show all projects"
+  },
+  "actions": {
+    "openLab": "Open lab",
+    "openAtlas": "Open atlas",
+    "code": "Code",
+    "openLabLabel": "Open lab – {project}",
+    "openAtlasLabel": "Open atlas – {project}",
+    "codeLabel": "Code – {project}"
+  },
+  "projects": {
+    "early-earth": {
+      "title": "Early Earth",
+      "category": "PLANET / NATURAL SCIENCES",
+      "description": "Explore the young Earth in 3D, zoom through geological time and get a feel for Earth's history with daily exercises.",
+      "keywords": "planet geology oceans atmosphere origins timeline geological timescale training proto-earth accretion"
+    },
+    "abiogenesis": {
+      "title": "Abiogenesis",
+      "category": "CHEMISTRY / ORIGINS OF LIFE",
+      "description": "Explore prebiotic chemistry, molecular building blocks, protocells and RNA, then compare ideas about the origins of life with the evidence.",
+      "keywords": "origin life concentration water evaporation chemistry prebiotic membranes molecules building blocks RNA copying hypotheses research"
+    },
+    "molecular-biology": {
+      "title": "DNA & RNA",
+      "category": "BIOLOGY / MOLECULES",
+      "description": "Follow genetic information through DNA, RNA, replication, transcription, translation and mutation.",
+      "keywords": "molecular biology genes proteins replication transcription translation mutations"
+    },
+    "evolution": {
+      "title": "Evolution",
+      "category": "BIOLOGY / TIME",
+      "description": "Explore population genetics, gene flow, family trees, the last universal common ancestor and major evolutionary transitions. See how scientists weigh the evidence.",
+      "keywords": "species natural selection genetic drift populations mutations phylogeny phylogenetics LUCA fossils speciation transitions"
+    },
+    "human-origins": {
+      "title": "Human Origins",
+      "category": "ANTHROPOLOGY / HUMAN ORIGINS",
+      "description": "Trace hominins through time, explore family trees and examine the evidence for walking upright, making tools and moving into new regions.",
+      "keywords": "human ancestry fossils archaeology paleoanthropology palaeoanthropology migration homo sapiens laetoli lucy neanderthals denisovans bipedalism"
+    },
+    "anthropology-atlas": {
+      "title": "Anthropology Atlas",
+      "category": "HISTORY / MAPS / TIME",
+      "description": "Explore people, places, sources and historical journeys on interactive maps and timelines.",
+      "keywords": "anthropology history voyages columbus darwin magellan world map timeline places events",
+      "url": "https://philipp-klinz.net/anthropology-atlas-engine/#/v1/explore?lang=en"
+    },
+    "people-atlas": {
+      "title": "People Atlas",
+      "category": "PEOPLE / BIOGRAPHIES / TIME",
+      "description": "Compare lives in science, philosophy, politics and the arts. Combine categories, read biographies and explore works, contributions and sources in German and English.",
+      "keywords": "people biographies lives timelines scientists mathematicians philosophers inventors politicians artists writers women in science research",
+      "url": "https://philipp-klinz.net/people-atlas-engine/?lang=en"
+    },
+    "maths-atlas": {
+      "title": "Maths Atlas",
+      "category": "MATHEMATICS / PROOFS",
+      "description": "Follow mathematical proofs step by step. Explore the mind map to see how concepts and theorems connect.",
+      "keywords": "math math atlas maths mathematics algebra arithmetic geometry triangle altitude theorem fractions formulas lemma"
+    }
+  },
+  "guide": {
+    "heading": "One question leads\nto the next",
+    "role": "Your guide",
+    "stops": {"one": "{count} stop", "other": "{count} stops"},
+    "furtherReading": "Read on in the atlas"
+  },
+  "about": {
+    "heading": "Small labs.\nBig questions",
+    "intro": "Each site is simple by design. It gives you room to investigate a question and understand something for yourself.",
+    "independent": "Independent",
+    "independentText": "Each lab has its own website and repository. You can use it on its own.",
+    "handsOn": "Hands-on",
+    "handsOnText": "Look closely, form a hypothesis, change a parameter and watch what happens.",
+    "open": "Open",
+    "openText": "The labs are freely accessible, open source and always growing. There is room for your curiosity and your next question."
+  },
+  "footer": {"source": "Directory source code"}
+}

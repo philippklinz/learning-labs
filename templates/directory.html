@@ -1,0 +1,376 @@
+<!doctype html>
+<!-- Source: templates/directory.html, locales/ and journeys/. Publish the checked-in HTML directly. -->
+<html lang="{{language}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1d23">
+<meta name="description" content="{{page.description}}">
+<title>{{page.title}}</title>
+{{alternateLinks}}
+<script>
+(() => {
+  const media = matchMedia("(prefers-color-scheme: dark)");
+  const key = "learning-labs-theme";
+  let choice;
+  try { choice = localStorage.getItem(key); } catch {}
+  function applyTheme() {
+    const dark = choice === "dark" || (choice !== "light" && media.matches);
+    document.documentElement.dataset.theme = dark ? "dark" : "light";
+    document.getElementById("theme-toggle")?.setAttribute("aria-pressed", String(dark));
+  }
+  applyTheme();
+  media.addEventListener("change", applyTheme);
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggle = document.getElementById("theme-toggle");
+    applyTheme();
+    toggle.addEventListener("click", () => {
+      choice = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      try { localStorage.setItem(key, choice); } catch {}
+      applyTheme();
+    });
+    toggle.hidden = false;
+  });
+})();
+</script>
+<script>
+(() => {
+  if (!/^https?:$/.test(location.protocol) || !window.IntersectionObserver || !window.ResizeObserver) return;
+  const still = matchMedia('(prefers-reduced-motion: reduce), (forced-colors: active)');
+  // Choose the seed before the browser can paint the full-grown fallback.
+  if (!still.matches) document.documentElement.dataset.crystalView = 'seed';
+  document.addEventListener('DOMContentLoaded', () => {
+    import('./hero/controls.js').then(({ startCrystal }) => startCrystal(still))
+      .catch(() => { delete document.documentElement.dataset.crystalView; });
+  }, { once: true });
+})();
+</script>
+<link rel="stylesheet" href="modern-objectivity.css">
+<link rel="stylesheet" href="directory.css">
+<script defer src="card-illustrations.js"></script>
+<script defer src="directory.js"></script>
+</head>
+<body>
+<a class="skip mo-btn" href="#main">{{nav.skip}}</a>
+<header data-theme="dark">
+  <div class="wrap header-inner">
+    <a class="brand" href="{{editionUrl}}" aria-label="{{nav.home}}">
+      <span class="brand-mark" aria-hidden="true">⌁</span>
+      <span class="brand-name" lang="en"><strong>LEARNING LABS</strong><small>INDEPENDENT KNOWLEDGE SPACES</small></span>
+    </a>
+    <nav class="site-nav" aria-label="{{nav.label}}">
+      <a href="#projects">{{nav.projects}}</a>
+      <a href="#journeys">{{nav.journeys}}</a>
+      <a href="#about">{{nav.about}}</a>
+      <a href="https://github.com/philippklinz/learning-labs">GitHub<span class="external-mark" aria-hidden="true">↗</span></a>
+    </nav>
+    <div class="header-tools">
+      <details class="language-menu">
+        <summary class="mo-btn"><span class="mo-sr-only">{{nav.language}} · </span>{{languageName}}<span class="chevron" aria-hidden="true"></span></summary>
+        <nav class="language-options" aria-label="{{nav.language}}">{{languageLinks}}</nav>
+      </details>
+      <button type="button" id="theme-toggle" class="mo-btn theme-toggle" aria-label="{{nav.theme}}" title="{{nav.theme}}" aria-pressed="false" hidden>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 2a8 8 0 0 1 0 16z" fill="currentColor"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="hero" data-theme="dark" aria-labelledby="hero-heading">
+  <canvas class="hero-canvas" aria-hidden="true"></canvas>
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <h1 id="hero-heading">{{hero.heading}}<br><em>{{hero.emphasis}}</em></h1>
+      <p class="lead">{{hero.lead}}</p>
+      <p class="intro">{{hero.intro}}</p>
+      <div class="hero-links"><a class="mo-btn mo-btn-primary" href="#projects">{{hero.projects}}</a><a class="mo-btn" href="#journeys">{{hero.journeys}}</a></div>
+    </div>
+    <figure class="study-window" role="img" aria-label="{{hero.crystal}}">
+      <img class="study-poster" src="hero/kristall.webp" width="960" height="640" alt="">
+    </figure>
+  </div>
+</section>
+<section class="catalog" id="projects"><div class="wrap">
+  <div class="section-head"><h2>{{catalog.heading}}<span class="period">.</span></h2></div>
+  <div class="filters" id="project-filters" hidden>
+    <fieldset class="filter-group">
+      <legend>{{catalog.category}}</legend>
+      <div class="filter-buttons">
+        <button type="button" class="mo-btn" data-filter="all" aria-controls="project-cards" aria-pressed="true">{{catalog.all}}</button>
+        <button type="button" class="mo-btn" data-filter="nature" aria-controls="project-cards" aria-pressed="false">{{catalog.nature}}</button>
+        <button type="button" class="mo-btn" data-filter="human" aria-controls="project-cards" aria-pressed="false">{{catalog.human}}</button>
+        <button type="button" class="mo-btn" data-filter="atlas" aria-controls="project-cards" aria-pressed="false">{{catalog.atlas}}</button>
+      </div>
+    </fieldset>
+    <div class="search"><label for="project-search">{{catalog.search}}</label><input type="search" id="project-search" class="mo-input" placeholder="{{catalog.placeholder}}" autocomplete="off" aria-controls="project-cards"></div>
+  </div>
+  <p class="results" id="result-count" role="status" aria-live="polite" data-messages="{{countMessages}}">{{initialCount}}</p>
+  <div class="cards" id="project-cards">
+<article class="card" data-project="early-earth" data-tags="nature" data-search="{{projects.early-earth.keywords}}">
+  <div class="card-meta"><span class="card-num">LAB / 01</span></div>
+  <div class="card-art">
+    <svg data-illustration="impact" viewBox="0 0 155 112" fill="none" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+    <path d="M86 36 C79 31 72 29 65 29 C44 29 28 45 28 65 C28 86 45 102 65 102 C86 102 103 86 103 65 Q103 54 97 44 Q89 44 86 36 Z"/>
+    <path d="M31 78 C41 92 55 98 71 95 Q92 90 101 65 C101 84 88 98 70 101 Q44 104 31 78Z" fill="currentColor" fill-opacity=".10" stroke="none"/>
+    <g stroke-width="1.7">
+      <path d="M32 50 Q40 51 46 45 L53 46 L60 41 L67 42 M34 72 L43 69 L51 73 L58 71 L67 79 L74 77 M72 94 Q90 89 96 75"/>
+      <path d="M80 40 Q85 49 95 50 M67 9 L73 16 M62 15 L66 19"/>
+    </g>
+    <g data-part="impactor">
+      <path d="M91 24 C93 30 89 34 84 34 C78 34 74 31 74 26 C74 20 78 17 83 17 Q89 17 91 24Z"/>
+      <path d="M78 27 Q80 30 84 29" stroke-width="1.65"/>
+    </g>
+    <g data-part="plume" stroke-width="1.7">
+      <path d="M91 37 Q104 13 124 15 M96 41 Q110 25 127 27"/>
+    </g>
+    <g data-part="shardHigh"><path d="M107 15 L110 10 L115 12 L113 16 Z" fill="currentColor" stroke-width="1.4"/></g>
+    <g data-part="shardFar"><path d="M126 19 L132 17 L136 21 L130 23 Z" stroke-width="1.8"/></g>
+    <g data-part="shardLow"><path d="M110 37 L114 33 L118 35 L114 39 Z" stroke-width="1.7"/></g>
+  </svg>
+  </div>
+  <div class="card-body">
+    <p class="card-category">{{projects.early-earth.category}}</p>
+    <h3>{{projects.early-earth.title}}</h3>
+    <p>{{projects.early-earth.description}}</p>
+  </div>
+  <div class="card-actions">
+    <a class="mo-btn card-open" href="https://philipp-klinz.net/lab-early-earth/" aria-label="{{projects.early-earth.openLabel}}">{{actions.openLab}}</a>
+    <a class="mo-btn card-source" href="https://github.com/philippklinz/lab-early-earth" aria-label="{{projects.early-earth.codeLabel}}">{{actions.code}}</a>
+  </div>
+</article>
+<article class="card" data-project="abiogenesis" data-tags="nature" data-search="{{projects.abiogenesis.keywords}}">
+  <div class="card-meta"><span class="card-num">LAB / 02</span></div>
+  <div class="card-art">
+    <svg data-illustration="vesicle" viewBox="0 0 155 112" fill="none" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+    <defs>
+      <g id="card-lipid" stroke-width="1.65">
+        <path d="M-1.4 2 L-2.6 6.8 L-1.5 10.5 M1.3 2 L.8 6.5 L2.2 9.5"/>
+        <circle r="2.6"/>
+      </g>
+    </defs>
+    <g data-part="membrane">
+      <path d="M82 17 C65 12 47 17 35 29 C23 41 22 60 30 75 C38 91 55 99 74 97 C94 96 114 84 121 65"/>
+      <path d="M32 48 C28 64 36 79 48 86 Q61 93 74 91 M82 89 Q98 86 106 76" stroke-width="1.65"/>
+      <use href="#card-lipid" transform="translate(88 18) rotate(18)"/>
+      <use href="#card-lipid" transform="translate(97 21.5) rotate(30)"/>
+      <use href="#card-lipid" transform="translate(105.5 26.8) rotate(42)"/>
+      <use href="#card-lipid" transform="translate(112.5 33.5) rotate(55)"/>
+      <use href="#card-lipid" transform="translate(118 41.5) rotate(69)"/>
+      <use href="#card-lipid" transform="translate(121 50.5) rotate(82)"/>
+      <use href="#card-lipid" transform="translate(122 60) rotate(95)"/>
+    </g>
+    <g data-part="chain" stroke-width="2">
+      <path d="M52 58 L61 50 M68 50 L79 57 M85 56 L92 48"/>
+      <circle cx="49" cy="61" r="4"/>
+      <circle cx="64.5" cy="47.5" r="4.5"/>
+      <circle cx="82" cy="59" r="4"/>
+      <circle cx="94" cy="45.5" r="3.3"/>
+    </g>
+    <circle data-part="bead" cx="93" cy="74" r="2.5" fill="currentColor" stroke="none"/>
+  </svg>
+  </div>
+  <div class="card-body">
+    <p class="card-category">{{projects.abiogenesis.category}}</p>
+    <h3>{{projects.abiogenesis.title}}</h3>
+    <p>{{projects.abiogenesis.description}}</p>
+  </div>
+  <div class="card-actions">
+    <a class="mo-btn card-open" href="https://philipp-klinz.net/lab-abiogenesis/" aria-label="{{projects.abiogenesis.openLabel}}">{{actions.openLab}}</a>
+    <a class="mo-btn card-source" href="https://github.com/philippklinz/lab-abiogenesis" aria-label="{{projects.abiogenesis.codeLabel}}">{{actions.code}}</a>
+  </div>
+</article>
+<article class="card" data-project="molecular-biology" data-tags="nature" data-search="{{projects.molecular-biology.keywords}}">
+  <div class="card-meta"><span class="card-num">LAB / 03</span></div>
+  <div class="card-art">
+    <svg data-illustration="molecules" viewBox="0 0 155 112" fill="none" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+    <path data-part="rungs" d="M67.46 19.8 L36.54 17.56 M56.79 28.64 L47.21 23.45 M42.81 35.68 L61.19 31.14 M35.17 41.16 L68.83 40.39 M39.15 46.37 L64.85 49.9 M52 52.8 L52 58.2 M64.85 61.1 L39.15 64.63 M68.83 70.61 L35.17 69.84 M61.19 79.86 L42.81 75.32 M47.21 87.55 L56.79 82.36 M36.54 93.44 L67.46 91.2" stroke-width="1.7" opacity=".82"/>
+    <path data-part="backboneA" d="M69 15 C69 20.91 60.9 26.7 52 31.2 C43.1 35.7 35 38.91 35 42 C35 45.09 43.1 48.3 52 52.8 C60.9 57.3 69 63.09 69 69 C69 74.91 60.9 80.7 52 85.2 C43.1 89.7 35 92.91 35 96"/>
+    <path data-part="backboneB" d="M35 15 C35 18.09 43.1 21.3 52 25.8 C60.9 30.3 69 36.09 69 42 C69 47.91 60.9 53.7 52 58.2 C43.1 62.7 35 65.91 35 69 C35 72.09 43.1 75.3 52 79.8 C60.9 84.3 69 90.09 69 96"/>
+    <g data-part="hairpin">
+      <path d="M82 94 C81 86 91 86 96 79 Q99 75 101 69 L108 50 Q110 45 105 41 C99 36 100 28 107 22 C114 16 125 17 130 24 C136 32 131 40 124 43 L118 46 L110 69 Q106 78 114 82 C119 85 124 78 130 81"/>
+      <path d="M103 28 L108 31 M113 20 L115 25 M126 21 L123 26 M132 33 L126 33 M107 53l8 3 M105 59l8 3 M103 65l8 3 M100 71l9 3 M87 87l-3-4 M95 80l-3-4 M121 82l1-5 M128 80l2-4" stroke-width="1.7"/>
+    </g>
+  </svg>
+  </div>
+  <div class="card-body">
+    <p class="card-category">{{projects.molecular-biology.category}}</p>
+    <h3>{{projects.molecular-biology.title}}</h3>
+    <p>{{projects.molecular-biology.description}}</p>
+  </div>
+  <div class="card-actions">
+    <a class="mo-btn card-open" href="https://philipp-klinz.net/lab-molecular-biology/" aria-label="{{projects.molecular-biology.openLabel}}">{{actions.openLab}}</a>
+    <a class="mo-btn card-source" href="https://github.com/philippklinz/lab-molecular-biology" aria-label="{{projects.molecular-biology.codeLabel}}">{{actions.code}}</a>
+  </div>
+</article>
+<article class="card" data-project="evolution" data-tags="nature" data-search="{{projects.evolution.keywords}}">
+  <div class="card-meta"><span class="card-num">LAB / 04</span></div>
+  <div class="card-art">
+    <svg data-illustration="finches" viewBox="0 0 155 112" fill="none" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+    <g data-part="deepBeak">
+      <path d="M14 93 C19 84 23 76 22 65 C20 49 29 34 43 32 C54 30 62 35 66 44 Q76 47 83 55 Q75 62 63 64 C59 72 52 76 50 84 Q48 90 49 97"/>
+      <path d="M66 44 Q67 54 63 64 M66 55 Q75 57 82 55 M33 43 Q40 38 48 39 M36 55 Q41 64 52 65 M30 74 L35 79" stroke-width="1.7"/>
+      <circle cx="55" cy="45" r="2.5" fill="currentColor" stroke="none"/>
+    </g>
+    <g data-part="fineBeak">
+      <path d="M141 79 C134 73 132 64 134 55 C137 42 135 29 126 23 C118 17 107 19 101 30 L78 42 L104 40 C106 47 112 51 113 58 Q114 66 106 78"/>
+      <path d="M101 30 L104 40 M93 37 L103 35 M118 48 Q124 45 126 40 M123 63 L128 67" stroke-width="1.7"/>
+      <circle cx="112" cy="30" r="2.3" fill="currentColor" stroke="none"/>
+    </g>
+    <g data-part="seed" stroke-width="1.65">
+      <path d="M81 75 Q84 68 90 69 Q91 76 83 78 Z M83 76 L88 71"/>
+    </g>
+  </svg>
+  </div>
+  <div class="card-body">
+    <p class="card-category">{{projects.evolution.category}}</p>
+    <h3>{{projects.evolution.title}}</h3>
+    <p>{{projects.evolution.description}}</p>
+  </div>
+  <div class="card-actions">
+    <a class="mo-btn card-open" href="https://philipp-klinz.net/lab-evolution/" aria-label="{{projects.evolution.openLabel}}">{{actions.openLab}}</a>
+    <a class="mo-btn card-source" href="https://github.com/philippklinz/lab-evolution" aria-label="{{projects.evolution.codeLabel}}">{{actions.code}}</a>
+  </div>
+</article>
+<article class="card" data-project="human-origins" data-tags="human" data-search="{{projects.human-origins.keywords}}">
+  <div class="card-meta"><span class="card-num">LAB / 05</span></div>
+  <div class="card-art">
+    <svg data-illustration="footsteps" viewBox="0 0 155 112" fill="none" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+    <defs>
+      <g id="card-footprint" fill="currentColor">
+        <path d="M-11 -11 C-16 -6 -15 3 -12 12 Q-9 22 -10 27 C-12 34 -10 40 -4 41 C3 43 8 38 7 31 C7 25 2 22 2 16 C2 10 8 8 11 3 C15 -3 12 -11 6 -13 Q-4 -17 -11 -11 Z"/>
+        <g stroke-width="2">
+          <ellipse cx="10" cy="-23" rx="4.8" ry="7" transform="rotate(12 10 -23)"/>
+          <ellipse cx=".3" cy="-24.7" rx="3.1" ry="4.8"/>
+          <ellipse cx="-7.1" cy="-22.4" rx="2.6" ry="3.9" transform="rotate(-9 -7.1 -22.4)"/>
+          <ellipse cx="-13.1" cy="-18.9" rx="2.15" ry="3.2" transform="rotate(-18 -13.1 -18.9)"/>
+          <ellipse cx="-17.1" cy="-13.4" rx="1.9" ry="2.5" transform="rotate(-25 -17.1 -13.4)"/>
+        </g>
+        <path d="M-9 -3 Q-6 -8 1 -8 M-6 32 Q-7 36 -3 37" fill="none" stroke-width="1.55"/>
+      </g>
+    </defs>
+    <g transform="translate(51 64) rotate(-14)">
+      <g data-part="leftPrint" fill-opacity="0"><use href="#card-footprint"/></g>
+    </g>
+    <g transform="translate(104 41) rotate(12) scale(-1 1)">
+      <g data-part="rightPrint" fill-opacity="0"><use href="#card-footprint"/></g>
+    </g>
+  </svg>
+  </div>
+  <div class="card-body">
+    <p class="card-category">{{projects.human-origins.category}}</p>
+    <h3>{{projects.human-origins.title}}</h3>
+    <p>{{projects.human-origins.description}}</p>
+  </div>
+  <div class="card-actions">
+    <a class="mo-btn card-open" href="https://philipp-klinz.net/lab-human-origins/" aria-label="{{projects.human-origins.openLabel}}">{{actions.openLab}}</a>
+    <a class="mo-btn card-source" href="https://github.com/philippklinz/lab-human-origins" aria-label="{{projects.human-origins.codeLabel}}">{{actions.code}}</a>
+  </div>
+</article>
+<article class="card" data-project="anthropology-atlas" data-tags="atlas human" data-search="{{projects.anthropology-atlas.keywords}}">
+  <div class="card-meta"><span class="card-num">ATLAS / 01</span></div>
+  <div class="card-art">
+    <svg data-illustration="map" viewBox="0 0 155 112" fill="none" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+    <path d="M18 31 L56 18 L98 31 L137 18 V82 L98 95 L56 82 L18 95 Z"/>
+    <path d="M56 19 V82 M98 31 V94" stroke-width="1.7" opacity=".72"/>
+    <g stroke-width="1.8">
+      <path d="M34 26 C31 33 39 36 39 42 Q39 47 33 50 C28 54 36 57 32 63 L26 65 L23 71 L18 72"/>
+      <path d="M83 27 C80 32 84 38 89 41 L97 44 Q101 50 107 50 L113 45 L117 46 L120 42 Q124 38 130 39 L137 36"/>
+      <path d="M108 75 Q111 69 116 71 L116 75 L111 78 Z"/>
+    </g>
+    <path data-part="route" d="M30 78 C44 79 45 58 59 59 S80 76 92 62 S111 44 125 47" stroke-width="1.9" stroke-dasharray="3 4"/>
+    <g stroke-width="2">
+      <circle cx="30" cy="78" r="3.3"/>
+      <circle cx="125" cy="47" r="3.3"/>
+    </g>
+    <circle data-part="traveller" cx="30" cy="78" r="3.5" fill="currentColor" stroke="none" opacity="0"/>
+  </svg>
+  </div>
+  <div class="card-body">
+    <p class="card-category">{{projects.anthropology-atlas.category}}</p>
+    <h3>{{projects.anthropology-atlas.title}}</h3>
+    <p>{{projects.anthropology-atlas.description}}</p>
+  </div>
+  <div class="card-actions">
+    <a class="mo-btn card-open" href="{{projects.anthropology-atlas.url}}" aria-label="{{projects.anthropology-atlas.openLabel}}">{{actions.openAtlas}}</a>
+    <a class="mo-btn card-source" href="https://github.com/philippklinz/anthropology-atlas-engine" aria-label="{{projects.anthropology-atlas.codeLabel}}">{{actions.code}}</a>
+  </div>
+</article>
+<article class="card" data-project="people-atlas" data-tags="atlas human" data-search="{{projects.people-atlas.keywords}}">
+  <div class="card-meta"><span class="card-num">ATLAS / 02</span></div>
+  <div class="card-art">
+    <svg data-illustration="portraits" viewBox="0 0 155 112" fill="none" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+    <g data-part="rear" opacity=".8">
+      <path d="M80 78 Q95 72 95 66 V60 C89 54 86 47 86 39 C86 25 94 14 106 14 C118 14 125 23 125 35 Q124 38 127 42 L131 47 Q132 49 129 50 L125 51 L124 57 Q124 62 118 63 L112 64 V69 Q112 73 122 77 Q136 82 140 90"/>
+      <path d="M115 36h3 M121 56h3 M102 42c-2-4-7-3-6 2 0 2 2 5 4 6" stroke-width="2"/>
+    </g>
+    <g data-part="front">
+      <path d="M15 99 Q18 88 32 82 L42 78 Q46 76 46 70 V65 C39 60 35 52 35 44 C35 30 44 21 57 21 C69 21 78 29 78 41 Q77 44 80 48 L84 53 Q85 55 82 56 L78 57 L77 63 Q77 68 72 69 L66 70 V75 Q66 79 74 83 L82 86 Q92 91 95 99"/>
+      <path d="M74 30 Q68 37 57 39 Q54 44 49 46 M68 44h3 M73 62h4 M54 50c-2-4-7-3-6 2 0 2 2 5 4 6" stroke-width="2"/>
+    </g>
+  </svg>
+  </div>
+  <div class="card-body">
+    <p class="card-category">{{projects.people-atlas.category}}</p>
+    <h3>{{projects.people-atlas.title}}</h3>
+    <p>{{projects.people-atlas.description}}</p>
+  </div>
+  <div class="card-actions">
+    <a class="mo-btn card-open" href="{{projects.people-atlas.url}}" aria-label="{{projects.people-atlas.openLabel}}">{{actions.openAtlas}}</a>
+    <a class="mo-btn card-source" href="https://github.com/philippklinz/people-atlas-engine" aria-label="{{projects.people-atlas.codeLabel}}">{{actions.code}}</a>
+  </div>
+</article>
+<article class="card" data-project="maths-atlas" data-tags="atlas" data-search="{{projects.maths-atlas.keywords}}">
+  <div class="card-meta"><span class="card-num">ATLAS / 03</span></div>
+  <div class="card-art">
+    <svg data-illustration="altitude" viewBox="0 0 155 112" fill="none" stroke-width="2.7" aria-hidden="true" focusable="false">
+      <path d="M17 85L62 25L142 85Z"/>
+      <path d="M62 25V85" stroke-width="1.7" stroke-dasharray="4 4"/>
+      <path d="M56 33l8 6 6-8" stroke-width="1.7"/>
+      <path data-part="angle" d="M62 77h8v8" stroke-width="1.7"/>
+      <path data-part="construction" d="M62 25V85" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" stroke-width="2" opacity="0"/>
+      <circle data-part="plumb" cx="62" cy="25" r="3" fill="currentColor" stroke="none" opacity="0"/>
+    </svg>
+  </div>
+  <div class="card-body">
+    <p class="card-category">{{projects.maths-atlas.category}}</p>
+    <h3>{{projects.maths-atlas.title}}</h3>
+    <p>{{projects.maths-atlas.description}}</p>
+  </div>
+  <div class="card-actions">
+    <a class="mo-btn card-open" href="https://philipp-klinz.net/maths-atlas-engine/" aria-label="{{projects.maths-atlas.openLabel}}">{{actions.openAtlas}}</a>
+    <a class="mo-btn card-source" href="https://github.com/philippklinz/maths-atlas-engine" aria-label="{{projects.maths-atlas.codeLabel}}">{{actions.code}}</a>
+  </div>
+</article>
+  </div>
+  <div id="no-results" class="empty" hidden><strong>{{catalog.empty}}</strong><p>{{catalog.emptyHint}}</p><button id="clear-search" class="mo-btn mo-btn-primary" type="button">{{catalog.reset}}</button></div>
+</div></section>
+<section class="journeys" id="journeys" data-theme="dark" aria-labelledby="journeys-heading"><div class="wrap">
+  <div class="section-head journey-head">
+    <h2 id="journeys-heading">{{guide.heading}}<span class="period">.</span></h2>
+    <figure class="journey-guide">
+      {{guidePortrait}}
+      <figcaption><strong>Alexander von Humboldt</strong><span>{{guide.role}}</span></figcaption>
+    </figure>
+  </div>
+  <div class="journey-shelf">
+    {{journeyList}}
+  </div>
+</div></section>
+<section class="about wrap" id="about">
+  <div class="section-head"><h2>{{about.heading}}<span class="period">.</span></h2><p>{{about.intro}}</p></div>
+  <div class="principles">
+    <article><h3>{{about.independent}}</h3><p>{{about.independentText}}</p></article>
+    <article><h3>{{about.handsOn}}</h3><p>{{about.handsOnText}}</p></article>
+    <article><h3>{{about.open}}</h3><p>{{about.openText}}</p></article>
+  </div>
+</section>
+</main>
+<footer data-theme="dark">
+  <div class="wrap footer-inner">
+    <div class="footer-brand" lang="en"><strong>LEARNING LABS</strong><p>Independent spaces for curiosity and exploration.</p></div>
+    <div class="footer-links"><a href="https://github.com/philippklinz/learning-labs">{{footer.source}}<span class="external-mark" aria-hidden="true">↗</span></a><a href="https://philipp-klinz.net/modern-objectivity-style/">Modern Objectivity</a><a href="LICENSE">GPL v2.0</a></div>
+  </div>
+  <div class="wrap foot-bar"><span lang="en">STATIC BY DESIGN · OPEN ACCESS · OPEN SOURCE · NO ACCOUNTS · NO TRACKING</span></div>
+</footer>
+</body>
+</html>

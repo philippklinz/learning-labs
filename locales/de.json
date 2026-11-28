@@ -1,0 +1,125 @@
+{
+  "languageName": "Deutsch",
+  "page": {
+    "title": "Learning Labs – Interaktive Labore und Atlanten",
+    "description": "Unabhängige interaktive Wissenslabore, wissenschaftliche Modelle und Atlanten. Entdecke Projekte und folge einer Wissensreise."
+  },
+  "nav": {
+    "skip": "Zum Inhalt springen",
+    "home": "Learning Labs – Startseite",
+    "label": "Hauptnavigation",
+    "projects": "Projekte",
+    "journeys": "Wissensreisen",
+    "about": "Konzept",
+    "language": "Sprache wählen",
+    "theme": "Dunkelmodus"
+  },
+  "hero": {
+    "heading": "Wissen ist\nein Raum zum",
+    "emphasis": "Erkunden.",
+    "lead": "Interaktive Experimente, wissenschaftliche Modelle und Atlanten – unabhängig voneinander, frei zugänglich und verbunden durch Neugier.",
+    "intro": "Du brauchst kein Vorwissen. Wähle ein Thema, stelle Fragen und finde heraus, wie die Dinge zusammenhängen.",
+    "projects": "Projekte entdecken",
+    "journeys": "Wissensreise beginnen",
+    "crystal": "Schematische Darstellung eines Kristallbündels, das vom gemeinsamen Fuß im XYZ-Ursprung nach oben und außen wächst."
+  },
+  "catalog": {
+    "heading": "Entdecke die Projekte",
+    "category": "Kategorie",
+    "all": "Alle",
+    "nature": "Natur & Leben",
+    "human": "Mensch & Kultur",
+    "atlas": "Atlanten",
+    "search": "Projekte durchsuchen",
+    "placeholder": "Name oder Thema",
+    "count": {
+      "one": "{count} Projekt",
+      "other": "{count} Projekte"
+    },
+    "empty": "Keine passenden Projekte gefunden.",
+    "emptyHint": "Versuche einen anderen Suchbegriff oder setze die Filter zurück.",
+    "reset": "Alle Projekte anzeigen"
+  },
+  "actions": {
+    "openLab": "Labor öffnen",
+    "openAtlas": "Atlas öffnen",
+    "code": "Code",
+    "openLabLabel": "Labor öffnen – {project}",
+    "openAtlasLabel": "Atlas öffnen – {project}",
+    "codeLabel": "Code – {project}"
+  },
+  "projects": {
+    "early-earth": {
+      "title": "Die frühe Erde",
+      "category": "PLANET / NATURWISSENSCHAFT",
+      "description": "Von der Proto-Erde in 3D bis zur geologischen Zeitskala: Erdgeschichte zoomen, erforschen und mit täglichen Übungen lernen.",
+      "keywords": "erde ursprung planet geologie ozeane atmosphäre frühgeschichte time geologische zeitskala trainer threejs protoerde akkretionsmodell"
+    },
+    "abiogenesis": {
+      "title": "Abiogenese",
+      "category": "CHEMIE / URSPRUNG DES LEBENS",
+      "description": "Sechs interaktive Lernstationen: präbiotische Chemie, Molekülbausteine, Protocellen, RNA, Ursprungshypothesen und wissenschaftliche Evidenz.",
+      "keywords": "abiogenese ursprung leben chemie konzentration wasservolumen verdunstung praebiotisch protocellen membranen molekuele bausteine rna information kopieren hypothesen evidenz forschung studie"
+    },
+    "molecular-biology": {
+      "title": "DNA & RNA",
+      "category": "BIOLOGIE / MOLEKÜLE",
+      "description": "Genetische Information verstehen: DNA, RNA, Replikation, Transkription, Translation und Mutationen.",
+      "keywords": "dna rna molekularbiologie gene proteine transkription translation replikation mutation"
+    },
+    "evolution": {
+      "title": "Evolution",
+      "category": "BIOLOGIE / ZEIT",
+      "description": "Sechs interaktive Lernlabore: Populationsgenetik, Genfluss, Stammbäume, LUCA, biologische Übergänge und Evolutionsbelege.",
+      "keywords": "evolution arten natürliche selektion genetische drift population mutation stammbaum phylogenetik luca grosse uebergaenge evidenz fossilien genfluss"
+    },
+    "human-origins": {
+      "title": "Entstehung des Menschen",
+      "category": "ANTHROPOLOGIE / URSPRÜNGE",
+      "description": "Sechs interaktive Unterlabore: Homininen-Zeitreise, Stammbaum, aufrechter Gang, Werkzeuge, Ausbreitungen und Evidenz.",
+      "keywords": "menschen homininen entstehung mensch fossilien archäologie palaeoanthropologie migration homo sapiens laetoli lucy werkzeuge neandertaler denisova menschenursprung"
+    },
+    "anthropology-atlas": {
+      "title": "Anthropology Atlas",
+      "category": "GESCHICHTE / KARTEN / ZEIT",
+      "description": "Menschen, Orte, Quellen und historische Reisen auf interaktiven Karten und Zeitleisten entdecken.",
+      "keywords": "anthropology atlas anthropologie geschichte historische reisen kolumbus darwin magellan weltkarte zeitleiste menschen orte ereignisse",
+      "url": "https://philipp-klinz.net/anthropology-atlas-engine/"
+    },
+    "people-atlas": {
+      "title": "People Atlas",
+      "category": "MENSCHEN / BIOGRAFIEN / ZEIT",
+      "description": "Lebenswege aus Wissenschaft, Philosophie, Politik und Kunst vergleichen: Kategorien kombinieren, Biografien lesen und Werke, Beiträge sowie Quellen entdecken. Auf Deutsch und Englisch.",
+      "keywords": "people atlas personen menschen biografien biographien lebenswege zeitleiste zeit wissenschaft wissenschaftler wissenschaftlerinnen mathematik mathematiker mathematikerinnen philosophie philosophen philosophinnen erfindungen erfinder erfinderinnen politik kunst literatur frauen forschung deutsch englisch",
+      "url": "https://philipp-klinz.net/people-atlas-engine/"
+    },
+    "maths-atlas": {
+      "title": "Maths Atlas",
+      "category": "MATHEMATIK / BEWEISE",
+      "description": "Folge mathematischen Beweisen Schritt für Schritt. Entdecke in der Mindmap, wie Begriffe und Sätze aus der Mathematik zusammenhängen.",
+      "keywords": "maths atlas matheatlas mathe-atlas mathe atlas mathematik algebra arithmetik geometrie dreieck höhensatz hoehensatz brüche formeln lemma"
+    }
+  },
+  "guide": {
+    "heading": "Eine Frage führt\nzur nächsten",
+    "role": "Dein Reiseführer",
+    "stops": {
+      "one": "{count} Station",
+      "other": "{count} Stationen"
+    },
+    "furtherReading": "Im Atlas weiterlesen"
+  },
+  "about": {
+    "heading": "Kleine Labore.\nGroße Fragen",
+    "intro": "Die Websites sind bewusst einfach aufgebaut. Ihr Wert liegt nicht in einer gemeinsamen Plattform, sondern in der Möglichkeit, etwas selbst zu verstehen.",
+    "independent": "Unabhängig",
+    "independentText": "Jedes Labor ist eine eigenständige Website mit eigenem Repository. Es benötigt kein anderes Labor, um zu funktionieren.",
+    "handsOn": "Erfahrbar",
+    "handsOnText": "Nicht nur lesen: ansehen, Hypothesen aufstellen, Parameter verändern und beobachten, was passiert.",
+    "open": "Offen",
+    "openText": "Frei zugänglich, quelloffen und bewusst unvollendet – ein Ort für persönliche Neugier und neue Fragen."
+  },
+  "footer": {
+    "source": "Portal-Quellcode"
+  }
+}

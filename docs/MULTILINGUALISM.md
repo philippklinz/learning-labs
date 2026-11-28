@@ -1,6 +1,12 @@
 # Multilingual Learning Labs — Adoption Plan
 
-Status: lab migration planning, 24 November 2026.
+Directory delivery updated 28 November 2026. The independent labs' inventory below records the 24 November snapshot.
+
+## Directory editions
+
+German (`index.html`) and English (`en.html`) include the complete directory, metadata, accessible names, search vocabulary, result counts, Humboldt guide and first five-stop route. These static files share a template and local catalogues. The edition URLs work with JavaScript disabled and with local files. The source revision in each translated UI catalogue records which German copy it follows. The English copy is AI-assisted and awaits independent language review.
+
+Editors maintain journeys separately for each language in `journeys/`. In this release both editions of the first route intentionally open the five German lab activities. The additional Anthropology Atlas chapter opens in the reader's language. Additional EU editions and translated lab activities are future work. See the [editing instructions](../README.md#edit-a-journey-or-language-edition).
 
 ## Central requirement and implementation reference
 
@@ -74,4 +80,4 @@ Use the [central requirements](https://github.com/philippklinz/modern-objectivit
 5. Check numerical equality before/after language switches, local links, keyboard use, mobile layouts and every relevant feedback path. Run each lab's existing interaction/layout checks.
 6. Report availability per complete module and language. A whole lab is available only when its entry page, modules and common controls are current; report the Atlas separately until its expansion is included and verified.
 
-The current pages remain the implementation baseline. This plan changes documentation and ownership of the requirement; it does not itself translate a lab or establish that all existing sites are offline-capable.
+The independent labs retain their own release schedules. The directory's static editions can be opened locally. Following a link to a published lab or atlas requires access to that site.

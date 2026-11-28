@@ -1,0 +1,48 @@
+[
+  {
+    "id": "early-earth-to-humans",
+    "title": "Von der frühen Erde zum Menschen",
+    "stops": [
+      {
+        "id": "young-earth",
+        "projectId": "early-earth",
+        "title": "Die Oberfläche der jungen Erde",
+        "question": "Wie entstanden die erste Kruste, eine Atmosphäre und Ozeane?",
+        "url": "https://philipp-klinz.net/lab-early-earth/04_junge_erde.html#process-heading"
+      },
+      {
+        "id": "protocells",
+        "projectId": "abiogenesis",
+        "title": "Membranen und Protocellen",
+        "question": "Wie kann eine Hülle aus Molekülen ein Innen und ein Außen trennen?",
+        "url": "https://philipp-klinz.net/lab-abiogenesis/03_protocellen.html#membrane-title"
+      },
+      {
+        "id": "dna-and-rna",
+        "projectId": "molecular-biology",
+        "title": "DNA und RNA im Vergleich",
+        "question": "Was verrät die Form der beiden Moleküle über ihre Aufgaben?",
+        "url": "https://philipp-klinz.net/lab-molecular-biology/01_dna_rna.html"
+      },
+      {
+        "id": "speciation",
+        "projectId": "evolution",
+        "title": "Wenn Populationen sich trennen",
+        "question": "Was passiert, wenn zwischen zwei Populationen weniger Gene ausgetauscht werden?",
+        "url": "https://philipp-klinz.net/lab-evolution/02_artbildung.html"
+      },
+      {
+        "id": "human-family-tree",
+        "projectId": "human-origins",
+        "title": "Unser verzweigter Stammbaum",
+        "question": "Was erzählen Fossilien und DNA über unsere nächsten Verwandten?",
+        "url": "https://philipp-klinz.net/lab-human-origins/02_stammbaum.html"
+      }
+    ],
+    "furtherReading": {
+      "projectId": "anthropology-atlas",
+      "title": "Die Wiege der Menschheit",
+      "url": "https://philipp-klinz.net/anthropology-atlas-engine/#/v1/chapter/chapter%3Acradle-of-humankind?lang=de"
+    }
+  }
+]
