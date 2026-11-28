@@ -29,7 +29,7 @@ To activate Pages if needed: Settings > Pages > Deploy from a branch > main > /(
 ## Add a new lab or atlas
 
 1. Confirm the source repository and public website exist. Do not invent URLs or describe unfinished features as working.
-2. In index.html, copy an article with class "card" in the "#project-cards" section and update name, description, public link, GitHub link and honest status.
+2. In index.html, copy an article with class "card" in the "#project-cards" section and update its name, description, public link and GitHub link. Use a Concept badge only for a project with just a landing page.
 3. Set data-tags to one or more of "nature", "human", "atlas". Set data-search for additional search terms.
 4. The existing in-page JavaScript automatically handles filtering and counting; no JSON service or build is needed.
 5. Add a new optional knowledge journey stop only if there is a meaningful relationship, not just because a project exists.
