@@ -1,5 +1,5 @@
 {
-  "sourceRevision": "5e4ffc87b6c06c658747ab1beb606dc92370938d715a1e42038388f459c8d9e2",
+  "sourceRevision": "8cbcb7dbbd68efa647d2861f28979419642ec09316a6918e7936c30ae92deba6",
   "languageName": "English",
   "page": {
     "title": "Learning Labs – Interactive labs and atlases",
@@ -8,9 +8,6 @@
   "nav": {
     "skip": "Skip to content",
     "home": "Learning Labs – home",
-    "label": "Main navigation",
-    "projects": "Projects",
-    "journeys": "Journeys",
     "language": "Choose language",
     "theme": "Dark mode"
   },
