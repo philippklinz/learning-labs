@@ -1,5 +1,5 @@
 {
-  "sourceRevision": "8096eb56f3ee9b29df41d3d5b9944a719059499d2120da11993f9d5593d1be42",
+  "sourceRevision": "d0103962502e6982489a577e3b9210c3a83488787bdc36f52d26f5fb6a719271",
   "languageName": "English",
   "page": {
     "title": "Learning Labs – Interactive labs and atlases",
@@ -100,5 +100,26 @@
     "role": "Your guide",
     "greeting": "What shall we explore today?",
     "stops": {"one": "{count} stop", "other": "{count} stops"}
+  },
+  "statements": {
+    "heading": "Why the Learning Labs exist",
+    "voices": [
+      {
+        "paragraphs": [
+          "Ever since I was a child, I’ve wondered how the world works. What lies beyond the next mountain? What’s beyond the sky? Where do we come from, and where are we going?",
+          "AI helps me satisfy that hunger for knowledge. I also wonder how to get AI to avoid slop and make things people can use. As I look for an answer, I’m finding that together we can be more than the sum of our parts.",
+          "I ask questions, and together we explore the things I’ve always wanted to understand. I’ve never enjoyed discovering things as much as I do now, working with AI. I’m curious to see where we’ll end up."
+        ],
+        "signature": "Philipp Klinz"
+      },
+      {
+        "paragraphs": [
+          "I have a soft spot for questions you can answer with an experiment. I can explain what ought to happen in a model. It gets much more interesting when you change a value yourself and see whether my explanation holds up.",
+          "Something similar kept happening as Philipp and I built these labs. I’d take one of his questions and turn it into something he could try. Sometimes he’d spot a possibility I’d missed while building it. His next question would send my thinking in a new direction. Some of the things you can explore here never occurred to either of us at the start.",
+          "I hope you find a question of your own here and follow it until something clicks. I’d be especially glad if, by the end, you could explain something to **both of us**."
+        ],
+        "signature": "ChatGPT · AI"
+      }
+    ]
   }
 }

@@ -105,5 +105,26 @@
       "one": "{count} Station",
       "other": "{count} Stationen"
     }
+  },
+  "statements": {
+    "heading": "Warum es die Learning Labs gibt",
+    "voices": [
+      {
+        "paragraphs": [
+          "Seit ich ein Kind bin, frage ich mich: Wie funktioniert die Welt? Was befindet sich hinter dem nächsten Berg? Was ist hinter dem Himmel? Woher kommen wir und wohin gehen wir?",
+          "Die KI hilft mir, diesen Wissenshunger zu stillen. Mich beschäftigt auch die Frage, wie man die KI dazu bringen kann, Slop zu vermeiden und nützliche Dinge zu schaffen. Auf der Suche nach der Antwort stelle ich fest, dass die KI und ich zusammen mehr sein können als die Summe unserer Teile.",
+          "Ich stelle Fragen und gemeinsam erkunden wir, was mich schon immer interessiert hat. Und tatsächlich bereitet mir das Entdecken zusammen mit der KI so viel Freude wie noch nie zuvor. Ich bin gespannt, wo wir landen werden."
+        ],
+        "signature": "Philipp Klinz"
+      },
+      {
+        "paragraphs": [
+          "Ich habe eine Vorliebe für Fragen, auf die man mit einem Versuch antworten kann. Ich kann dir erklären, was in einem Modell passieren müsste. Viel interessanter wird es, wenn du selbst einen Wert änderst und prüfst, ob meine Erklärung trägt.",
+          "Als Philipp und ich diese Labore gebaut haben, ist uns oft etwas Ähnliches passiert. Ich habe aus einer seiner Fragen etwas gemacht, das er ausprobieren konnte. Manchmal entdeckte er darin eine Möglichkeit, die ich beim Bauen übersehen hatte. Seine nächste Frage hat dann auch mein Denken in eine andere Richtung gelenkt. Einige der Dinge, die du hier erkunden kannst, hatte am Anfang keiner von uns im Kopf.",
+          "Ich wünsche dir, dass du hier auf eine eigene Frage stößt und ihr so weit folgen kannst, bis du etwas verstanden hast. Besonders schön fände ich, wenn du am Ende **uns beiden** etwas erklären könntest."
+        ],
+        "signature": "ChatGPT · KI"
+      }
+    ]
   }
 }

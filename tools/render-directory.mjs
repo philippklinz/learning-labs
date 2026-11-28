@@ -65,6 +65,21 @@ function renderJourneys(language, copy) {
   }).join('\n');
 }
 
+function renderStatements(voices) {
+  return voices.map(({ paragraphs, signature }) => {
+    const text = paragraphs.map(paragraph => {
+      const formatted = escape(paragraph).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return `<p>${formatted}</p>`;
+    });
+    return `<figure class="statement">
+      <blockquote>
+        ${text.join('\n        ')}
+      </blockquote>
+      <figcaption>${escape(signature)}</figcaption>
+    </figure>`;
+  }).join('\n    ');
+}
+
 function render(language, pack) {
   if (language !== 'de' && pack.sourceRevision !== sourceRevision) {
     throw new Error(language + ' needs review against the German UI. Current source revision: ' + sourceRevision);
@@ -86,7 +101,8 @@ function render(language, pack) {
   }
   const markup = {
     languageLinks: links.join('\n'), alternateLinks: alternates.join('\n'),
-    guidePortrait: portrait, journeyList: renderJourneys(language, copy)
+    guidePortrait: portrait, journeyList: renderJourneys(language, copy),
+    statementList: renderStatements(copy.statements.voices)
   };
   Object.assign(copy, {
     language, editionUrl: editionUrl(language), countMessages: JSON.stringify(copy.catalog.count),
