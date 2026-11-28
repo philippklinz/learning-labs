@@ -1,9 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { Vector3 } from '../vendor/three/three.module.min.js';
-import { createAtlasView, duration, stateAt } from '../hero/cosmos-scene.js';
+import { createAtlasView, createAtlasWorld, duration, stateAt } from '../hero/cosmos-scene.js';
+import { createSpiralGalaxy, galaxyProfiles } from '../hero/spiral-galaxies.js';
 
-test('the hero starts dark, pulses once and settles after 1.8 seconds', () => {
+test('the opening starts dark and completes its single pulse after 1.8 seconds', () => {
   for (const time of [0, 100, 200]) {
     assert.ok(Object.values(stateAt(time)).every(value => value === 0));
   }
@@ -18,6 +19,69 @@ test('the hero starts dark, pulses once and settles after 1.8 seconds', () => {
   assert.equal(end.flash, 0);
   assert.equal(end.axisLight, 0);
   assert.deepEqual(stateAt(60000), end);
+});
+
+test('each galaxy turns through its own inclined plane with a three-dimensional stellar bulge', () => {
+  const view = createAtlasView();
+  view.resize(1440, 690, { x: 756, y: 130, width: 582, height: 388 });
+  for (const profile of galaxyProfiles) {
+    const galaxy = createSpiralGalaxy(profile);
+    try {
+      galaxy.place(view, { x: 900, y: 140, width: 300, height: 196 }, 690);
+      const disk = galaxy.group.children[0];
+      const cloud = disk.children.find(child => child.isPoints);
+      assert.ok(disk.children.some(child => child.geometry.type === 'CircleGeometry'));
+      assert.ok(disk.children.some(child => child.geometry.type === 'SphereGeometry'));
+      const positions = cloud.geometry.getAttribute('position');
+      assert.equal(positions.count, profile.stars);
+      const depths = Array.from({ length: positions.count }, (_, i) => positions.getZ(i));
+      assert.ok(Math.min(...depths) < -.08 && Math.max(...depths) > .08);
+      for (const child of disk.children) {
+        assert.ok(Object.values(child.material.uniforms).every(uniform => !uniform.value?.isTexture));
+      }
+      const normal = new Vector3(0, 0, 1).applyQuaternion(galaxy.group.quaternion);
+      const towardsCamera = new Vector3(0, 0, 1).applyQuaternion(view.camera.quaternion);
+      assert.ok(Math.abs(normal.dot(towardsCamera) - profile.axisRatio) < 1e-9);
+      galaxy.update(-400, .3);
+      assert.ok(disk.rotation.z < 0);
+      galaxy.update(0, 1);
+      const centre = disk.localToWorld(new Vector3());
+      const initial = disk.localToWorld(new Vector3(1, 0, 0)).sub(centre);
+      galaxy.update(10000, 1);
+      const advanced = disk.localToWorld(new Vector3(1, 0, 0)).sub(centre);
+      assert.ok(Math.abs(initial.angleTo(advanced) - 10 * profile.degreesPerSecond * Math.PI / 180) < 1e-9);
+      assert.ok(disk.localToWorld(new Vector3()).distanceTo(centre) < 1e-9);
+      assert.ok(Math.abs(advanced.dot(normal)) < 1e-9);
+      galaxy.update(360000 / profile.degreesPerSecond, 1);
+      assert.ok(disk.localToWorld(new Vector3(1, 0, 0)).sub(centre).distanceTo(initial) < 1e-9);
+    } finally {
+      galaxy.dispose();
+    }
+  }
+});
+
+test('turning the atlas produces parallax around the fixed origin and survives a reflow', () => {
+  const view = createAtlasView();
+  const atlas = createAtlasWorld(view);
+  const rects = [{ x: 900, y: 140, width: 300, height: 196 }, { x: 670, y: 380, width: 160, height: 104 }];
+  try {
+    atlas.resize(1440, 690, { x: 756, y: 130, width: 582, height: 388 }, rects, 1);
+    atlas.update(duration, stateAt(duration));
+    const origin = view.pixel(new Vector3());
+    const near = view.point(800, 330, -2), far = view.point(800, 330, 3);
+    const pixel = point => view.pixel(atlas.world.localToWorld(point.clone()));
+    assert.ok(pixel(near).distanceTo(pixel(far)) < 1e-8);
+    atlas.turn(.7, -.3);
+    assert.ok(pixel(new Vector3()).distanceTo(origin) < 1e-8);
+    assert.ok(pixel(near).distanceTo(pixel(far)) > 30);
+    const pose = atlas.world.quaternion.clone();
+    atlas.resize(390, 800, { x: 20, y: 520, width: 350, height: 233 }, rects, 1);
+    assert.ok(atlas.world.quaternion.equals(pose));
+    atlas.turn(0, 0);
+    assert.ok(pixel(near).distanceTo(pixel(far)) < 1e-8);
+  } finally {
+    atlas.dispose();
+  }
 });
 
 test('the pulse meets the XYZ origin on the archived perspective grid at every size', () => {
@@ -35,5 +99,36 @@ test('the pulse meets the XYZ origin on the archived perspective grid at every s
       assert.ok(Math.abs(pixel.y - h * .73) < .001);
       assert.ok(view.pixel(point.multiplyScalar(0)).distanceTo(origin) < .001);
     }
+  }
+});
+
+test('turning the mobile star field side-on keeps a comparable number of visible stars', () => {
+  const view = createAtlasView();
+  const atlas = createAtlasWorld(view);
+  const rect = { x: 16, y: 535, width: 358, height: 239 };
+  try {
+    atlas.resize(390, 823, rect, [rect, rect], 1);
+    atlas.update(duration, stateAt(duration));
+    let field;
+    atlas.world.traverse(object => {
+      if (object.isPoints && object.geometry.hasAttribute('birth')) field = object;
+    });
+    function visibleStars(yaw) {
+      atlas.turn(yaw, 0);
+      field.updateWorldMatrix(true, false);
+      const positions = field.geometry.getAttribute('position');
+      const point = new Vector3();
+      let count = 0;
+      for (let i = 0; i < positions.count; i++) {
+        point.fromBufferAttribute(positions, i).applyMatrix4(field.matrixWorld).project(view.camera);
+        if (Math.abs(point.x) < 1 && Math.abs(point.y) < 1 && Math.abs(point.z) < 1) count++;
+      }
+      return count;
+    }
+    const initial = visibleStars(0);
+    const side = visibleStars(Math.PI / 2);
+    assert.ok(initial > 0 && side > initial / 2 && side < initial * 3);
+  } finally {
+    atlas.dispose();
   }
 });
