@@ -359,13 +359,13 @@
     {{journeyList}}
   </div>
 </div></section>
-<section class="about wrap" id="about">
-  <div class="section-head"><h2>{{about.heading}}<span class="period">.</span></h2><p>{{about.intro}}</p></div>
-  <div class="principles">
-    <article><h3>{{about.independent}}</h3><p>{{about.independentText}}</p></article>
-    <article><h3>{{about.handsOn}}</h3><p>{{about.handsOnText}}</p></article>
-    <article><h3>{{about.open}}</h3><p>{{about.openText}}</p></article>
-  </div>
+<section class="about wrap" id="about" aria-labelledby="about-heading">
+  <div class="section-head"><h2 id="about-heading">{{about.heading}}<span class="period">.</span></h2></div>
+  <figure class="personal-statement">
+    <p>{{about.statement}}</p>
+    <p>{{about.invitation}}</p>
+    <figcaption>Philipp Klinz</figcaption>
+  </figure>
 </section>
 </main>
 <footer data-theme="dark">
