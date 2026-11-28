@@ -1,5 +1,5 @@
 {
-  "sourceRevision": "519e94684026517a92e9fba2437dbe4c6716410cda967d2d6ca64667f5f84fba",
+  "sourceRevision": "15fe91d223f4c24606f63971250dae441ba90fbcc99c0387f26fd2b50595e7fb",
   "languageName": "English",
   "page": {
     "title": "Learning Labs – Interactive labs and atlases",
@@ -102,8 +102,7 @@
     "heading": "One question leads\nto the next",
     "role": "Your guide",
     "greeting": "What shall we explore today?",
-    "stops": {"one": "{count} stop", "other": "{count} stops"},
-    "furtherReading": "Read on in the atlas"
+    "stops": {"one": "{count} stop", "other": "{count} stops"}
   },
   "about": {
     "heading": "Small labs.\nBig questions",

@@ -37,12 +37,14 @@
         "title": "Unser verzweigter Stammbaum",
         "question": "Was erzählen Fossilien und DNA über unsere nächsten Verwandten?",
         "url": "https://philipp-klinz.net/lab-human-origins/02_stammbaum.html"
+      },
+      {
+        "id": "cradle-of-humankind",
+        "projectId": "anthropology-atlas",
+        "title": "Die Wiege der Menschheit",
+        "question": "Was verraten Fossilien aus Afrika über die Anfänge unserer Art?",
+        "url": "https://philipp-klinz.net/anthropology-atlas-engine/#/v1/chapter/chapter%3Acradle-of-humankind?lang=de"
       }
-    ],
-    "furtherReading": {
-      "projectId": "anthropology-atlas",
-      "title": "Die Wiege der Menschheit",
-      "url": "https://philipp-klinz.net/anthropology-atlas-engine/#/v1/chapter/chapter%3Acradle-of-humankind?lang=de"
-    }
+    ]
   }
 ]

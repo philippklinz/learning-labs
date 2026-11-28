@@ -4,9 +4,9 @@ Directory delivery updated 28 November 2026. The independent labs' inventory bel
 
 ## Directory editions
 
-German (`index.html`) and English (`en.html`) include the complete directory, metadata, accessible names, search vocabulary, result counts, Humboldt guide and first five-stop route. These static files share a template and local catalogues. The edition URLs work with JavaScript disabled and with local files. The source revision in each translated UI catalogue records which German copy it follows. The English copy is AI-assisted and awaits independent language review.
+German (`index.html`) and English (`en.html`) include the complete directory, metadata, accessible names, search vocabulary, result counts, Humboldt guide and first six-stop route. These static files share a template and local catalogues. The edition URLs work with JavaScript disabled and with local files. The source revision in each translated UI catalogue records which German copy it follows. The English copy is AI-assisted and awaits independent language review.
 
-Editors maintain journeys separately for each language in `journeys/`. In this release both editions of the first route intentionally open the five German lab activities. The additional Anthropology Atlas chapter opens in the reader's language. Additional EU editions and translated lab activities are future work. See the [editing instructions](../README.md#edit-a-journey-or-language-edition).
+Editors maintain journeys separately for each language in `journeys/`. In both editions, the first five stops open German lab activities. The sixth stop opens the Anthropology Atlas chapter in the reader's language. Additional EU editions and translated lab activities are future work. See the [editing instructions](../README.md#edit-a-journey-or-language-edition).
 
 ## Central requirement and implementation reference
 

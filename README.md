@@ -36,9 +36,9 @@ To activate Pages if needed: Settings > Pages > Deploy from a branch > main > /(
 
 ## Edit a journey or language edition
 
-Each edition has an independent ordered list in `journeys/<language>.json`. Each journey has an English ID, a displayed title and an ordered list of stops. Each stop has its own ID, `projectId`, title, question and a complete destination URL, including any chapter or fragment. An optional `furtherReading` link follows the stops. The first journey is expanded on arrival. Additional journeys appear as disclosures in file order. Reuse a journey ID across editions when it represents the same route.
+Each edition has an independent ordered list in `journeys/<language>.json`. Each journey has an English ID, a displayed title and an ordered list of stops. Each stop has its own ID, `projectId`, title, question and a complete destination URL, including any chapter or fragment. The first journey is expanded on arrival. Additional journeys appear as disclosures in file order. Reuse a journey ID across editions when it represents the same route.
 
-German and English currently offer *From early Earth to humans*. Both link to the five German lab activities. The further reading opens the corresponding German or English chapter in the Anthropology Atlas. Replace individual English stop URLs as those activities become available.
+German and English currently offer *From early Earth to humans*. The first five stops open German lab activities. The sixth opens the Anthropology Atlas chapter *The Cradle of Humankind* in the selected language. Replace individual English stop URLs as those activities become available.
 
 The two pages share `templates/directory.html`, `directory.css`, the interaction scripts and the Humboldt drawing. UI text is maintained in `locales/<language>.json`. For a new edition, add a UI catalogue with the language's native name, translated search and plural forms, and its own journey file. The language menu and alternate links are generated from the available editions. Direct links such as `en.html#journey-early-earth-to-humans` work on Pages and in a downloaded copy.
 

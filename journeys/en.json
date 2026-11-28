@@ -37,12 +37,14 @@
         "title": "Our branching family tree",
         "question": "What do fossils and DNA tell us about our closest relatives?",
         "url": "https://philipp-klinz.net/lab-human-origins/02_stammbaum.html"
+      },
+      {
+        "id": "cradle-of-humankind",
+        "projectId": "anthropology-atlas",
+        "title": "The Cradle of Humankind",
+        "question": "What do fossils from Africa tell us about the origins of our species?",
+        "url": "https://philipp-klinz.net/anthropology-atlas-engine/#/v1/chapter/chapter%3Acradle-of-humankind?lang=en"
       }
-    ],
-    "furtherReading": {
-      "projectId": "anthropology-atlas",
-      "title": "The Cradle of Humankind",
-      "url": "https://philipp-klinz.net/anthropology-atlas-engine/#/v1/chapter/chapter%3Acradle-of-humankind?lang=en"
-    }
+    ]
   }
 ]

@@ -107,8 +107,7 @@
     "stops": {
       "one": "{count} Station",
       "other": "{count} Stationen"
-    },
-    "furtherReading": "Im Atlas weiterlesen"
+    }
   },
   "about": {
     "heading": "Kleine Labore.\nGroße Fragen",
