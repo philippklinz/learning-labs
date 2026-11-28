@@ -11,7 +11,6 @@
 .skip:focus { transform: none; }
 .skip:not(:focus) { clip-path: inset(50%); }
 main:focus { outline-offset: -3px; }
-.external-mark { display: inline-block; margin-inline-start: .25em; font-family: var(--mo-font); }
 
 header, .journeys, footer { background: var(--mo-rail); color: var(--mo-rail-text); }
 header { border-bottom: 1px solid var(--mo-border); }
