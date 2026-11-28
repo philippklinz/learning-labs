@@ -30,11 +30,12 @@ const gridFragment = `
   }
 `;
 
-// These are the axes, tick distances and label anchors used to expose the static grid.
+// Use the original Y label as the reference for all three positive axes.
+const markerDistance = 3.38;
 const axes = [
-  { dir: [1,0,0], cross: [0,0,1], color: '#d29d8b', marker: 2.50, glyph: [-.3,-.46,.3,.46, -.3,.46,.3,-.46] },
-  { dir: [0,1,0], cross: [1,0,0], color: '#afc39d', marker: 3.38, glyph: [-.3,.46,0,0, .3,.46,0,0, 0,0,0,-.46] },
-  { dir: [0,0,1], cross: [1,0,0], color: '#8ab7d3', marker: 2.08, glyph: [-.3,.46,.3,.46, .3,.46,-.3,-.46, -.3,-.46,.3,-.46] }
+  { dir: [1,0,0], cross: [0,0,1], color: '#d29d8b', glyph: [-.3,-.46,.3,.46, -.3,.46,.3,-.46] },
+  { dir: [0,1,0], cross: [1,0,0], color: '#afc39d', glyph: [-.3,.46,0,0, .3,.46,0,0, 0,0,0,-.46] },
+  { dir: [0,0,1], cross: [1,0,0], color: '#8ab7d3', glyph: [-.3,.46,.3,.46, .3,.46,-.3,-.46, -.3,-.46,.3,-.46] }
 ];
 
 export function createCosmosGrid() {
@@ -57,7 +58,7 @@ export function createCosmosGrid() {
   group.add(rulers);
   const labels = [];
   const materials = [];
-  for (const { dir, cross, color, marker, glyph } of axes) {
+  for (const { dir, cross, color, glyph } of axes) {
     const axis = new THREE.Vector3(...dir), tickDirection = new THREE.Vector3(...cross);
     const points = [axis.clone().multiplyScalar(-85), axis.clone().multiplyScalar(85)];
     for (let i = -12; i <= 12; i++) {
@@ -74,18 +75,34 @@ export function createCosmosGrid() {
     const strokes = [];
     for (let i = 0; i < glyph.length; i += 2) strokes.push(new THREE.Vector3(glyph[i], glyph[i + 1], 0));
     const label = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(strokes), ink);
-    label.position.copy(axis).multiplyScalar(marker).addScaledVector(tickDirection, .14);
+    const offset = tickDirection.multiplyScalar(.14);
+    label.position.copy(offset).addScaledVector(axis, markerDistance);
     label.renderOrder = 2;
-    labels.push(label);
+    labels.push({ label, axis, offset });
     rulers.add(label);
   }
   return {
     group,
-    resize(plotHeight) {
-      for (const label of labels) label.scale.setScalar(14 * 3.75 / plotHeight);
+    resize(plotHeight, camera) {
+      const glyphScale = 14 * 3.75 / plotHeight;
+      const clip = new THREE.Matrix4().multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
+      const frustum = new THREE.Frustum().setFromProjectionMatrix(clip);
+      // Z can reach the bottom edge on phones. Fit one shared distance to the
+      // opening view and keep the labels anchored there when the reader turns it.
+      let distance = markerDistance;
+      for (const { axis, offset } of labels) {
+        for (const plane of frustum.planes) {
+          const towardEdge = -plane.normal.dot(axis);
+          if (towardEdge > 0) distance = Math.min(distance, (plane.distanceToPoint(offset) - glyphScale) / towardEdge);
+        }
+      }
+      for (const { label, axis, offset } of labels) {
+        label.position.copy(offset).addScaledVector(axis, Math.max(0, distance));
+        label.scale.setScalar(glyphScale);
+      }
     },
     faceLabels(orientation) {
-      for (const label of labels) label.quaternion.copy(orientation);
+      for (const { label } of labels) label.quaternion.copy(orientation);
     },
     update(state) {
       planes.visible = state.grid > 0;

@@ -166,7 +166,7 @@ export function createAtlasWorld(view) {
     world,
     resize(width, height, plot, galaxyRects, ratio) {
       view.resize(width, height, plot);
-      grid.resize(plot.height);
+      grid.resize(plot.height, view.camera);
       points.geometry.dispose();
       points.geometry = starGeometry(width, height, view);
       points.material.uniforms.pixelRatio.value = ratio;
