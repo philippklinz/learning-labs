@@ -1,5 +1,5 @@
 {
-  "sourceRevision": "15fe91d223f4c24606f63971250dae441ba90fbcc99c0387f26fd2b50595e7fb",
+  "sourceRevision": "71414704710fda080315af3a5245494705edc60439f443387bf9b37074a70366",
   "languageName": "English",
   "page": {
     "title": "Learning Labs – Interactive labs and atlases",
@@ -106,13 +106,8 @@
   },
   "about": {
     "heading": "Small labs.\nBig questions",
-    "intro": "Each site is simple by design. It gives you room to investigate a question and understand something for yourself.",
-    "independent": "Independent",
-    "independentText": "Each lab has its own website and repository. You can use it on its own.",
-    "handsOn": "Hands-on",
-    "handsOnText": "Look closely, form a hypothesis, change a parameter and watch what happens.",
-    "open": "Open",
-    "openText": "The labs are freely accessible, open source and always growing. There is room for your curiosity and your next question."
+    "statement": "How did the young Earth get its oceans? Why does the altitude theorem hold for every right-angled triangle? I build the Learning Labs around questions I want to answer for myself. For the first, a model helps me picture what happened. For the second, I can work through a proof step by step.",
+    "invitation": "I share what helps me learn so anyone can use it. As you explore, you might come across a question I haven’t even thought of yet."
   },
   "footer": {"source": "Directory source code"}
 }
