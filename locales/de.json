@@ -17,7 +17,8 @@
     "intro": "Du brauchst kein Vorwissen. Wähle ein Thema, stelle Fragen und finde heraus, wie die Dinge zusammenhängen.",
     "projects": "Projekte entdecken",
     "journeys": "Wissensreise beginnen",
-    "cosmos": "Schematische Darstellung eines expandierenden Raums. Vom Ursprung wachsen drei Koordinatenachsen. Sterne rücken auseinander, zwei geneigte Spiralgalaxien werden sichtbar."
+    "cosmos": "Schematische Darstellung eines expandierenden Raums. Vom Ursprung wachsen drei Koordinatenachsen. Sterne rücken auseinander, zwei geneigte Spiralgalaxien werden sichtbar.",
+    "orbitHelp": "Ziehe mit der Maus oder wische seitlich, um den Sternatlas zu drehen. Mit den Pfeiltasten kannst du ihn ebenfalls drehen. Pos1 stellt die Ausgangsansicht wieder her."
   },
   "catalog": {
     "heading": "Entdecke die Projekte",

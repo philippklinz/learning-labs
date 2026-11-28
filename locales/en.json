@@ -1,5 +1,5 @@
 {
-  "sourceRevision": "5e12a55d2072cf339f5781bb0bb31ee95e2aed687d0ed81a2639cd503de72297",
+  "sourceRevision": "8096eb56f3ee9b29df41d3d5b9944a719059499d2120da11993f9d5593d1be42",
   "languageName": "English",
   "page": {
     "title": "Learning Labs – Interactive labs and atlases",
@@ -18,7 +18,8 @@
     "intro": "You can start anywhere. Pick a topic, ask a question and see how things fit together.",
     "projects": "Explore the projects",
     "journeys": "Start a journey",
-    "cosmos": "Schematic view of expanding space. Three coordinate axes grow from the origin. Stars move apart and two tilted spiral galaxies come into view."
+    "cosmos": "Schematic view of expanding space. Three coordinate axes grow from the origin. Stars move apart and two tilted spiral galaxies come into view.",
+    "orbitHelp": "Drag with the mouse or swipe sideways to turn the star atlas. You can also use the arrow keys to turn it. Press Home to restore the initial view."
   },
   "catalog": {
     "heading": "Explore the projects",

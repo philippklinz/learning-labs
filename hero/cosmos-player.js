@@ -1,23 +1,27 @@
+import { attachOrbitControls } from './orbit-controls.js';
+
 export function startCosmos(still) {
   const root = document.documentElement;
   const hero = document.querySelector('.hero');
   const canvas = hero.querySelector('.hero-canvas');
   const plot = hero.querySelector('.cosmos-frame');
-  const galaxies = [...plot.querySelectorAll('img')];
+  const galaxyAnchors = [...plot.querySelectorAll('.galaxy-anchor')];
   let seen = false;
   let loadingStarted = false;
   let stopped = false;
   let dirty = true;
+  let turned = false;
   let elapsed = 0;
   let last = null;
   let raf = 0;
   let deadline = 0;
-  let scene, duration;
+  let scene, duration, controls;
 
   function pause() {
     cancelAnimationFrame(raf);
     raf = 0;
     last = null;
+    controls?.release();
   }
 
   function showPoster() {
@@ -31,6 +35,7 @@ export function startCosmos(still) {
     document.removeEventListener('visibilitychange', sync);
     still.removeEventListener('change', sync);
     canvas.removeEventListener('webglcontextlost', showPoster);
+    controls?.dispose();
     scene?.dispose();
   }
 
@@ -42,23 +47,30 @@ export function startCosmos(still) {
   function paint(time) {
     raf = 0;
     if (stopped || !seen || document.hidden) return;
+    // The opening and input follow the display. The slow, unattended orbit needs fewer draws.
+    raf = requestAnimationFrame(paint);
+    const delta = last === null ? 0 : time - last;
+    if (last !== null && elapsed >= duration && !dirty && !turned && delta < 1000 / 30 - .5) return;
     try {
       if (dirty) {
         const area = canvas.getBoundingClientRect();
-        if (!area.width || !area.height) return;
-        scene.resize(area.width, area.height, relative(plot, area), galaxies.map(image => relative(image, area)),
+        if (!area.width || !area.height) { pause(); return; }
+        scene.resize(area.width, area.height, relative(plot, area), galaxyAnchors.map(anchor => relative(anchor, area)),
           Math.min(window.devicePixelRatio || 1, 1.5));
         dirty = false;
       }
-      if (last !== null) elapsed = Math.min(duration, elapsed + time - last);
+      elapsed += delta;
+      last = time;
+      turned = false;
       scene.render(elapsed);
       if (stopped) return;
       if (root.dataset.cosmosView !== 'live') root.dataset.cosmosView = 'live';
-      if (elapsed < duration) {
-        last = time;
-        raf = requestAnimationFrame(paint);
-      } else {
-        last = null;
+      if (!controls && elapsed >= duration) {
+        controls = attachOrbitControls(canvas, plot, (yaw, pitch) => {
+          scene.turn(yaw, pitch);
+          turned = true;
+          sync();
+        });
       }
     } catch {
       showPoster();
@@ -69,12 +81,10 @@ export function startCosmos(still) {
     loadingStarted = true;
     deadline = setTimeout(showPoster, 4500);
     try {
-      const grid = new Image();
-      grid.src = new URL('./raum.webp', import.meta.url).href;
-      const [module] = await Promise.all([import('./cosmos-scene.js'), grid.decode(), ...galaxies.map(image => image.decode())]);
+      const module = await import('./cosmos-scene.js');
       if (stopped) return;
       duration = module.duration;
-      scene = module.createCosmosScene(canvas, grid, galaxies);
+      scene = module.createCosmosScene(canvas);
       clearTimeout(deadline);
       if (stopped) scene.dispose();
       else sync();
@@ -88,7 +98,7 @@ export function startCosmos(still) {
     if (still.matches) { showPoster(); return; }
     if (!seen || document.hidden) { pause(); return; }
     if (scene) {
-      if (!raf && (dirty || elapsed < duration)) raf = requestAnimationFrame(paint);
+      if (!raf) raf = requestAnimationFrame(paint);
     } else if (!loadingStarted) {
       prepare();
     }

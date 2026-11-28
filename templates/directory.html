@@ -86,9 +86,10 @@
       <div class="hero-links"><a class="mo-btn mo-btn-primary" href="#projects">{{hero.projects}}</a><a class="mo-btn" href="#journeys">{{hero.journeys}}</a></div>
     </div>
     <figure class="cosmos-frame" role="img" aria-label="{{hero.cosmos}}">
-      <img class="spiral-galaxy" src="hero/spiral-galaxy.webp" width="620" height="404" alt="">
-      <img class="distant-galaxy" src="hero/distant-galaxy.webp" width="470" height="304" alt="">
+      <span class="galaxy-anchor spiral-galaxy" aria-hidden="true"></span>
+      <span class="galaxy-anchor distant-galaxy" aria-hidden="true"></span>
     </figure>
+    <span id="cosmos-orbit-help" hidden>{{hero.orbitHelp}}</span>
   </div>
 </section>
 <section class="catalog" id="projects"><div class="wrap">
