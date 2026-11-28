@@ -103,6 +103,7 @@
   "guide": {
     "heading": "Eine Frage führt\nzur nächsten",
     "role": "Dein Reiseführer",
+    "greeting": "Was wollen wir heute erkunden?",
     "stops": {
       "one": "{count} Station",
       "other": "{count} Stationen"

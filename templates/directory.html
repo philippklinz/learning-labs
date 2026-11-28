@@ -348,8 +348,11 @@
   <div class="section-head journey-head">
     <h2 id="journeys-heading">{{guide.heading}}<span class="period">.</span></h2>
     <figure class="journey-guide">
-      {{guidePortrait}}
-      <figcaption><strong>Alexander von Humboldt</strong><span>{{guide.role}}</span></figcaption>
+      <details class="guide-dialogue">
+        <summary aria-labelledby="guide-name guide-role" aria-describedby="guide-greeting" aria-controls="guide-greeting">{{guidePortrait}}</summary>
+        <p class="guide-speech" id="guide-greeting">{{guide.greeting}}</p>
+      </details>
+      <figcaption><strong id="guide-name">Alexander von Humboldt</strong><span id="guide-role">{{guide.role}}</span></figcaption>
     </figure>
   </div>
   <div class="journey-shelf">

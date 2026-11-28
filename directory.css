@@ -90,10 +90,47 @@ header { border-bottom: 1px solid var(--mo-border); }
 
 .journey-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 16px 32px; }
 .journey-head h2 { color: var(--mo-rail-text); }
-.journey-guide { display: grid; grid-template-columns: minmax(0, auto) auto; align-items: center; gap: 12px; margin: 0; color: var(--mo-accent); }
-.journey-guide svg { grid-area: 1 / 2; display: block; width: clamp(136px, 12vw, 170px); height: auto; }
-.journey-guide figcaption { grid-area: 1 / 1; text-align: end; }
-.journey-guide strong { display: block; font: italic 1.25rem/1.2 var(--mo-serif); color: var(--mo-rail-text); }
+.journey-guide {
+  --guide-width: 11.75rem;
+  --speech-gap: 12px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--guide-width);
+  row-gap: 6px;
+  justify-self: end;
+  width: calc(12rem + var(--speech-gap) + var(--guide-width));
+  max-width: 100%;
+  margin: 0;
+  color: var(--mo-accent);
+}
+.guide-dialogue { position: relative; grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) var(--guide-width); column-gap: var(--speech-gap); align-items: center; }
+.guide-dialogue summary { grid-area: 1 / 2; display: block; width: var(--guide-width); margin-inline-start: auto; cursor: pointer; list-style: none; }
+.guide-dialogue summary::-webkit-details-marker { display: none; }
+.guide-dialogue svg { display: block; width: clamp(8.5rem, 12vw, 10.625rem); max-width: 100%; height: auto; margin-inline: auto; }
+.guide-dialogue::details-content { display: block; grid-area: 1 / 1; padding-block-end: .45rem; content-visibility: visible; }
+.guide-speech {
+  position: relative;
+  margin: 0;
+  padding: .65rem clamp(9px, 2vw, .8rem);
+  border: 1px solid var(--mo-accent);
+  background: var(--mo-surface);
+  color: var(--mo-rail-text);
+  font: italic 1.25rem/1.25 var(--mo-serif);
+  text-align: center;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(4px);
+  transition: opacity .22s ease, transform .22s ease, visibility 0s .22s;
+}
+.guide-speech::after { content: ""; position: absolute; inset-inline-end: -6px; inset-block-start: 50%; width: 10px; height: 10px; border-block-start: 1px solid var(--mo-accent); border-inline-end: 1px solid var(--mo-accent); background: inherit; transform: translateY(-50%) rotate(45deg); }
+.guide-dialogue[open] .guide-speech { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+@supports not selector(::details-content) {
+  .guide-dialogue { display: block; }
+  .guide-speech { position: absolute; inset-inline: 0 calc(var(--guide-width) + var(--speech-gap)); inset-block-start: 44%; translate: 0 -50%; }
+}
+.journey-guide figcaption { grid-column: 2; text-align: center; overflow-wrap: anywhere; }
+.journey-guide strong { display: block; font: italic 1.125rem/1.2 var(--mo-serif); color: var(--mo-rail-text); text-wrap: balance; }
 .journey-guide figcaption span { display: block; margin-top: 4px; font: .75rem/1.4 var(--mo-mono); color: var(--mo-rail-muted); }
 .journey { border-block-start: 1px solid var(--mo-border-strong); }
 .journey:last-child { border-block-end: 1px solid var(--mo-border-strong); }
@@ -130,10 +167,6 @@ details[open] > summary > .chevron { transform: translateY(2px) rotate(225deg); 
 @media (max-width: 62rem) {
   .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
-@media (min-width: 36.01rem) and (max-width: 48rem) {
-  .journey-guide { grid-template-columns: auto; justify-items: center; gap: 3px; }
-  .journey-guide svg, .journey-guide figcaption { grid-area: auto; text-align: center; }
-}
 @media (max-width: 48rem) {
   .header-inner { grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; }
   .site-nav { grid-column: 1 / -1; grid-row: 2; }
@@ -142,6 +175,7 @@ details[open] > summary > .chevron { transform: translateY(2px) rotate(225deg); 
   .hero::after { background: linear-gradient(180deg, #10191d66 0%, #10191d33 42%, transparent 66%); }
   .study-window { max-width: 31rem; }
   .section-head { align-items: start; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+  .journey-guide { --guide-width: 8.5rem; }
   .principles { gap: 16px; }
   .site-nav a, .footer-links a { padding-inline: 8px; }
 }
@@ -154,11 +188,10 @@ details[open] > summary > .chevron { transform: translateY(2px) rotate(225deg); 
   .filter-group, .search { width: 100%; }
   .filter-buttons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .filter-buttons .mo-btn { padding-inline: 8px; white-space: normal; }
-  .journey-head { grid-template-columns: minmax(0, 1fr) minmax(95px, 29%); align-items: center; gap: 12px; }
+  .journey-head { grid-template-columns: minmax(0, 1fr); gap: 12px; }
   .journey-head h2 br { display: none; }
-  .journey-guide { display: flex; flex-direction: column; gap: 4px; }
-  .journey-guide svg { width: 100%; max-width: 138px; }
-  .journey-guide figcaption { width: 100%; text-align: center; }
+  .journey-guide { --guide-width: clamp(104px, 28vw, 136px); row-gap: 4px; }
+  .guide-speech { font-size: 1.125rem; }
   .journey-guide strong { font-size: 1rem; }
   .journey-guide figcaption span { font-size: .65rem; }
   .journey > summary { gap: 10px; padding: 12px; }
@@ -176,6 +209,9 @@ details[open] > summary > .chevron { transform: translateY(2px) rotate(225deg); 
   .brand { gap: 7px; }
   .brand-mark { flex-basis: 32px; height: 32px; }
   .brand-name strong { font-size: .94rem; overflow-wrap: normal; }
+}
+@media (prefers-reduced-motion: reduce), (forced-colors: active) {
+  .guide-speech { transition: none; }
 }
 @media (forced-colors: active) {
   :root, [data-theme="dark"] {

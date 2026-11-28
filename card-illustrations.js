@@ -268,7 +268,7 @@
     const guidePlayer = attach(section, guide.querySelector('svg'));
     players.set(guide, guidePlayer);
     section.addEventListener('click', event => {
-      if (event.pointerType === 'touch' && event.target.closest('.journey > summary')) guidePlayer.cue();
+      if (event.pointerType === 'touch' && event.target.closest('.journey > summary, .guide-dialogue:not([open]) > summary')) guidePlayer.cue();
     });
   }
 
