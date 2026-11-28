@@ -42,7 +42,7 @@ function coordinates() {
 
   const axes = [
     { label: 'X', direction: [1, 0, 0], ticks: [0, 0, 1], color: '#d29d8b', marker: 2.50 },
-    { label: 'Y', direction: [0, 1, 0], ticks: [1, 0, 0], color: '#afc39d', marker: 1.94 },
+    { label: 'Y', direction: [0, 1, 0], ticks: [1, 0, 0], color: '#afc39d', marker: 3.38 },
     { label: 'Z', direction: [0, 0, 1], ticks: [1, 0, 0], color: '#8ab7d3', marker: 2.08 }
   ];
   const labels = [];
@@ -85,10 +85,11 @@ export function createHeroScene(canvas) {
   renderer.setClearColor(0x10191d);
   renderer.autoClear = false;
   const camera = new THREE.PerspectiveCamera(30, 1, 0.10, 80);
-  const cameraStart = new THREE.Vector3(-7.5, 5.4, 8.5);
-  const sweep = THREE.MathUtils.degToRad(8);
-  camera.position.copy(cameraStart);
-  camera.lookAt(0, 0, 0);
+  // Frame the space above the origin so the entire grown crystal fits above its foot.
+  const framingCenter = new THREE.Vector3(0, 1.5, 0);
+  camera.position.set(-7.5, 5.4, 8.5);
+  camera.lookAt(framingCenter);
+  const focusDistance = camera.position.distanceTo(framingCenter);
   const { space, labels } = coordinates();
   const subjects = new THREE.Scene();
   subjects.add(new THREE.HemisphereLight(0xd6f1f0, 0x3a484c, 1.75));
@@ -99,19 +100,16 @@ export function createHeroScene(canvas) {
   const cache = new Map();
   let current = null;
   return {
-    resize(width, height, originX, originY, studyHeight, pixelRatio) {
+    resize(width, height, centerX, centerY, studyHeight, pixelRatio) {
       renderer.setPixelRatio(pixelRatio);
       renderer.setSize(width, height, false);
       // Keep the same perspective at the subject. Only its position in the full header changes.
-      const focalLength = camera.position.length() * studyHeight / fieldHeight;
+      const focalLength = focusDistance * studyHeight / fieldHeight;
       camera.fov = THREE.MathUtils.radToDeg(2 * Math.atan(height / (2 * focalLength)));
-      camera.setViewOffset(width, height, width / 2 - originX, height / 2 - originY, width, height);
+      camera.setViewOffset(width, height, width / 2 - centerX, height / 2 - centerY, width, height);
       for (const label of labels) label.scale.setScalar(20 * fieldHeight / studyHeight);
     },
-    render(name, progress, cameraProgress = 0) {
-      const angle = sweep * (1 - Math.cos(2 * Math.PI * cameraProgress)) / 2;
-      camera.position.copy(cameraStart).applyAxisAngle(camera.up, angle);
-      camera.lookAt(0, 0, 0);
+    render(name, progress) {
       if (!cache.has(name)) {
         const study = studies[name]();
         subjects.add(study.group);

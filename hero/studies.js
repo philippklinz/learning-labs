@@ -9,7 +9,7 @@ function randomSequence(seed) {
   };
 }
 
-function crystalGeometry() {
+function crystalGeometry(sharedFoot) {
   const vertices = [];
   const ring = (radius, y, tilt = 0) => Array.from({ length: 6 }, (_, index) => {
     const angle = turn * index / 6;
@@ -22,12 +22,12 @@ function crystalGeometry() {
   const face = (a, b, c) => vertices.push(...a, ...b, ...c);
   for (let i = 0; i < 6; i++) {
     const j = (i + 1) % 6;
+    face(sharedFoot, base[i], base[j]);
     for (const [lower, upper] of [[base, foot], [foot, crown]]) {
       face(lower[i], upper[i], upper[j]);
       face(lower[i], upper[j], lower[j]);
     }
     face(crown[i], tip, crown[j]);
-    face([0, 0, 0], base[i], base[j]);
   }
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
@@ -37,8 +37,6 @@ function crystalGeometry() {
 
 function createCrystal() {
   const group = new THREE.Group();
-  const geometry = crystalGeometry();
-  const edges = new THREE.EdgesGeometry(geometry, 19);
   const edgeMaterial = new THREE.LineBasicMaterial({ color: 0xc0f3e6, transparent: true, opacity: 0.28 });
   const mineral = new THREE.ShaderMaterial({
     vertexShader: `
@@ -94,19 +92,28 @@ function createCrystal() {
         gl_FragColor = vec4(color, 1.0);
       }`
   });
-  // Each prism is anchored at its base, so new tips grow outwards from the seed.
   const stalks = [];
   const up = new THREE.Vector3(0, 1, 0);
   const orientation = new THREE.Quaternion().setFromAxisAngle(up, -0.07);
   function prism(x, z, leanX, leanZ, length, radius, twist, delay) {
+    const base = new THREE.Vector3(x, 0.46, z).applyQuaternion(orientation);
+    const axis = new THREE.Vector3(leanX, 1, leanZ).normalize();
+    const rotation = new THREE.Quaternion().setFromUnitVectors(up, axis);
+    rotation.multiply(new THREE.Quaternion().setFromAxisAngle(up, twist)).premultiply(orientation);
+    const size = new THREE.Vector3(radius, length, radius);
+    // All lower facets meet at the world origin, expressed here in each prism's local space.
+    const toLocal = new THREE.Matrix4().compose(base, rotation, size).invert();
+    const sharedFoot = new THREE.Vector3().applyMatrix4(toLocal).toArray();
+    const geometry = crystalGeometry(sharedFoot);
     const mesh = new THREE.Mesh(geometry, mineral);
-    mesh.add(new THREE.LineSegments(edges, edgeMaterial));
-    const base = new THREE.Vector3(x, 0, z).applyQuaternion(orientation);
-    mesh.quaternion.setFromUnitVectors(up, new THREE.Vector3(leanX, 1, leanZ).normalize());
-    mesh.rotateY(twist);
-    mesh.quaternion.premultiply(orientation);
-    group.add(mesh);
-    stalks.push({ mesh, base, radius, length, delay });
+    mesh.add(new THREE.LineSegments(new THREE.EdgesGeometry(geometry, 19), edgeMaterial));
+    mesh.position.copy(base);
+    mesh.quaternion.copy(rotation);
+    mesh.scale.copy(size);
+    const sprout = new THREE.Group();
+    sprout.add(mesh);
+    group.add(sprout);
+    stalks.push({ sprout, delay });
   }
   prism(0, 0, 0.15, -0.12, 2.63, 0.39, 0.18, 0);
   prism(0.15, -0.15, 0.82, -0.35, 2.19, 0.30, 0.62, 0.09);
@@ -121,31 +128,13 @@ function createCrystal() {
     prism(x * 0.38, z * 0.38, x * lean, z * lean, 0.58 + random() * 0.79,
       0.12 + random() * 0.12, random(), 0.15 + random() * 0.30);
   }
-  const bounds = new THREE.Box3();
-  const point = new THREE.Vector3();
-  const center = new THREE.Vector3();
-  const vertices = geometry.getAttribute('position');
-  let previousGrowth = -1;
   return { group, update(t) {
-    if (t === previousGrowth) return;
-    previousGrowth = t;
-    bounds.makeEmpty();
-    for (const { mesh, base, radius, length, delay } of stalks) {
+    for (const { sprout, delay } of stalks) {
       const growth = THREE.MathUtils.smoothstep(t, delay, 1);
-      const fraction = delay === 0 ? 0.06 + 0.94 * growth : growth;
-      mesh.visible = fraction > 0;
-      if (!mesh.visible) continue;
-      mesh.position.copy(base).multiplyScalar(fraction);
-      const width = radius * Math.sqrt(fraction);
-      mesh.scale.set(width, length * fraction, width);
-      mesh.updateMatrix();
-      // Measure the actual tilted facets in group space, including just the visible prisms.
-      for (let i = 0; i < vertices.count; i++) {
-        bounds.expandByPoint(point.fromBufferAttribute(vertices, i).applyMatrix4(mesh.matrix));
-      }
+      const fraction = delay === 0 ? 0.08 + 0.92 * growth : growth;
+      sprout.visible = fraction > 0;
+      sprout.scale.setScalar(fraction);
     }
-    bounds.getCenter(center);
-    for (const { mesh } of stalks) if (mesh.visible) mesh.position.sub(center);
   } };
 }
 
